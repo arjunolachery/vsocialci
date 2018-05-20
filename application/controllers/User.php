@@ -11,6 +11,8 @@ class User extends CI_Controller
     }*/
     $this->load->view("profile");
     asad;
+    asdasd;
+    
     //$this->load->view("profile");
 
   }
