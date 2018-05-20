@@ -10,9 +10,9 @@ class User extends CI_Controller
       redirect("auth/login");
     }*/
     $this->load->view("profile");
-    asad;
+    asad;as;
     asdasd;
-    
+
     //$this->load->view("profile");
 
   }
