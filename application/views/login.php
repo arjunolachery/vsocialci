@@ -52,7 +52,7 @@
         <button class="btn btn-primary" name="login">Login</button>
       </div>
     </form>
-    <a href="index.php/auth/register">New here? Sign up</a>
+    <a href="auth/register">New here? Sign up</a>
     </div>
 <div class="col-lg-3"></div>
   </body>
