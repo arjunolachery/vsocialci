@@ -22,7 +22,7 @@ class User extends CI_Controller
     {
     $this->session->set_flashdata("verifyEmailText", "<div class='alert alert-danger alert-dismissible fade in'>
   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-  Your email hasn't been verified yet. Click <a href='http://localhost/vsocialci/index.php/user/sendlink'>here</a> to send again.
+  Your email hasn't been verified yet. Click <a href='"site_url();"/user/sendlink'>here</a> to send again.
   </div>");
     }
     $this->load->view("profile");
@@ -80,7 +80,7 @@ class User extends CI_Controller
 
           $config['validation'] = true; // bool whether to validate email or not
           $email="arjun2olachery@gmail.com";
-          $message="http://localhost/vsocialci/index.php/user/activateUser?key=".$uidActivationKey;
+          $message=site_url();"/user/activateUser?key=".$uidActivationKey;
           $this->email->initialize($config);
           $this->email->from('arjun2olachery@gmail.com', 'Arjun Olachery');
           $this->email->to($email);
@@ -88,7 +88,7 @@ class User extends CI_Controller
           $this->email->message($message);
           $this->email->send();
           //$this->load->view('profile');
-          redirect("http://localhost/vsocialci/index.php/user/profile","refresh");
+          redirect(site_url();"/user/profile","refresh");
         }
     public function activateUser()
     {
