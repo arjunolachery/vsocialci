@@ -16,8 +16,8 @@ foreach ($query->result_array() as $row)
         $content=$row['content'];
         echo $name."</div></div>";
         echo "<div class='row'><div class='col-lg-3 text-left namePost'></div>";
-        echo "<div class='col-lg-6 text-left contentPost'>";
+        echo "<div class='col-lg-6 text-left contentPost' style='word-wrap:break-word;'>";
         echo $content;
-        echo "</div><div class='col-lg-3 text-center contentPost'><button class='sideButton'><img src='".base_url()."assets/images/up-arrow.png'></button><button class='sideButton'><img src='".base_url()."assets/images/chevron.png'></button></div></div><hr>";
+        echo "</div><div class='col-lg-3 text-center contentPost'><button class='sideButton'><img src='".base_url()."assets/images/remove.png'></button><button class='sideButton'><img src='".base_url()."assets/images/up-arrow.png'></button><button class='sideButton'><img src='".base_url()."assets/images/chevron.png'></button></div></div><hr>";
 }
 ?>
