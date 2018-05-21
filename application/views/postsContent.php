@@ -11,7 +11,7 @@
         ?><div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
 
       <?php } ?>
-      Hello, <?php echo $_SESSION['userid']; ?>
+      Hello, <?php echo $_SESSION['uid']; ?>
     </div>
     <div class="col-lg-3"><br><h3 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h3></div>
 </div>
