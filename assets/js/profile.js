@@ -6,6 +6,7 @@ $("#settingsContent").hide();
 $("#postsContent").hide();
 $("#circleChangeContent").hide();
 
+
 $("#settingsButtonOpen").click(function(){
   $.fn.openContent(2);
 });

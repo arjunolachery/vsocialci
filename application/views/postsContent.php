@@ -16,6 +16,7 @@
     <div class="col-lg-3"><br><h3 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h3></div>
 </div>
 <script>
+
 $("#circleChangeContent").hide();
 $("#circleChangeButton").mouseenter(function(){
   $("#circleDefinition").css("text-decoration","underline");
