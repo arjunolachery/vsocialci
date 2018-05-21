@@ -10,8 +10,8 @@ In development.
 Things to work on
 *******************
 
-1. Merge email activation code from homebranch [ ]
-2. Posting functionality [ ]
+1. Merge email activation code from homebranch
+2. Posting functionality
 
 
 ###################
