@@ -1,9 +1,18 @@
+###
+Vsocial v3.0 with codeIgniter
+###
+
+***
+In development.
+***
+
+
 ###################
-Vsocial v3.0 with CodeIgniter
+Vsocial v3.0 with codeIgniter
 ###################
 
 *******************
-In development
+In development.
 *******************
 
 ###################
