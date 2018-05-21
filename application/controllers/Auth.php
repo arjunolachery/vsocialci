@@ -1,78 +1,98 @@
 <?php
-class Auth extends CI_Controller{
-
-  public function index()
-  {
-    $this->form_validation->set_rules('email','poipo','required');
-    $this->form_validation->set_rules('password','Password','required|min_length[5]');
-
-    if($this->form_validation->run()==TRUE){
-      $email=$_POST['email'];
-      $password=md5($_POST['password']);
-      //echo "<script>alert('hi');</script>";
-      //check user in db
-      $this->db->select('*');
-      $this->db->from('users');
-      $this->db->where(array('email'=>$email,'password'=>$password));
-      $query=$this->db->get();
-
-      $user=$query->row();
-      //if user exists
-      //echo "<script>alert('".$query->num_rows().$username.$password."');</script>";
-      if($query->num_rows() > 0){
-        //temporary message
-        $this->session->set_flashdata("success", "Welcome,".$user->name);
-        $this->session->unset_userdata('error');
-        //set session variables
-        $this->session->set_userdata("user_logged",1);
-        $this->session->set_userdata("userid",$user -> user_id);
-        //redirect to profile page
-        redirect("user/profile","refresh");
-
-      } else {
-        $this->session->set_flashdata("error","User does not exist. Try signing up instead.");
-        $this->session->unset_userdata('success');
-        //redirect("auth/login","refresh");
-      }
-    }
-    $this->load->view("login");
-  }
-  public function register()
-  {
-    if(isset($_POST['register']))
+/**
+ * [Auth this is the first controller to execute]
+ */
+class Auth extends CI_Controller
+{
+    public function __construct()
     {
-      $this->form_validation->set_rules('name','Name','required');
-      $this->form_validation->set_rules('email','Email','required');
-      $this->form_validation->set_rules('password','Password','required|min_length[5]');
-      $this->form_validation->set_rules('password','jojio','required|min_length[5]|matches[password]');
-      //$this->form_validation->set_rules('phone','Phone','required|min_length[5]');
-
-      if($this->form_validation->run()==TRUE){
-        echo "form validated";
-
-        //add user in db
-        $data=array(
-          //'username'=>$_POST['username']
-          'name'=>$_POST['name'],
-          'email'=>$_POST['email'],
-          'password'=>md5($_POST['password']),
-          //'gender'=>$_POST['gender'],
-          //'created_date'=>date('Y-m-d'),
-          //'phone' => $_POST['phone']
-          'time'=>time(),
-          'activation'=>0,
-        );
-        $this->db->insert('users',$data);
-
-        $this->session->set_flashdata("success","Your account has been created. You can login now");
-        redirect("/","refresh");
-
-      }
+        parent::__construct();
+        /**
+         * [$this->load->model contains all the database operations]
+         * @var [object]
+         */
+       $this->load->model('Auth_model');
     }
-    //load view
-    $this->load->view("register");
-  }
+    /**
+     * [index the landing page where users can log in to the platform]
+     * @return [type] [description]
+     */
+    public function index()
+    {
+        //unset all sessionkeys on load
+        //
+        //set form validation rules for logging in
 
+        if(!($this->session->userdata('error')=='Please login first to view the page'))
+        {
+          $this->session->unset_userdata('error');
+        }
+        if(!($this->session->userdata('success')=='You have successfully signed up. Proceed to log in.'))
+        {
+          $this->session->unset_userdata('success');
+        }
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+
+        if ($this->form_validation->run()==true) {
+            $email=$this->input->post('email');
+            $password=md5($this->input->post('password'));
+            //check user in db, gets user table array
+            $user=$this->Auth_model->retrieveUserPrimaryDetails($email, $password);
+            //if user exists
+            if ($user) {
+                //set session variables and redirect to user controller, profile function after logging in
+                $this->session->set_userdata("success", "Welcome,".$user->name);
+                $this->session->set_userdata("uid", $user->user_id);
+                $this->session->unset_userdata('error');
+                $this->session->set_userdata("user_logged", true);
+                redirect("user/profile", "refresh");
+            } else {
+                $this->session->set_userdata("error", "Account does not exist");
+                $this->session->unset_userdata('success');
+            }
+        }
+        $this->load->view("login");
+    }
+    public function register()
+    {
+
+      //$this->session->sess_destroy();
+        if (isset($_REQUEST)) {
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+            $this->form_validation->set_rules('passwordconf', 'Confirm Password', 'required|min_length[5]|matches[password]');
+            if ($this->form_validation->run()==TRUE) {
+                //add user in db
+
+                $data=array(
+                'name'=>$this->input->post('name'),
+                'email'=>$this->input->post('email'),
+                'password'=>md5($this->input->post('password')),
+                'time'=>time(),
+                'activation'=>0,
+                );
+                if(strchr($this->input->post('email'),"@")!="" && strchr($this->input->post('email'),".")!="")
+                {
+                  if(!($this->Auth_model->checkUserExist($this->input->post('email'))))
+                  {
+                  $this->db->insert('users', $data);
+                  $this->session->set_userdata("success", "You have successfully signed up. Proceed to log in.");
+                  $this->session->unset_userdata('error');
+                  redirect("/", "refresh");
+                  }
+                  else {
+                  $this->session->set_userdata("error", "You have already signed up.");
+                  }
+                }
+                else {
+                  $this->session->set_userdata("error", "Type in the complete email address");
+                }
+            }
+
+        }
+        //load view
+        $this->load->view("register");
+    }
 }
-
- ?>
