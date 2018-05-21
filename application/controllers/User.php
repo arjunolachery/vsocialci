@@ -61,7 +61,12 @@ class User extends CI_Controller
     $this->User_model->userpostdata($_SESSION['uid'],$_POST['message']);
     echo 1;
   }
-
+  public function postscontentview()
+  {
+    $data['uid']=$_SESSION['uid'];
+    $this->load->view('postsContentView',$data);
+  }
+/*
   public function sendlink()
       {
           $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['userid']);
@@ -92,7 +97,11 @@ class User extends CI_Controller
           $this->email->subject("Vsocial Activation Link");
           $this->email->message($message);
           $this->email->send();
-          //$this->load->view('profile');
+          //$this->load->view('profile');  public function postdata()
+  {
+    $this->User_model->userpostdata($_SESSION['uid'],$_POST['message']);
+    echo 1;
+  }
           redirect(site_url()."/user/profile","refresh");
         }
     public function activateUser()
@@ -105,7 +114,8 @@ class User extends CI_Controller
       $this->db->update('users', $data);
       echo "<script>alert('".$_REQUEST['key']."')</script>";
     }
-
+*/
 }
+
 
 ?>

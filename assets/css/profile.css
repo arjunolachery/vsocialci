@@ -104,5 +104,12 @@ textarea.droplinetext:focus
   height:100px;
   width:1000px;
   background-color: red;
-
+}
+.namePost
+{
+  font-size: 1.3em;
+}
+.contentPost
+{
+  font-size: 2em;
 }

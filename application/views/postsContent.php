@@ -24,10 +24,17 @@
       <div class="row">
       <div class="col-12 fromtoend"></div>
       </div>
+      <br><hr><br><br>
+
+      <div class="row">
+      <div class="col-12" id="postsViewer"></div>
+      </div>
 
     </div>
     <div class="col-lg-3"><br><h3 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h3></div>
 </div>
+
+
 <script>
 var hostAddress=document.location.origin+'/vsocialci';
 $("#circleChangeContent").hide();
@@ -69,7 +76,6 @@ $("#textareamail").keypress(function(){
     $(".fromto").fadeIn("slow");
     count++;
   }
-  //alert("hi");
 });
 $("#postClose").click(function(){
   count=0;
@@ -86,7 +92,6 @@ $("#postConfirm").click(function(){
   var textPostColor="green";
   var data=$("#textareamail").val();
   $.fn.postData(data);
-  //alert(data);
   count=0;
   $(".fromto").hide();
   $("#textareamail").hide();
@@ -108,13 +113,12 @@ $("#postConfirm").click(function(){
 
 $.fn.postData=function(data){
   $.post(hostAddress+"/index.php/user/postdata",{message:data},
-  function(response,status){ // Required Callback Function
-    //alert(hostAddress+"/index.php/user/postdata");
-  //alert(response);
+  function(response,status){
   if(response ==1)
   {
     textPostNotify="Successfully Posted.";
     textPostColor="green";
+    $("#postsViewer").load(hostAddress+"/index.php/user/postscontentview");
   }
   else {
     textPostNotify="Technical error. Try again.";
@@ -122,48 +126,6 @@ $.fn.postData=function(data){
   }
   });
 };
-/*
 
-    $(".fromtobutton").click(function(){
-      $.fn.ajaxSubmitFunction();
-    });
-
-    $.fn.ajaxSubmitFunction = function(){
-      var message = $("#textareamail").val();
-      var urlmessage = window.location.href;
-      // Returns successful data submission message when the entered information is stored in database.
-      var dataString = 'message='+ message +'&urlmessage='+urlmessage;
-      if(message=='')
-      {
-      alert("Please Fill the Field");
-      }
-      else
-      {
-        //alert('hello');
-      // AJAX Code To Submit Form.
-      $.ajax({
-      type: "POST",
-      url: "entryProcessMessage.php",
-      data: dataString,
-      cache: false,
-      success: function(result){
-      //alert(result);
-      if(result=='1')
-      {
-        //$(".fromtoend").html("Thanks!");
-        $('#textareamail').prop('readonly', true);
-        $("#textareamail").val("Thanks!");
-        $("#textareamail").css("text-align","center");
-        $(".textareadivclass").css("text-align","center");
-        $(".fromto").hide();
-
-      }
-      else {
-        $('.fromtoend').html("Error"+result);
-      }
-      }
-      });
-      }
-    };
-*/
+$("#postsViewer").load(hostAddress+"/index.php/user/postscontentview");
 </script>
