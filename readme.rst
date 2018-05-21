@@ -1,10 +1,10 @@
-#
-Vsocial v3.0 with codeIgniter
-#
+###################
+Vsocial v3.0 with CodeIgniter
+###################
 
-*
-In development.
-*
+*******************
+In development
+*******************
 
 ###################
 What is CodeIgniter
