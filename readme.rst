@@ -1,5 +1,5 @@
 ###################
-Vsocial v3.0 with codeIgniter
+Vsocial v3.0 with CodeIgniter
 ###################
 
 *******************
