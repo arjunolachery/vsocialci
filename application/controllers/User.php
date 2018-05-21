@@ -9,8 +9,8 @@ class User extends CI_Controller
   }
   public function profile()
   {
-    $uid=$_SESSION['userid'];
-    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['userid']));
+    $uid=$_SESSION['uid'];
+    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['uid']));
     if(!isset($_SESSION['user_logged']))
     {
       $this->session->set_flashdata("error","Please login first to view this page");
@@ -22,7 +22,7 @@ class User extends CI_Controller
     {
     $this->session->set_flashdata("verifyEmailText", "<div class='alert alert-danger alert-dismissible fade in'>
   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-  Your email hasn't been verified yet. Click <a href='"site_url();"/user/sendlink'>here</a> to send again.
+  Your email hasn't been verified yet. Click <a href='".site_url()."/user/sendlink'>here</a> to send again.
   </div>");
     }
     $this->load->view("profile");
@@ -88,7 +88,7 @@ class User extends CI_Controller
           $this->email->message($message);
           $this->email->send();
           //$this->load->view('profile');
-          redirect(site_url();"/user/profile","refresh");
+          redirect(site_url()."/user/profile","refresh");
         }
     public function activateUser()
     {
