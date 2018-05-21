@@ -2,7 +2,7 @@
   <div class="col-lg-3"></div>
     <div class="col-lg-6">
       <br>
-      <h3 style="display:inline">Posts from <span id="circleDefinition">everyone</span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/levels.png"></button></h3><br>
+      <h4 style="display:inline">Posts from <span id="circleDefinition">everyone</span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/levels.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="sideButton" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
     </div>
@@ -31,7 +31,7 @@
       </div>
 
     </div>
-    <div class="col-lg-3"><br><h3 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h3></div>
+    <div class="col-lg-3 text-center"><br><h4 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h4></div>
 </div>
 
 
