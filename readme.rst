@@ -1,10 +1,18 @@
 ###################
-Vsocial v3.0 with codeIgniter
+Vsocial v3.0 with CodeIgniter
 ###################
 
 *******************
 In development.
 *******************
+
+*******************
+Things to work on
+*******************
+
+1. Merge email activation code from homebranch []
+2. Posting functionality []
+
 
 ###################
 What is CodeIgniter
