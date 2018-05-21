@@ -30,7 +30,15 @@
       {
         ?><div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
 
-      <?php } echo validation_errors("<div class='alert alert-danger'>","</div>");?>
+      <?php }
+
+      if(isset($_SESSION['error']))
+      {
+        ?><div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+
+      <?php }
+
+      echo validation_errors("<div class='alert alert-danger'>","</div>");?>
       <form action="" method="post">
       <div class="form-group">
         <label for="name">Name:</label>
@@ -45,8 +53,8 @@
         <input class="form-control" name="password" id="password" type="password">
       </div>
       <div class="form-group">
-        <label for="password">Confirm Password:</label>
-        <input class="form-control" name="password" id="password" type="password">
+        <label for="passwordconf">Confirm Password:</label>
+        <input class="form-control" name="passwordconf" id="passwordconf" type="password">
       </div>
       <!--<div class="form-group">
         <label for="gender">Gender:</label>
