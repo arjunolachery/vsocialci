@@ -29,7 +29,7 @@
     <div class="col-lg-3"><br><h3 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h3></div>
 </div>
 <script>
-
+var hostAddress=document.location.origin+'/vsocialci';
 $("#circleChangeContent").hide();
 $("#circleChangeButton").mouseenter(function(){
   $("#circleDefinition").css("text-decoration","underline");
@@ -82,14 +82,16 @@ $("#postClose").click(function(){
 });
 
 $("#postConfirm").click(function(){
+  var textPostNotify="Successfully Posted.";
+  var textPostColor="green";
   var data=$("#textareamail").val();
   $.fn.postData(data);
   //alert(data);
   count=0;
   $(".fromto").hide();
   $("#textareamail").hide();
-  $("#textareamail").css("color","green");
-  $("#textareamail").val('Successfully Posted');
+  $("#textareamail").css("color",textPostColor);
+  $("#textareamail").val(textPostNotify);
   $("#textareamail").css("text-align","center");
   $(".textareadivclass").css("text-align","center");
   $("#textareamail").fadeIn();
@@ -105,8 +107,21 @@ $("#postConfirm").click(function(){
 });
 
 $.fn.postData=function(data){
-  alert(data);
-}
+  $.post(hostAddress+"/index.php/user/postdata",{message:data},
+  function(response,status){ // Required Callback Function
+    //alert(hostAddress+"/index.php/user/postdata");
+  //alert(response);
+  if(response ==1)
+  {
+    textPostNotify="Successfully Posted.";
+    textPostColor="green";
+  }
+  else {
+    textPostNotify="Technical error. Try again.";
+    textPostColor="red";
+  }
+  });
+};
 /*
 
     $(".fromtobutton").click(function(){

@@ -56,6 +56,11 @@ class User extends CI_Controller
   {
     $this->load->view('messagesContent');
   }
+  public function postdata()
+  {
+    $this->User_model->userpostdata($_SESSION['uid'],$_POST['message']);
+    echo 1;
+  }
 
   public function sendlink()
       {

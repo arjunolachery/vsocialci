@@ -14,6 +14,16 @@ class User_model extends CI_Model
       $user=$query->row();
       return $user->activation;
     }
+    public function userpostdata($id,$message)
+    {
+      $data=array(
+        'u_id' => $id,
+        'content' => $message,
+        'timestamp' => time(),
+      );
+      $this->db->insert('posts',$data);
+      return 1;
+    }
     /*
     public function messagesConf($id)
     {
