@@ -22,12 +22,7 @@
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
   </head>
   <body>
-<?php
-if(isset($_SESSION['error']))
-{
-  echo $_SESSION['error'];
-}
-?>
+
 <div class="col-lg-3"></div>
     <div class="col-lg-6">
       <center><h1>Vsocial | Login</h1></center><br><br>
@@ -36,7 +31,13 @@ if(isset($_SESSION['error']))
       {
         ?><div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
 
-      <?php } echo validation_errors("<div class='alert alert-danger'>","</div>");?>
+      <?php }
+      if(isset($_SESSION['error']))
+      {
+        ?><div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+
+      <?php }
+      echo validation_errors("<div class='alert alert-danger'>","</div>");?>
       <form action="" method="post">
       <div class="form-group">
         <label for="email">Email:</label>

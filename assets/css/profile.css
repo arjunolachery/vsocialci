@@ -1,0 +1,61 @@
+.main{
+  background-color: rgb(237, 237, 237);
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.5em;
+  vertical-align: middle;
+  padding:0.5em;
+  color:black;
+}
+.main2{
+  background-color: rgb(237, 237, 237);
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
+  color:black;
+}
+.sideButton{
+  border:none;
+  outline:none;
+  background:none;
+  opacity: 0.4;
+}
+.sideButton:hover{
+  border:none;
+  outline:none;
+  background:none;
+  opacity: 0.7;
+}
+.sideButton:active{
+  outline:none;
+  background:none;
+  opacity: 1;
+}
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../../../assets/images/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+.amountOnIcon{
+  position:absolute;
+  top:0.1em;
+  left:0.7em;
+}
+.amountOnIconCss{
+background-color: red;
+font-size: 0.7em;
+border-radius: 2em;
+color:white;
+padding:0.1em;
+}
+.notifictionsAmountContainer
+{
+  position:relative;
+}

@@ -30,7 +30,7 @@ class Auth extends CI_Controller{
         redirect("user/profile","refresh");
 
       } else {
-        $this->session->set_flashdata("error","No such acccount exists in database");
+        $this->session->set_flashdata("error","User does not exist. Try signing up instead.");
         $this->session->unset_userdata('success');
         //redirect("auth/login","refresh");
       }

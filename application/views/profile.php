@@ -9,6 +9,9 @@
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<? echo base_url();?>/assets/css/profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,18 +23,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/profile.js"></script>
   </head>
   <body>
+<div class="row main">
+<div class="col-lg-4" style="padding:0.17em 0em 0em 0.4em">vsocial</div>
+<div class="col-lg-4 text-center">
 
-    <div class="col-lg-5 col-lg-offset-2">
-      <h1>Login Page</h1>
-      <p>Fill in the details to login</p>
-      <?php if(isset($_SESSION['success']))
-      {
-        ?><div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
-
-      <?php } ?>
-      Hello, <?php echo $_SESSION['userid']; ?>
+        <input type="text" placeholder="Search" name="search" id="searchBar">
     </div>
+
+<div class="col-lg-4 text-right">
+  &nbsp;<button class="sideButton" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/chat.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">99</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="sideButton" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/friend-request.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">99</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="sideButton" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">99</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="sideButton" id="settingsButtonOpen"><img src="../../assets/images/settings.png"></button>
+</div>
+</div>
+
+</div>
+
+<div id="mainContent">
+</div>
+
+
+
+
+
+
+
   </body>
 </html>
