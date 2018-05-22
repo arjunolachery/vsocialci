@@ -119,6 +119,13 @@ textarea.droplinetext:focus
   color:grey;
 }
 .borderPostInput{
-  border:0.2em solid #ccc;
+  border:0.2em solid rgb(237, 237, 237);
   border-radius:0.5em;
+}
+#userPostImageContainer{
+  width:100%;
+  background-color:rgb(237, 237, 237);
+  color:grey;
+  font-family: 'Raleway', sans-serif;
+  
 }

@@ -4,19 +4,19 @@
       <br>
       <div class="borderPostInput" style="padding:1em;">
       <br>
-      <h4 style="display:inline"><span id="circleDefinition"><button class="sideButton" id="circleChangeButton">everyone</button></span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/photo.png"></button></h4><br>
+      <h4 style="display:inline"><span id="circleDefinition"><button class="sideButton" id="circleChangeButton">everyone</button></span>&nbsp;<button class="sideButton" id="imageUploadButton"><img src="../../assets/images/photo.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="sideButton" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
     </div>
       <br>
 
-
+      <div id="userPostTextContainer">
       <div class="row fromto">
       <div class="col-lg-12"><!--To Everyone,--></div>
       </div>
 
       <div class="row ">
-      <div class="col-lg-12 textareadivclass"><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
+      <div class="col-lg-12 textareadivclass" ><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
       </div>
 
       <div class="row fromto">
@@ -27,6 +27,13 @@
       <div class="col-12 fromtoend"></div>
       </div>
       </div>
+      <div id="userPostImageContainer">
+      <div id="imageUploadWrapper" class="text-center">
+        <button class="sideButton"><img src="<?php echo base_url();?>assets/images/cloud-computing.png"></button>
+        <br><br>
+      </div>
+      </div>
+    </div>
       <br><br>
 
 
@@ -73,7 +80,7 @@ $('textarea').each(function () {
   $(".fromto").hide();
   var count=0;
 $("#textareamail").focusout(function(){
-  $(".borderPostInput").css('border-color','#ccc');
+  $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
 });
 $("#textareamail").focus(function(){
   $(".borderPostInput").css('border-color','#0099CC');
@@ -114,7 +121,7 @@ $("#postConfirm").click(function(){
   function show_popup(){
     $("#textareamail").hide();
     $("#textareamail").css("color","black");
-    $(".borderPostInput").css('border-color','#ccc');
+    $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
     $("#textareamail").val('');
     $("#textareamail").fadeIn();
    };
@@ -138,6 +145,62 @@ $.fn.postData=function(data){
   }
   });
 };
+$("#userPostImageContainer").hide();
+var imageButtonSet=0;
+$("#imageUploadButton").click(function(){
+  imageButtonSet=!imageButtonSet;
+  if(imageButtonSet)
+  {
+    $("#imageUploadButton").html("<img src='../../assets/images/photo(1).png'>");
+    $.fn.changeToPostImage();
+  }
+  else
+  {
+    $.fn.changeToPostText();
+  }
+});
+
+$("#imageUploadButton").hover(function(){
+  $("#imageUploadButton").html("<img src='../../assets/images/photo(1).png'>");
+});
+
+$("#imageUploadButton").mouseleave(function(){
+  if(!imageButtonSet)
+  $("#imageUploadButton").html("<img src='../../assets/images/photo.png'>");
+});
+
+$.fn.changeToPostImage=function()
+{
+  $("#userPostTextContainer").hide();
+  $("#userPostImageContainer").fadeIn();
+  $(".borderPostInput").css("background-color","rgb(237, 237, 237)");
+};
+$.fn.changeToPostText=function()
+{
+  $("#userPostImageContainer").hide();
+  $("#userPostTextContainer").fadeIn();
+  $(".borderPostInput").css("background-color","white");
+};
+
+$(".borderPostInput").on('dragenter', function (e){
+ //$("#userPostImageContainer").html('dragenter');
+});
+
+$("body").on('dragover', function (e){
+ e.preventDefault();
+ $("#userPostImageContainer").html("<div id='imageUploadWrapper' class='text-center'><button class='sideButton'><img src='<?php echo base_url();?>assets/images/cloud-computing.png'></button><br>Drag Here<br></div>");
+ $(".borderPostInput").css("border","thick solid black");
+
+});
+
+$(".borderPostInput").on('drop', function (e){
+ //$(this).css('background', '#D8F9D3');
+ e.preventDefault();
+ //var image = e.originalEvent.dataTransfer.files;
+ //createFormData(image);
+ $("#userPostImageContainer").html('drop');
+});
+
 
 $("#postsViewer").load(hostAddress+"/index.php/user/postscontentview");
 </script>
