@@ -15,7 +15,7 @@ Things to work on (Big Picture)
 3. More to be added
 
 *******************
-Work Log (21nd May)
+Work Log (21st May)
 *******************
 
 1. Refined the front-end of the platform
@@ -24,7 +24,7 @@ Work Log (21nd May)
   2. made the posting and calling features work
 
 *******************
-Work Log (22rd May)
+Work Log (22nd May)
 *******************
 
 1. Refining the posts call functionality (Working now)
