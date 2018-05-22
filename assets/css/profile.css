@@ -118,3 +118,6 @@ textarea.droplinetext:focus
 {
   color:grey;
 }
+.borderPostInput{
+  border:thin solid #ccc;
+}

@@ -7,7 +7,9 @@ class User_functions_model extends CI_Model
   }
   public function deleteUserPost($id,$postid)
   {
-      echo 1;
+      //echo 1;
+      $this->db->where('id', $postid);
+      $this->db->delete('posts');
       /*
       $this->db->select('*');
       $this->db->from('users');

@@ -2,7 +2,9 @@
   <div class="col-lg-3"></div>
     <div class="col-lg-6">
       <br>
-      <h4 style="display:inline">Posts from <span id="circleDefinition">everyone</span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/levels.png"></button></h4><br>
+      <div class="borderPostInput" style="padding:1em;">
+      <br>
+      <h4 style="display:inline"><span id="circleDefinition">everyone</span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/levels.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="sideButton" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
     </div>
@@ -13,7 +15,7 @@
       <div class="col-lg-12"><!--To Everyone,--></div>
       </div>
 
-      <div class="row">
+      <div class="row ">
       <div class="col-lg-12 textareadivclass"><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
       </div>
 
@@ -24,7 +26,9 @@
       <div class="row">
       <div class="col-12 fromtoend"></div>
       </div>
-      <br><hr><br><br>
+      </div>
+      <br><br>
+
 
       <div class="row">
       <div class="col-12" id="postsViewer"></div>
@@ -68,6 +72,12 @@ $('textarea').each(function () {
 
   $(".fromto").hide();
   var count=0;
+$("#textareamail").focusout(function(){
+  $(".borderPostInput").css('border','thin solid black');
+});
+$("#textareamail").focus(function(){
+  $(".borderPostInput").css('border','thin solid #0099CC');
+});
 $("#textareamail").keypress(function(){
   if(count==0)
   {
@@ -91,6 +101,7 @@ $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
   var data=$("#textareamail").val();
+  $(".borderPostInput").css('border','thin solid green');
   $.fn.postData(data);
   count=0;
   $(".fromto").hide();
@@ -103,6 +114,7 @@ $("#postConfirm").click(function(){
   function show_popup(){
     $("#textareamail").hide();
     $("#textareamail").css("color","black");
+    $(".borderPostInput").css('border','thin solid #ccc');
     $("#textareamail").val('');
     $("#textareamail").fadeIn();
    };
