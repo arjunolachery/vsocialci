@@ -4,7 +4,7 @@
       <br>
       <div class="borderPostInput" style="padding:1em;">
       <br>
-      <h4 style="display:inline"><span id="circleDefinition">everyone</span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/levels.png"></button></h4><br>
+      <h4 style="display:inline"><span id="circleDefinition"><button class="sideButton" id="circleChangeButton">everyone</button></span>&nbsp;<button class="sideButton" id="circleChangeButton"><img src="../../assets/images/photo.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="sideButton" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
     </div>
@@ -73,10 +73,10 @@ $('textarea').each(function () {
   $(".fromto").hide();
   var count=0;
 $("#textareamail").focusout(function(){
-  $(".borderPostInput").css('border','thin solid black');
+  $(".borderPostInput").css('border-color','#ccc');
 });
 $("#textareamail").focus(function(){
-  $(".borderPostInput").css('border','thin solid #0099CC');
+  $(".borderPostInput").css('border-color','#0099CC');
 });
 $("#textareamail").keypress(function(){
   if(count==0)
@@ -101,7 +101,7 @@ $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
   var data=$("#textareamail").val();
-  $(".borderPostInput").css('border','thin solid green');
+  $(".borderPostInput").css('border-color','green');
   $.fn.postData(data);
   count=0;
   $(".fromto").hide();
@@ -114,7 +114,7 @@ $("#postConfirm").click(function(){
   function show_popup(){
     $("#textareamail").hide();
     $("#textareamail").css("color","black");
-    $(".borderPostInput").css('border','thin solid #ccc');
+    $(".borderPostInput").css('border-color','#ccc');
     $("#textareamail").val('');
     $("#textareamail").fadeIn();
    };

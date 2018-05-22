@@ -32,7 +32,7 @@
 #searchBar {
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid rgb(237, 237, 237);
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
@@ -119,5 +119,6 @@ textarea.droplinetext:focus
   color:grey;
 }
 .borderPostInput{
-  border:thin solid #ccc;
+  border:0.2em solid #ccc;
+  border-radius:0.5em;
 }
