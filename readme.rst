@@ -28,8 +28,9 @@ Work Log (22rd May)
 *******************
 
 1. Refining the posts call functionality (Working now)
-  1. adding scripts for each post to show icons to delete, upvote or downvote upon hover of each post
-  2. enable the delete post functionality
+  1. adding scripts for each post to show icons to delete, upvote or downvote upon hover of each post (to be done later)
+  2. enable the delete post functionality (finished)
   3. upvote, downvote functionality will be developed after friend requests and acceptances functionalities are enabled
-2. Develop the friend requests, acceptances functionalities
-3. Refine, add comments and add proper documentation to existing code. 
+2. Develop image uploading functionality
+3. Develop the friend requests, acceptances functionalities
+4. Refine, add comments and add proper documentation to existing code.
