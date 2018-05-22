@@ -12,6 +12,7 @@ Things to work on (Big Picture)
 
 1. Merge email activation code from homebranch
 2. Posting functionality
+3. More to be added
 
 *******************
 Work Log (21nd May)
