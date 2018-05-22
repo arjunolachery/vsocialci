@@ -16,7 +16,6 @@ class User extends CI_Controller
       $this->session->set_flashdata("error","Please login first to view this page");
       redirect("auth/");
     }
-    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['uid']));
     $activationStatus=$this->User_model->checkActivationStatus($uid);
     if($activationStatus==0)
     {
@@ -66,10 +65,11 @@ class User extends CI_Controller
     $data['uid']=$_SESSION['uid'];
     $this->load->view('postsContentView',$data);
   }
-/*
   public function sendlink()
       {
-          $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['userid']);
+          $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['uid']);
+          $userDetails=$this->Auth_model->retrieveUserPrimaryDetailsId($_SESSION['uid']);
+          //echo "<script>alert('".$userDetails->email."')</script>";
           $config['protocol'] = 'smtp';
 
           $config['smtp_host'] = 'ssl://smtp.gmail.com';
@@ -78,30 +78,25 @@ class User extends CI_Controller
 
           $config['smtp_timeout'] = '7';
 
-          $config['smtp_user'] = 'arjun2olachery@gmail.com';
+          $config['smtp_user'] = 'vsocial2018@gmail.com';
 
-          $config['smtp_pass'] = '';
+          $config['smtp_pass'] = 'vsocial201812345$';
 
           $config['charset'] = 'utf-8';
 
           $config['newline'] = "\r\n";
 
-          $config['mailtype'] = 'text'; // or html
+          $config['mailtype'] = 'html'; // or html
 
           $config['validation'] = true; // bool whether to validate email or not
-          $email="arjun2olachery@gmail.com";
-          $message=site_url();"/user/activateUser?key=".$uidActivationKey;
+          $email=$userDetails->email;
+          $message="Hi, ".$userDetails->name."!<br>Activate your account by clicking this link<br>".site_url()."/user/activateUser?key=".$uidActivationKey;
           $this->email->initialize($config);
-          $this->email->from('arjun2olachery@gmail.com', 'Arjun Olachery');
+          $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
           $this->email->to($email);
           $this->email->subject("Vsocial Activation Link");
           $this->email->message($message);
           $this->email->send();
-          //$this->load->view('profile');  public function postdata()
-  {
-    $this->User_model->userpostdata($_SESSION['uid'],$_POST['message']);
-    echo 1;
-  }
           redirect(site_url()."/user/profile","refresh");
         }
     public function activateUser()
@@ -112,9 +107,7 @@ class User extends CI_Controller
       );
       $this->db->where('activationKey', $_REQUEST['key']);
       $this->db->update('users', $data);
-      echo "<script>alert('".$_REQUEST['key']."')</script>";
     }
-*/
 }
 
 
