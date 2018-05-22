@@ -14,6 +14,15 @@ class Auth_model extends CI_Model
         $user=$query->row();
         return $user;
     }
+    public function retrieveUserPrimaryDetailsId($id)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where(array('user_id'=>$id));
+        $query=$this->db->get();
+        $user=$query->row();
+        return $user;
+    }
     public function checkUserExist($email)
     {
       $this->db->select('*');

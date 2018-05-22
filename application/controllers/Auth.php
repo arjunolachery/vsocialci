@@ -72,6 +72,7 @@ class Auth extends CI_Controller
                 'password'=>md5($this->input->post('password')),
                 'time'=>time(),
                 'activation'=>0,
+                'activationKey'=> md5(time().rand(10,100).$_SESSION['userid']),
                 );
                 if(strchr($this->input->post('email'),"@")!="" && strchr($this->input->post('email'),".")!="")
                 {

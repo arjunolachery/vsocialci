@@ -9,20 +9,18 @@ class User extends CI_Controller
   }
   public function profile()
   {
-    $uid=$_SESSION['userid'];
-    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['userid']));
+    $uid=$_SESSION['uid'];
     if(!isset($_SESSION['user_logged']))
     {
       $this->session->set_flashdata("error","Please login first to view this page");
       redirect("auth/");
     }
-    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['uid']));
     $activationStatus=$this->User_model->checkActivationStatus($uid);
     if($activationStatus==0)
     {
     $this->session->set_flashdata("verifyEmailText", "<div class='alert alert-danger alert-dismissible fade in'>
   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-  Your email hasn't been verified yet. Click <a href='http://localhost/vsocialci/index.php/user/sendlink'>here</a> to send again.
+  Your email hasn't been verified yet. Click <a href='http://localhost/vsocialci/index.php/user/sendlink' target='_blank'>here</a> to send again.
   </div>");
     }
     $this->load->view("profile");
@@ -59,7 +57,9 @@ class User extends CI_Controller
 
   public function sendlink()
       {
-          $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['userid']);
+          $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['uid']);
+          $userDetails=$this->Auth_model->retrieveUserPrimaryDetailsId($_SESSION['uid']);
+          //echo "<script>alert('".$userDetails->email."')</script>";
           $config['protocol'] = 'smtp';
 
           $config['smtp_host'] = 'ssl://smtp.gmail.com';
@@ -68,27 +68,29 @@ class User extends CI_Controller
 
           $config['smtp_timeout'] = '7';
 
-          $config['smtp_user'] = 'arjun2olachery@gmail.com';
+          $config['smtp_user'] = 'vsocial2018@gmail.com';
 
-          $config['smtp_pass'] = '';
+          $config['smtp_pass'] = 'vsocial201812345$';
 
           $config['charset'] = 'utf-8';
 
           $config['newline'] = "\r\n";
 
-          $config['mailtype'] = 'text'; // or html
+          $config['mailtype'] = 'html'; // or html
 
           $config['validation'] = true; // bool whether to validate email or not
-          $email="arjun2olachery@gmail.com";
-          $message="http://localhost/vsocialci/index.php/user/activateUser?key=".$uidActivationKey;
+          $email=$userDetails->email;
+          $message="Hi, ".$userDetails->name."!<br>Activate your account by clicking this link<br>"."http://localhost/vsocialci/index.php/user/activateUser?key=".$uidActivationKey;
           $this->email->initialize($config);
-          $this->email->from('arjun2olachery@gmail.com', 'Arjun Olachery');
+          $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
           $this->email->to($email);
           $this->email->subject("Vsocial Activation Link");
           $this->email->message($message);
           $this->email->send();
           //$this->load->view('profile');
-          redirect("http://localhost/vsocialci/index.php/user/profile","refresh");
+          echo "1";
+          //echo "<script>alert('Verification link has been sent to '+".$email.+"');</script>";
+          //redirect("http://localhost/vsocialci/index.php/user/profile","refresh");
         }
     public function activateUser()
     {
