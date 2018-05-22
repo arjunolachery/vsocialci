@@ -189,7 +189,7 @@ $(".borderPostInput").on('dragenter', function (e){
 $("body").on('dragover', function (e){
  e.preventDefault();
  $("#userPostImageContainer").html("<div id='imageUploadWrapper' class='text-center'><button class='sideButton'><img src='<?php echo base_url();?>assets/images/cloud-computing.png'></button><br>Drag Here<br></div>");
- $(".borderPostInput").css("border","thick solid black");
+ $(".borderPostInput").css("border"," dotted black");
 
 });
 
