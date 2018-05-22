@@ -100,7 +100,7 @@ class User extends CI_Controller
       );
       $this->db->where('activationKey', $_REQUEST['key']);
       $this->db->update('users', $data);
-      echo "<script>alert('".$_REQUEST['key']."')</script>";
+      //echo "<script>alert('".$_REQUEST['key']."')</script>";
     }
 
 }
