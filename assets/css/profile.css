@@ -108,8 +108,13 @@ textarea.droplinetext:focus
 .namePost
 {
   font-size: 1.3em;
+  color:#577ae4;
 }
 .contentPost
 {
   font-size: 2em;
+}
+.timePost
+{
+  color:grey;
 }
