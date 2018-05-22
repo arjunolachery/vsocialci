@@ -9,7 +9,7 @@ foreach ($query->result_array() as $row)
   //echo "<script>alert('".$this->session->userdata('uid')."');</script>";
   $this->db->select('*');
   $this->db->from('users');
-  $this->db->where(array('user_id'=>1));
+  $this->db->where(array('user_id'=>5));
   $query=$this->db->get();
   $user=$query->row();
   $remsec=time()-$row['timestamp'];

@@ -14,16 +14,7 @@
     <script src="<?php echo base_url();?>assets/js/profile.js"></script>
   </head>
   <body>
-<div class="row main2">
-  <div class="col-lg-12">
-<?php
-if(isset($_SESSION['verifyEmailText']))
-{
-  echo $_SESSION['verifyEmailText'];
-}
-?>
-</div>
-</div>
+
 <div class="row main">
 <div class="col-lg-4" style="padding:0.17em 0em 0em 0.4em">vsocial</div>
 <div class="col-lg-4 text-center">
