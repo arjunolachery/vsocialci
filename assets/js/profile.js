@@ -1,4 +1,7 @@
 $(document).ready(function(){
+//alert(document.location.origin);
+var hostAddress=document.location.origin+'/vsocialci';
+//alert(hostAddress);
 var searchFirst=0;
 $("#searchContent").hide();
 $("#circleChangeContent").hide();
@@ -53,28 +56,28 @@ $.fn.openContent=function(a){
   switch(a)
   {
     case 1:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/searchresult",{searchInputData:$("#searchBar").val()});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/searchresult",{searchInputData:$("#searchBar").val()});
     break;
     case 2:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/settings",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/settings",{data:'data'});
     break;
     case 3:
     $("#circleChangeContent").fadeIn();
     break;
     case 4:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/posts",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/posts",{data:'data'});
     break;
     case 5:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/welcomeMessage",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/welcomeMessage",{data:'data'});
     break;
     case 6:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/messages",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/messages",{data:'data'});
     break;
     case 7:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/notifications",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/notifications",{data:'data'});
     break;
     case 8:
-    $.fn.retrieveContent("http://localhost/vsocialci/index.php/user/friendRequests",{data:'data'});
+    $.fn.retrieveContent(hostAddress+"/index.php/user/friendRequests",{data:'data'});
     break;
     default:
     break;

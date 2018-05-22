@@ -10,6 +10,7 @@ class User extends CI_Controller
   public function profile()
   {
     $uid=$_SESSION['uid'];
+    $this->session->set_flashdata("userError",md5(time().rand(10,100).$_SESSION['uid']));
     if(!isset($_SESSION['user_logged']))
     {
       $this->session->set_flashdata("error","Please login first to view this page");
@@ -20,7 +21,7 @@ class User extends CI_Controller
     {
     $this->session->set_flashdata("verifyEmailText", "<div class='alert alert-danger alert-dismissible fade in'>
   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-  Your email hasn't been verified yet. Click <a href='http://localhost/vsocialci/index.php/user/sendlink' target='_blank'>here</a> to send again.
+  Your email hasn't been verified yet. Click <a href='".site_url()."/user/sendlink'>here</a> to send again.
   </div>");
     }
     $this->load->view("profile");
@@ -54,7 +55,16 @@ class User extends CI_Controller
   {
     $this->load->view('messagesContent');
   }
-
+  public function postdata()
+  {
+    $this->User_model->userpostdata($_SESSION['uid'],$_POST['message']);
+    echo 1;
+  }
+  public function postscontentview()
+  {
+    $data['uid']=$_SESSION['uid'];
+    $this->load->view('postsContentView',$data);
+  }
   public function sendlink()
       {
           $uidActivationKey=$this->Auth_model->checkUserExistId($_SESSION['uid']);
@@ -80,17 +90,14 @@ class User extends CI_Controller
 
           $config['validation'] = true; // bool whether to validate email or not
           $email=$userDetails->email;
-          $message="Hi, ".$userDetails->name."!<br>Activate your account by clicking this link<br>"."http://localhost/vsocialci/index.php/user/activateUser?key=".$uidActivationKey;
+          $message="Hi, ".$userDetails->name."!<br>Activate your account by clicking this link<br>".site_url()."/user/activateUser?key=".$uidActivationKey;
           $this->email->initialize($config);
           $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
           $this->email->to($email);
           $this->email->subject("Vsocial Activation Link");
           $this->email->message($message);
           $this->email->send();
-          //$this->load->view('profile');
-          echo "1";
-          //echo "<script>alert('Verification link has been sent to '+".$email.+"');</script>";
-          //redirect("http://localhost/vsocialci/index.php/user/profile","refresh");
+          redirect(site_url()."/user/profile","refresh");
         }
     public function activateUser()
     {
@@ -100,9 +107,8 @@ class User extends CI_Controller
       );
       $this->db->where('activationKey', $_REQUEST['key']);
       $this->db->update('users', $data);
-      //echo "<script>alert('".$_REQUEST['key']."')</script>";
     }
-
 }
+
 
 ?>
