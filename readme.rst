@@ -39,4 +39,4 @@ Work Log (22nd May)
 Work Log (23rd May)
 *******************
 
-1. Add proper documentation
+1. Add documentation and codes to all files (working)
