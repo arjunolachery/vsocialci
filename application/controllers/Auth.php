@@ -1,7 +1,4 @@
 <?php
-// QUESTION: How do i get the opening curly brace in a new line with atom-beatify?
-// QUESTION: Are the comments i mentioned too specific?
-
 /**
  * [Auth the first controller to execute when the base_url is visited]
  */
@@ -42,8 +39,8 @@ class Auth extends CI_Controller
         if ($this->form_validation->run()==true) {
             // collect post values of email and password from the login form
             // password is encrypted with md5 php built-in algorithm
-            $email=$this->input->post('email');
-            $password=md5($this->input->post('password'));
+            $email    =$this->input->post('email');
+            $password =md5($this->input->post('password'));
             // $user stores the values from a specific row of the user table for the logged in user
             $user=$this->Auth_model->retrieveUserPrimaryDetails($email, $password);
             // proceed to the following 'if branch' if the user has been found in the user table after logging in
@@ -84,11 +81,11 @@ class Auth extends CI_Controller
             if ($this->form_validation->run()==true) {
                 // add user sign up details in users table
                 $data=array(
-                'name'=>$this->input->post('name'),
-                'email'=>$this->input->post('email'),
-                'password'=>md5($this->input->post('password')),
-                'time'=>time(),
-                'activation'=>0,
+                'name'       =>$this->input->post('name'),
+                'email'      =>$this->input->post('email'),
+                'password'   =>md5($this->input->post('password')),
+                'time'       =>time(),
+                'activation' =>0,
                 );
                 // proceed to the following 'if branch' only if the posted email has characters '@' and '.'
                 if (strchr($this->input->post('email'), "@")!="" && strchr($this->input->post('email'), ".")!="") {
