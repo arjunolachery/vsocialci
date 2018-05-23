@@ -12,19 +12,19 @@
   font-size: 2em;
   color:black;
 }
-.sideButton{
+.side_button{
   border:none;
   outline:none;
   background:none;
   opacity: 0.4;
 }
-.sideButton:hover{
+.side_button:hover{
   border:none;
   outline:none;
   background:none;
   opacity: 0.7;
 }
-.sideButton:active{
+.side_button:active{
   outline:none;
   background:none;
   opacity: 1;
@@ -108,7 +108,7 @@ textarea:focus
 .namePost
 {
   font-size: 1.3em;
-  color:#577ae4;
+  color:grey;
 }
 .contentPost
 {
@@ -116,7 +116,9 @@ textarea:focus
 }
 .timePost
 {
-  color:grey;
+  color:#a3a3a3;
+  border-left: thin solid black;
+  padding:0.5em;
 }
 .borderPostInput{
   border:0.2em solid rgb(237, 237, 237);
