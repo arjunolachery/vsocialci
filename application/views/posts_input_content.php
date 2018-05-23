@@ -4,9 +4,9 @@
       <br>
       <div class="borderPostInput" style="padding:1em;">
       <br>
-      <h4 style="display:inline"><span id="circleDefinition"><button class="sideButton" id="circleChangeButton">everyone</button></span>&nbsp;<button class="sideButton" id="imageUploadButton"><img src="../../assets/images/photo.png"></button></h4><br>
+      <h4 style="display:inline"><span id="circleDefinition"><button class="side_button" id="circleChangeButton">everyone</button></span>&nbsp;<button class="side_button" id="imageUploadButton"><img src="../../assets/images/photo.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
-      <center><button class="sideButton" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
+      <center><button class="side_button" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
     </div>
       <br>
 
@@ -20,7 +20,7 @@
       </div>
 
       <div class="row fromto">
-      <div class="col-lg-12"><!--From,<br>arjun--><br><button class="sideButton" id="postConfirm"><img src="../../assets/images/check.png"></button><button class="sideButton" id="postClose"><img src="../../assets/images/error.png"></button></div>
+      <div class="col-lg-12"><!--From,<br>arjun--><br><button class="side_button" id="postConfirm"><img src="../../assets/images/check.png"></button><button class="side_button" id="postClose"><img src="../../assets/images/error.png"></button></div>
       </div>
 
       <div class="row">
@@ -29,7 +29,7 @@
       </div>
       <div id="userPostImageContainer">
       <div id="imageUploadWrapper" class="text-center">
-        <button class="sideButton"><img src="<?php echo base_url();?>assets/images/cloud-computing.png"></button>
+        <button class="side_button"><img src="<?php echo base_url();?>assets/images/cloud-computing.png"></button>
         <br><br>
       </div>
       </div>
@@ -38,11 +38,11 @@
 
 
       <div class="row">
-      <div class="col-12" id="postsViewer"></div>
+      <div class="col-12" id="posts_viewer">hi</div>
       </div>
 
     </div>
-    <div class="col-lg-3 text-center"><br><h4 style="display:inline">Online<button class="sideButton"><img src="../../assets/images/levels.png"></button></h4></div>
+    <div class="col-lg-3 text-center"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
 </div>
 
 
@@ -109,6 +109,7 @@ $("#postConfirm").click(function(){
   var textPostColor="green";
   var data=$("#textareamail").val();
   $(".borderPostInput").css('border-color','green');
+  $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
   $.fn.postData(data);
   count=0;
   $(".fromto").hide();
@@ -131,13 +132,13 @@ $("#postConfirm").click(function(){
 });
 
 $.fn.postData=function(data){
-  $.post(hostAddress+"/index.php/user/postdata",{message:data},
+  $.post(hostAddress+"/index.php/user/post_data",{message:data},
   function(response,status){
   if(response ==1)
   {
     textPostNotify="Successfully Posted.";
     textPostColor="green";
-    $("#postsViewer").load(hostAddress+"/index.php/user/postscontentview");
+    $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
   }
   else {
     textPostNotify="Technical error. Try again.";
@@ -188,7 +189,7 @@ $(".borderPostInput").on('dragenter', function (e){
 
 $("body").on('dragover', function (e){
  e.preventDefault();
- $("#userPostImageContainer").html("<div id='imageUploadWrapper' class='text-center'><button class='sideButton'><img src='<?php echo base_url();?>assets/images/cloud-computing.png'></button><br>Drag Here<br></div>");
+ $("#userPostImageContainer").html("<div id='imageUploadWrapper' class='text-center'><button class='side_button'><img src='<?php echo base_url();?>assets/images/cloud-computing.png'></button><br>Drag Here<br></div>");
  $(".borderPostInput").css("border"," dotted black");
 
 });
@@ -202,5 +203,5 @@ $(".borderPostInput").on('drop', function (e){
 });
 
 
-$("#postsViewer").load(hostAddress+"/index.php/user/postscontentview");
+$("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
 </script>

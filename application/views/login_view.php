@@ -27,17 +27,17 @@
     <div class="col-lg-6">
       <center><h1>Vsocial | Login</h1></center><br><br>
       <!--<p>Fill in the details to login</p>-->
-      <?php if(isset($_SESSION['success']))
-      {
-        ?><div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
+      <?php if (isset($_SESSION['success'])) {
+    ?><div class="alert alert-success"><?php echo $_SESSION['success']; ?></div>
 
-      <?php }
-      if(isset($_SESSION['error']))
-      {
-        ?><div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+      <?php
+}
+      if (isset($_SESSION['error'])) {
+          ?><div class="alert alert-danger"><?php echo $_SESSION['error']; ?></div>
 
-      <?php }
-      echo validation_errors("<div class='alert alert-danger'>","</div>");?>
+      <?php
+      }
+      echo validation_errors("<div class='alert alert-danger'>", "</div>");?>
       <form action="" method="post">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -52,7 +52,7 @@
         <button class="btn btn-primary" name="login">Login</button>
       </div>
     </form>
-    <a href="auth/register">New here? Sign up</a>
+    <a href="<?php echo site_url()?>/auth/register">New here? Sign up</a>
     </div>
 <div class="col-lg-3"></div>
   </body>

@@ -23,10 +23,10 @@
     </div>
 
 <div class="col-lg-4 text-right">
-  &nbsp;<button class="sideButton" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/chat.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="sideButton" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/friend-request.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="sideButton" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="sideButton" id="settingsButtonOpen"><img src="../../assets/images/settings.png"></button>
+  &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/chat.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">9</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/friend-request.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">9</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">9</span>&nbsp;</span></sup></span></button>
+  &nbsp;<button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/settings.png"></button>
 </div>
 </div>
 

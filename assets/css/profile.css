@@ -12,19 +12,19 @@
   font-size: 2em;
   color:black;
 }
-.sideButton{
+.side_button{
   border:none;
   outline:none;
   background:none;
   opacity: 0.4;
 }
-.sideButton:hover{
+.side_button:hover{
   border:none;
   outline:none;
   background:none;
   opacity: 0.7;
 }
-.sideButton:active{
+.side_button:active{
   outline:none;
   background:none;
   opacity: 1;

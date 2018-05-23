@@ -62,7 +62,7 @@ class Auth extends CI_Controller
         }
         // load {login} view into the {index} method of the current controller
         // with the session varibles {success,error,uid,user_logged} that have been set or unset based on the if else conditions
-        $this->load->view("login");
+        $this->load->view("login_view");
     }
     /**
      * register method class when the user wants to sign up
@@ -114,6 +114,6 @@ class Auth extends CI_Controller
         }
         // load [register] view into the [register] method of the current controller
         // with the session varibles {success,error} that have been set or unset based on the if else conditions
-        $this->load->view("register");
+        $this->load->view("register_view");
     }
 }
