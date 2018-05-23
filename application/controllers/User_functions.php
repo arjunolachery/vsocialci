@@ -20,6 +20,6 @@ class User_functions extends CI_Controller
     {
         $uid=$this->session->userdata('uid');
         $postid=$this->input->post('postid');
-        $this->User_functions_model->deleteUserPost($uid, $postid);
+        $this->User_functions_model->deleteUserPost($postid);
     }
 }

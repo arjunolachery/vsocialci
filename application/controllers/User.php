@@ -134,8 +134,12 @@ class User extends CI_Controller
      */
     public function posts_content()
     {
-        // load view [posts_content_view] to the method [posts_content] with $data [$uid]
+        // store session uid value
         $data['uid']=$this->session->userdata('uid');
+        // retrieval of posts is done from User_functions_model->retrieve_posts
+        $this->load->model('User_functions_model');
+        $data['posts_results']=$this->User_functions_model->retrieve_posts();
+        // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
         $this->load->view('posts_content_view', $data);
     }
     /**

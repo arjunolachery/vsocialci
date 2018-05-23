@@ -108,7 +108,7 @@ textarea:focus
 .namePost
 {
   font-size: 1.3em;
-  color:#577ae4;
+  color:grey;
 }
 .contentPost
 {
@@ -116,7 +116,9 @@ textarea:focus
 }
 .timePost
 {
-  color:grey;
+  color:#a3a3a3;
+  border-left: thin solid black;
+  padding:0.5em;
 }
 .borderPostInput{
   border:0.2em solid rgb(237, 237, 237);

@@ -1,10 +1,18 @@
 <?php
+/**
+ * [User_model the operations for the User controller exist here]
+ */
 class User_model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
     }
+    /**
+     * [check_activation_status to check whether the user's email has been activated]
+     * @param  [int] $uid [user's id]
+     * @return [int]      [1 if activated or 0 if not]
+     */
     public function check_activation_status($uid)
     {
         $this->db->select('*');
@@ -31,30 +39,4 @@ class User_model extends CI_Model
         $this->db->insert('posts', $data);
         return 1;
     }
-    /*
-    public function messagesConf($id)
-    {
-      switch($id)
-      {
-        case 1:
-        return "You have successfully signed up. Proceed to log in.";
-        case 2:
-        return "You have successfully logged out";
-        case default:
-        break;
-      }
-    }
-    */
-    /*
-    public function messagesRej($id)
-    {
-      switch($id)
-      {
-        case 1:
-        return "You have successfully signed up. Proceed to log in.";
-        case default:
-        break;
-      }
-    }
-    */
 }

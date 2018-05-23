@@ -1,24 +1,16 @@
 <?php
-//this is the view that calls the posts within the profile page
-//need to create scripts that makes the buttons show up
+// the content for private messages
+// called from User controller -> posts_content()
 
-$query = $this->db->query('SELECT * FROM posts ORDER BY id DESC');
-
-foreach ($query->result_array() as $row) {
-    //echo "<script>alert('".$this->session->userdata('uid')."');</script>";
-    $this->db->select('*');
-    $this->db->from('users');
-    $this->db->where(array('user_id'=>2));
-    $query=$this->db->get();
-    $user=$query->row();
+foreach ($posts_results as $row) {
     $remsec=time()-$row['timestamp'];
-    $name=$user->name;
+    $name=$row['name'];
     $postUserId=$row['u_id'];
     $postid=$row['id'];
     $content=$row['content'];
     echo "<div class='row' id='postContainer".$postid."'><div class='col-lg-5 text-center'><span id='namePost".$postid."' class='namePost'>";
 
-    echo $name."</span><span id='namePost".$postid."' class='timePost'> ".$remsec." seconds ago</span></div></div>";
+    echo $name."</span><span>&nbsp;&nbsp;</span><span id='namePost".$postid."' class='timePost'> ".$remsec." seconds ago</span></div></div>";
     echo "<div class='row' id='postContainer".$postid."2'><div class='col-lg-3 text-left namePost'></div>";
     echo "<div class='col-lg-6 text-left contentPost' style='word-wrap:break-word;'><span id='contentPost".$postid."'>";
     echo $content;
