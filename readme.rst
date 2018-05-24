@@ -33,7 +33,7 @@ Work Log (22nd May)
   3. upvote, downvote functionality will be developed after friend requests and acceptances functionalities are enabled (pending)
 2. Develop image uploading functionality for both posts and profile picture. (70% pending)
 3. Develop the friend requests, acceptances functionalities (pending).
-4. Refine, add comments and add proper documentation to existing code. (pending)
+4. Refine, add comments and add proper documentation to existing code. (complete)
 
 *******************
 Work Log (23rd May)
@@ -46,6 +46,8 @@ Work Log (24th May)
 *******************
 
 1. added pending documentation (complete)
+  1. documentation on scripts yet to be done
+  2. need to change camelcase variable names to names with underscore
 2. change name 'profile' method to 'home' (complete)
 2. implement search functionality (working)
 3. implement user profile
