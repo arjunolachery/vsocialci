@@ -40,3 +40,9 @@ Work Log (23rd May)
 *******************
 
 1. Add documentation and codes to all files (working)
+
+*******************
+Work Log (24th May)
+*******************
+
+1. test
