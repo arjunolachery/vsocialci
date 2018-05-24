@@ -19,9 +19,10 @@
 
 <div class="row main">
 <div class="col-lg-4" style="padding:0.17em 0em 0em 0.4em">vsocial</div>
-<div class="col-lg-4 text-center">
+<div class="col-lg-4" style="padding:0px">
 
-        <input type="text" placeholder="Search" name="search" id="searchBar">
+        <input type="text" placeholder="Search" name="search" id="searchBar" width="100%"><br><span id="search_content_show" style="width:33%">
+        </span>
     </div>
 
 <div class="col-lg-4 text-right">
@@ -33,7 +34,6 @@
 </div>
 
 </div>
-
 <div id="mainContent">
 </div>
 

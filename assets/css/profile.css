@@ -123,3 +123,11 @@ textarea:focus
   font-family: 'Raleway', sans-serif;
 
 }
+#search_content_show
+{
+  position:fixed;
+  z-index:2;
+  background-color: rgb(237, 237, 237);
+  color:grey;
+  border:thin solid #ccc;
+}

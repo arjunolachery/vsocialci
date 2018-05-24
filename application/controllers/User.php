@@ -69,7 +69,11 @@ class User extends CI_Controller
     public function search_result()
     {
         // TODO: change $_POST to standard post function in CI
+        // retrieval of search_results is done from User_functions_model->retrieve_search_results
+        $data['selector_search']=$_POST['selector_search'];
         $data['search_data']=$_POST['search_data'];
+        $this->load->model('User_functions_model');
+        $data['retrieved_search_results']=$this->User_functions_model->retrieve_search_results($data['search_data']);
         // load view [search_content] to the method [search_result] with $data [$search_data] loaded into div [search_result_value]
         $this->load->view('search_content', $data);
     }
@@ -141,6 +145,16 @@ class User extends CI_Controller
         $data['posts_results']=$this->User_functions_model->retrieve_posts();
         // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
         $this->load->view('posts_content_view', $data);
+    }
+    /**
+     * [profile a major functionality that will display the user's content]
+     * @return [type] [description]
+     */
+    public function profile()
+    {
+        echo $_REQUEST['email'];
+        $this->load->view('home_view.php');
+        //$this->load->view('login_view.php');
     }
     /**
      * send_link the email verification link is sent to the user's email

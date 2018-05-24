@@ -28,4 +28,11 @@ class User_functions_model extends CI_Model
         $query = $this->db->query('SELECT * FROM users INNER JOIN posts on users.user_id = posts.u_id');
         return $query->result_array();
     }
+    public function retrieve_search_results($search_data)
+    {
+        //return $this->session->userdata('uid').$search_data;
+        $query_string="SELECT * FROM users WHERE name LIKE '".$search_data."%' LIMIT 25";
+        $query = $this->db->query($query_string);
+        return $query->result_array();
+    }
 }
