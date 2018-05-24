@@ -11,7 +11,7 @@
     <div class="col-lg-3"></div>
 </div>
 
-<!-- closes the friend requests content and opens up posts content as defined in scripts.js -->
+<!-- closes the messages content and opens up posts content as defined in scripts.js -->
 <script>
 $("#button_close").click(function(){
 $.fn.openContent(4);

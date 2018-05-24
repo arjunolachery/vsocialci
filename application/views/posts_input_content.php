@@ -1,3 +1,5 @@
+<!-- this is the content for the posts -->
+<!-- contains both the posting input area as well as the posts viewer - posts gets loaded to [#posts_viewer] -->
 <div class="row" id="postsContent">
   <div class="col-lg-3"></div>
     <div class="col-lg-6">

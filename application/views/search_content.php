@@ -1,3 +1,4 @@
+<!-- this is the content for the search results -->
 <div class='row' id='search_content'>
   <div class='col-lg-3'></div>
     <div class='col-lg-6'>
@@ -7,6 +8,7 @@
     </div>
     <div class='col-lg-3'>hi</div>
 </div>
+<!-- closes the search content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $("#searchClose").click(function(){
   $.fn.openContent(4);

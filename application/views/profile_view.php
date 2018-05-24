@@ -1,3 +1,5 @@
+<!-- this is the main profile content where everything else loads into [#mainContent] -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

@@ -19,7 +19,6 @@
   <div class="col-lg-6">
     <center>
       <h1>Vsocial | Login</h1></center><br><br>
-    <!--<p>Fill in the details to login</p>-->
     <!-- displays success and error messages set in session -->
     <?php if (isset($_SESSION['success'])) {
     ?>
@@ -36,7 +35,7 @@
       <?php
       }
       echo validation_errors("<div class='alert alert-danger'>", "</div>");?>
-
+<!-- the main form and login content -->
         <form action="" method="post">
           <div class="form-group">
             <label for="email">Email:</label>

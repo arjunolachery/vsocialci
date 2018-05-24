@@ -1,3 +1,4 @@
+<!-- this is the content for the welcome message -->
 <div class="row" id="welcomeMessageContent">
   <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -7,6 +8,7 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
+<!-- closes the welcome message content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $("#welcomeMessageClose").click(function(){
 $.fn.openContent(4);

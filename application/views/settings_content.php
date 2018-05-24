@@ -1,3 +1,4 @@
+<!-- this is the content for the settings area -->
 <div class="row" id="settings_content">
   <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -7,6 +8,7 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
+<!-- closes the settings content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $("#settings_button_close").click(function(){
   $.fn.openContent(4);
