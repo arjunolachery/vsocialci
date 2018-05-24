@@ -25,7 +25,7 @@ class User extends CI_Controller
      * profile is the method that is primarily called after the user logs in
      * @return void
      */
-    public function profile()
+    public function home()
     {
         // TODO: user_id to be renamed to uid in table
         // $uid has the user_id from the users table which is set in the session variable uid from the login method
@@ -51,7 +51,7 @@ class User extends CI_Controller
         );
         }
         // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-        $this->load->view("profile_view");
+        $this->load->view("home_view");
     }
     /**
      * posts is the method that calls the posts from the posts table for the particular user

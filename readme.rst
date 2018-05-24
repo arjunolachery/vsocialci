@@ -39,10 +39,14 @@ Work Log (22nd May)
 Work Log (23rd May)
 *******************
 
-1. Add documentation and codes to all files (working)
+1. Add documentation and codes to all files (complete)
 
 *******************
 Work Log (24th May)
 *******************
 
-1. test
+1. added pending documentation (complete)
+2. change name 'profile' method to 'home' (complete)
+2. implement search functionality (working)
+3. implement user profile
+4. implement friend request and acceptances
