@@ -45,7 +45,7 @@
 </div>
 
 </div>
-<div id="user_email"><?php echo $email;?></div>
+<div id="user_email" style="display:none"><?php echo $email;?></div>
 <div id="mainContent">
 </div>
 

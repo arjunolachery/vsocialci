@@ -161,7 +161,7 @@ class User extends CI_Controller
     }
     public function profile_specific()
     {
-        echo $_POST['data'];
+        echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
     }
     /**
      * send_link the email verification link is sent to the user's email

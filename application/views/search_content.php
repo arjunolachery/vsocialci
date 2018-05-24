@@ -15,12 +15,12 @@
           } else {
               $color='rgb(237, 237, 237)';
           }
-          echo "<div style='background-color:".$color."'><a href='".site_url()."/user/profile?email=".$row['email']."'>".$row['name']."</a></div>";
+          echo "<a class='anchor_search' href='".site_url()."/user/profile?email=".$row['email']."'><div style='background-color:".$color."'>".$row['name']."</div></a>";
           $count++;
       }
       ?>
       <?php setcookie('search_results_amount', $count, time()+3600);?>
-      <div id="number_search_results" value=''><center><?php echo $count." matching results"?></center></div></span>
+      <div class="anchor_search" id="number_search_results" value=''><center><?php echo $count." matching results"?></center></div></span>
       <center><button class='side_button' id='searchClose'><img src='../../assets/images/error.png'></button></center>
     </div>
     <!--
