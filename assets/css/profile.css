@@ -1,10 +1,15 @@
+body
+{
+  background-color:rgb(237, 237, 237);
+}
 .main{
-  background-color: light blue;
+  background-color: white;
   font-family: 'Raleway', sans-serif;
   font-size: 2.5em;
   vertical-align: middle;
   padding:0.5em;
   color:black;
+  border-bottom:1px solid #ccc;
 }
 #mainContent
 {
@@ -20,34 +25,34 @@
   border:none;
   outline:none;
   background:none;
-  opacity: 0.4;
+  opacity: 1;
 }
 .side_button:hover{
   border:none;
   outline:none;
   background:none;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 .side_button:active{
   outline:none;
   background:none;
   opacity: 1;
 }
-#searchBar {
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid rgb(237, 237, 237);
-    border-radius: 4px;
+#search_bar_input {
+    //border:none;
+    //border-botom:thin solid black;
+    outline: none;
+    text-align: center;
+    border:none;
+    border-bottom: 2px solid #ccc;
+    //border-radius: 4px;
     font-size: 16px;
     background-color: white;
     background-image: url('../../assets/images/searchicon.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
 }
-
 
 .amountOnIcon{
   position:absolute;
@@ -67,13 +72,14 @@ padding:0.1em;
 }
 textarea.droplinetext
 {
-  background-color: rgb(237, 237, 237);
+  background-color: white;
   color:black;
   border:none;
   text-align:center;
   resize:vertical;
-  max-width: 300px;
+  //max-width: 300px;
   outline: none;
+  width:100%;
 }
 textarea:focus
 {
@@ -110,16 +116,20 @@ textarea:focus
 .contentPost
 {
   font-size: 2em;
+  padding:1em;
 }
 .timePost
 {
   color:#a3a3a3;
-  border-left: thin solid black;
-  padding:0.5em;
+}
+.side_buttonsPost
+{
+  padding: 0.3em;
 }
 .borderPostInput{
-  border:0.2em solid rgb(237, 237, 237);
+  border:thin solid #ccc;
   border-radius:0.5em;
+  background-color: white;
 }
 #userPostImageContainer{
   width:100%;
@@ -135,8 +145,23 @@ textarea:focus
   background-color: rgb(237, 237, 237);
   color:grey;
   border:thin solid #ccc;
+  border-top:none;
 }
 .anchor_search
 {
   font-size: 0.7em;
+}
+.post_left_details
+{
+  text-align: left;
+}
+.postContainerMain
+{
+  padding: 1em;
+  background: white;
+}
+hr
+{
+  display: block;
+  color: black;
 }

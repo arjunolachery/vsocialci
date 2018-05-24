@@ -1,9 +1,9 @@
 <!-- this is the content for the posts -->
 <!-- contains both the posting input area as well as the posts viewer - posts gets loaded to [#posts_viewer] -->
 <div class="row" id="postsContent">
-  <div class="col-lg-3"></div>
+  <div class="col-lg-3" id="posts_content_left"></div>
     <div class="col-lg-6">
-      <br>
+      <br><h3>What's up, <?php echo $name?>?</h3></br>
       <div class="borderPostInput" style="padding:1em;">
 
       <br>
@@ -35,14 +35,16 @@
       </div>
     </div>
       <br><br>
-
+<hr><br>
+<table><tr><td style="border-bottom:thin solid black;width:40%"></td><td rowspan="2" style="width:20%">Top Posts</td><td style="border-bottom:thin solid black;width:40%"></td></tr>
+  <tr><td></td><td></td></tr></table>
 
       <div class="row">
-      <div class="col-12" id="posts_viewer">hi</div>
+      <div class="col-lg-12" id="posts_viewer">hi</div>
       </div>
 
     </div>
-    <div class="col-lg-3 text-center"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
+    <div class="col-lg-3 text-center" id="posts_content_right"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
 </div>
 
 
@@ -77,12 +79,14 @@ $('textarea').each(function () {
   $(".fromto").hide();
   var count=0;
 // based on the [#textareamail] events such as focus and focusout, the borders change
-$(".borderPostInput").css('border-color','white');
+//$(".borderPostInput").css('border-color','white');
 $("#textareamail").focusout(function(){
-  $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
+  $(".borderPostInput").css('border','thin solid #ccc');
+  $.fn.opacity_background_reduce(0);
 });
 $("#textareamail").focus(function(){
-  $(".borderPostInput").css('border-color','#0099CC');
+  $(".borderPostInput").css('border','0.2em solid #0099CC');
+  $.fn.opacity_background_reduce(1);
 });
 // when the user starts typing on the textarea of post input, the following things mentioned in the script happen
 $("#textareamail").keypress(function(){
@@ -104,13 +108,33 @@ $("#postClose").click(function(){
   $(".textareadivclass").css("text-align","center");
   $("#textareamail").fadeIn();
 });
+$.fn.opacity_background_reduce=function(i)
+{
+  var opacity_value=0.1;
+  if (i==1)
+  {
+  $(".borderPostInput").css('opacity','1');
+  $(".main").css("opacity",opacity_value);
+  $("#posts_viewer").css("opacity",opacity_value);
+  $("#posts_content_left").css("opacity",opacity_value);
+  $("#posts_content_right").css("opacity",opacity_value);
+  }
+  else {
+    $(".borderPostInput").css('opacity','1');
+    $(".main").css("opacity",'1');
+    $("#posts_viewer").css("opacity",'1');
+    $("#posts_content_left").css("opacity",'1');
+    $("#posts_content_right").css("opacity",'1');
+  }
+}
+
 // OPTIMIZE: script below can be optimized
 // text posting script when the user presses [#postConfirm]
 $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
   var data=$("#textareamail").val();
-  $(".borderPostInput").css('border-color','green');
+  $(".borderPostInput").css('border','0.2em solid green');
   $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
   $.fn.postData(data);
   count=0;
@@ -124,7 +148,7 @@ $("#postConfirm").click(function(){
   function show_popup(){
     $("#textareamail").hide();
     $("#textareamail").css("color","black");
-    $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
+    $(".borderPostInput").css('border','thin solid #ccc');
     $("#textareamail").val('');
     $("#textareamail").fadeIn();
    };

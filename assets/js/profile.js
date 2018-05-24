@@ -54,7 +54,7 @@ $.fn.retrieve_content_search=function(a,b)
 var select_search_result=0;
 $.fn.searchBarActive=function(e)
 {
-  if($("#searchBar").val()=="" && e.keyCode==8){
+  if($("#search_bar_input").val()=="" && e.keyCode==8){
     $("#search_content_show").hide();
   }
   else {
@@ -90,8 +90,8 @@ $.fn.openContent=function(a){
   switch(a)
   {
     case 1:
-    $.fn.retrieve_content_search(hostAddress+"/index.php/user/search_result",{search_data:$("#searchBar").val(),selector_search:select_search_result});
-    $("#search_content_show").fadeIn();
+    $.fn.retrieve_content_search(hostAddress+"/index.php/user/search_result",{search_data:$("#search_bar_input").val(),selector_search:select_search_result});
+    $("#search_content_show").show();
     break;
     case 2:
     $.fn.retrieveContent(hostAddress+"/index.php/user/settings",{data:'data'});

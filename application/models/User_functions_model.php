@@ -25,7 +25,7 @@ class User_functions_model extends CI_Model
      */
     public function retrieve_posts()
     {
-        $query = $this->db->query('SELECT * FROM users INNER JOIN posts on users.user_id = posts.u_id');
+        $query = $this->db->query('SELECT * FROM users INNER JOIN posts on users.user_id = posts.u_id ORDER BY id DESC');
         return $query->result_array();
     }
     public function retrieve_search_results($search_data)

@@ -19,20 +19,14 @@ foreach ($posts_results as $row) {
     // as well as upvote and downvote buttons that have not been fully developed
     // TODO: implement upvote, downvote
     // Also each post has a hr [#postHr{postid}] that exist at the end of each post
-    echo "<div class='row' id='postContainer".$postid."'>
-    <div class='col-lg-5 text-center'>
-    <span id='namePost".$postid."' class='namePost'>".$name."</span>
-    <span>&nbsp;&nbsp;</span>
-    <span id='namePost".$postid."' class='timePost'> ".$remsec." seconds ago</span>
+    echo "<div class='postContainerMain' id='postContainerMain".$postid."'><span id='postContainerTopSpan'>
+    <div class='row' class='postContainerTop' style='border-bottom-color:#ccc' id='postContainer".$postid."'>
+    <div class='col-lg-5'><table class='post_left_details'><tr><td rowspan='2'><button class='side_button' id='profileButtonOpen'><img src='../../assets/images/user.png'></button></td>
+    <td><span id='namePost".$postid."' class='namePost'>".$name."</span></td></tr><tr><td>
+    <span id='namePost".$postid."' class='timePost'> ".$remsec." seconds ago</span></td></tr></table>
     </div>
-    </div>";
-    echo "<div class='row' id='postContainer".$postid."2'>
-    <div class='col-lg-3 text-left namePost'>
-    </div>
-    <div class='col-lg-6 text-left contentPost' style='word-wrap:break-word;'>
-    <span id='contentPost".$postid."'>".$content."</span>
-    </div>
-    <div class='col-lg-3 text-center side_buttonsPost'>
+
+    <div class='col-lg-7 text-right side_buttonsPost'>
     <span id='side_buttonsPost".$postid."'>";
     if ($this->session->userdata('uid') == $postUserId) {
         echo "<button class='side_button'id='deletePost".$postid."'><img src='".base_url()."assets/images/remove.png'></button>";
@@ -41,8 +35,15 @@ foreach ($posts_results as $row) {
     <button class='side_button'><img src='".base_url()."assets/images/chevron.png'></button>
     </span>
     </div>
+
+    </div></span>";
+    echo "<div class='row' id='postContainer".$postid."2'>
+    <div class='col-lg-12 text-left contentPost' style='word-wrap:break-word;'>
+    <span id='contentPost".$postid."'>".$content."</span>
     </div>
-    <hr id='postHr".$postid."'>";
+
+    </div>
+    </div><br><br>";
     // the following script that is formed for each post is used for the delete functionality
     // once the delete button is clicked for each post, an ajax post request is made to the [deletePost] method
     // of the controller [User_functions]
@@ -53,6 +54,7 @@ foreach ($posts_results as $row) {
             $('#postContainer".$postid."').fadeOut();
             $('#postContainer".$postid."2').fadeOut();
             $('#postHr".$postid."').fadeOut();
+            $('#postContainerMain".$postid."').fadeOut();
           });
         });
         });</script>";

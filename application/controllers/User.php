@@ -62,7 +62,9 @@ class User extends CI_Controller
     public function posts()
     {
         // load view [posts_input_content] to the method [posts]
-        $this->load->view('posts_input_content');
+        $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
+        $data['name']=$data['name']->name;
+        $this->load->view('posts_input_content',$data);
     }
     /**
      * search_result contains data of the search result that is executed by the user typing in the search bar
