@@ -12,33 +12,43 @@
   font-size: 2em;
   color:black;
 }
-.sideButton{
+.side_button{
   border:none;
   outline:none;
   background:none;
   opacity: 0.4;
 }
-.sideButton:hover{
+.side_button:hover{
   border:none;
   outline:none;
   background:none;
   opacity: 0.7;
 }
-.sideButton:active{
+.side_button:active{
   outline:none;
   background:none;
   opacity: 1;
 }
-input[type=text] {
+#searchBar {
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid rgb(237, 237, 237);
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('../../../assets/images/searchicon.png');
+    background-image: url('../../assets/images/searchicon.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+#postsBar {
+    width: 100%;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    background-color: white;
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
@@ -58,4 +68,66 @@ padding:0.1em;
 .notifictionsAmountContainer
 {
   position:relative;
+}
+textarea.droplinetext
+{
+  color:black;
+  border:none;
+  text-align:center;
+  resize:vertical;
+  max-width: 300px;
+  outline: none;
+}
+textarea:focus
+{
+  outline: none;
+}
+.textareadivclass
+{
+  text-align:center;
+  font-size: 1.2em;
+}
+.fromto
+{
+  color:#A0A0A0;
+}
+.fromtobutton
+{
+  border:thin solid black;
+  color:black;
+}
+#overlay
+{
+  position:fixed;
+  top:0px;
+  z-index:1;
+  height:100px;
+  width:1000px;
+  background-color: red;
+}
+.namePost
+{
+  font-size: 1.3em;
+  color:grey;
+}
+.contentPost
+{
+  font-size: 2em;
+}
+.timePost
+{
+  color:#a3a3a3;
+  border-left: thin solid black;
+  padding:0.5em;
+}
+.borderPostInput{
+  border:0.2em solid rgb(237, 237, 237);
+  border-radius:0.5em;
+}
+#userPostImageContainer{
+  width:100%;
+  background-color:rgb(237, 237, 237);
+  color:grey;
+  font-family: 'Raleway', sans-serif;
+
 }
