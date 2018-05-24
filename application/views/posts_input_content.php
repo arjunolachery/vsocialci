@@ -77,6 +77,7 @@ $('textarea').each(function () {
   $(".fromto").hide();
   var count=0;
 // based on the [#textareamail] events such as focus and focusout, the borders change
+$(".borderPostInput").css('border-color','white');
 $("#textareamail").focusout(function(){
   $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
 });

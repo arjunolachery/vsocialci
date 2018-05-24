@@ -1,10 +1,14 @@
 .main{
-  background-color: rgb(237, 237, 237);
+  background-color: light blue;
   font-family: 'Raleway', sans-serif;
   font-size: 2.5em;
   vertical-align: middle;
   padding:0.5em;
   color:black;
+}
+#mainContent
+{
+  background-color: rgb(237, 237, 237);
 }
 .main2{
   background-color: rgb(237, 237, 237);
@@ -63,6 +67,7 @@ padding:0.1em;
 }
 textarea.droplinetext
 {
+  background-color: rgb(237, 237, 237);
   color:black;
   border:none;
   text-align:center;

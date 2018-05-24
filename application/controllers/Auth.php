@@ -62,6 +62,9 @@ class Auth extends CI_Controller
         }
         // load {login} view into the {index} method of the current controller
         // with the session varibles {success,error,uid,user_logged} that have been set or unset based on the if else conditions
+        if ($this->session->userdata('uid')) {
+            redirect("user/home", "refresh");
+        }
         $this->load->view("login_view");
     }
     /**
