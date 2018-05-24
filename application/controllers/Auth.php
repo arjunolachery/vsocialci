@@ -51,7 +51,7 @@ class Auth extends CI_Controller
                 $this->session->set_userdata("uid", $user->user_id);
                 $this->session->unset_userdata('error');
                 $this->session->set_userdata("user_logged", true);
-                redirect("user/profile", "refresh");
+                redirect("user/home", "refresh");
             }
             // proceed to the following 'else branch' if the user has not been found in the user table after logging in
             else {

@@ -5,17 +5,15 @@
     <div class="col-lg-6">
       <br>
       <div class="borderPostInput" style="padding:1em;">
+
       <br>
       <h4 style="display:inline"><span id="circleDefinition"><button class="side_button" id="circleChangeButton">everyone</button></span>&nbsp;<button class="side_button" id="imageUploadButton"><img src="../../assets/images/photo.png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="side_button" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
-    </div>
+      </div>
       <br>
 
       <div id="userPostTextContainer">
-      <div class="row fromto">
-      <div class="col-lg-12"><!--To Everyone,--></div>
-      </div>
 
       <div class="row ">
       <div class="col-lg-12 textareadivclass" ><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
@@ -49,7 +47,8 @@
 
 
 <script>
-var hostAddress=document.location.origin+'/vsocialci';
+var hostAddress='<?php echo base_url()?>';
+// script related to circlechanging
 $("#circleChangeContent").hide();
 $("#circleChangeButton").mouseenter(function(){
   $("#circleDefinition").css("text-decoration","underline");
@@ -67,11 +66,7 @@ $("#circleChangeClose").click(function(){
   $("#circleChangeContent").hide();
 });
 
-$("#postsBar").keyup(function(){
-  alert('hi');
-});
-
-//code for textarea
+//code for textarea (adaptive size change)
 $('textarea').each(function () {
   this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
 }).on('input', function () {
@@ -81,12 +76,14 @@ $('textarea').each(function () {
 
   $(".fromto").hide();
   var count=0;
+// based on the [#textareamail] events such as focus and focusout, the borders change
 $("#textareamail").focusout(function(){
   $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
 });
 $("#textareamail").focus(function(){
   $(".borderPostInput").css('border-color','#0099CC');
 });
+// when the user starts typing on the textarea of post input, the following things mentioned in the script happen
 $("#textareamail").keypress(function(){
   if(count==0)
   {
@@ -96,6 +93,7 @@ $("#textareamail").keypress(function(){
     count++;
   }
 });
+//closing of post input when [#postClose] button is pressed
 $("#postClose").click(function(){
   count=0;
   $(".fromto").hide();
@@ -105,7 +103,8 @@ $("#postClose").click(function(){
   $(".textareadivclass").css("text-align","center");
   $("#textareamail").fadeIn();
 });
-
+// OPTIMIZE: script below can be optimized
+// text posting script when the user presses [#postConfirm]
 $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
@@ -133,6 +132,7 @@ $("#postConfirm").click(function(){
 
 });
 
+// additional text posting script when the user presses [#postConfirm]
 $.fn.postData=function(data){
   $.post(hostAddress+"/index.php/user/post_data",{message:data},
   function(response,status){
@@ -148,6 +148,8 @@ $.fn.postData=function(data){
   }
   });
 };
+
+//switch between text and image type of posts
 $("#userPostImageContainer").hide();
 var imageButtonSet=0;
 $("#imageUploadButton").click(function(){
@@ -163,6 +165,7 @@ $("#imageUploadButton").click(function(){
   }
 });
 
+//to swich between icons (black and white) and (color) depending on state of post input
 $("#imageUploadButton").hover(function(){
   $("#imageUploadButton").html("<img src='../../assets/images/photo(1).png'>");
 });
@@ -172,6 +175,7 @@ $("#imageUploadButton").mouseleave(function(){
   $("#imageUploadButton").html("<img src='../../assets/images/photo.png'>");
 });
 
+//functions to switch between text and image posting
 $.fn.changeToPostImage=function()
 {
   $("#userPostTextContainer").hide();
@@ -185,6 +189,7 @@ $.fn.changeToPostText=function()
   $(".borderPostInput").css("background-color","white");
 };
 
+//drag and drop images scripts
 $(".borderPostInput").on('dragenter', function (e){
  //$("#userPostImageContainer").html('dragenter');
 });
@@ -204,6 +209,6 @@ $(".borderPostInput").on('drop', function (e){
  $("#userPostImageContainer").html('drop');
 });
 
-
+//load posts into [#posts_viewer] on load of this page
 $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
 </script>

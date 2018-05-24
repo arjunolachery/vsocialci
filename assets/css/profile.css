@@ -43,16 +43,8 @@
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
-#postsBar {
-    width: 100%;
-    border: none;
-    text-align: center;
-    font-size: 16px;
-    background-color: white;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
+
+
 .amountOnIcon{
   position:absolute;
   top:0.1em;
