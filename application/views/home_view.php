@@ -13,7 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/profile.js"></script>
+    <?php
+    if ($profile==1) {
+        ?>
+  <script src="<?php echo base_url(); ?>assets/js/profile2.js"></script>
+      <?php
+    } else {
+        ?>
+<script src="<?php echo base_url(); ?>assets/js/profile.js"></script>
+      <?php
+    }
+     ?>
+
   </head>
   <body>
 
@@ -34,6 +45,7 @@
 </div>
 
 </div>
+<div id="user_email"><?php echo $email;?></div>
 <div id="mainContent">
 </div>
 

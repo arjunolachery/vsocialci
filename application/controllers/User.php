@@ -51,7 +51,9 @@ class User extends CI_Controller
         );
         }
         // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-        $this->load->view("home_view");
+        $data['profile']=false;
+        $data['email']='';
+        $this->load->view('home_view.php', $data);
     }
     /**
      * posts is the method that calls the posts from the posts table for the particular user
@@ -152,9 +154,14 @@ class User extends CI_Controller
      */
     public function profile()
     {
-        echo $_REQUEST['email'];
-        $this->load->view('home_view.php');
+        $data['email']=$_REQUEST['email'];
+        $data['profile']=true;
+        $this->load->view('home_view.php', $data);
         //$this->load->view('login_view.php');
+    }
+    public function profile_specific()
+    {
+        echo $_POST['data'];
     }
     /**
      * send_link the email verification link is sent to the user's email
