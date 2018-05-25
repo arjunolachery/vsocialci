@@ -3,7 +3,26 @@
 // called from User controller -> posts_content()
 // posts displayed as each row from the table posts
 foreach ($posts_results as $row) {
-    $remsec=time()-$row['timestamp'];
+    $remsec=$row['timestamp'];
+    $now=time();
+    $day_timestamp=date('d', $remsec);
+    $month_timestamp=date('M', $remsec);
+    $year_timestamp=date('Y', $remsec);
+    if ($year_timestamp==date('Y', $now)) {
+        $year_timestamp="";
+    } else {
+        $year_timestamp=" ".$year_timestamp;
+    }
+    if ($day_timestamp==date('d', $now)) {
+        $day_timestamp="Today";
+        $month_timestamp="";
+    }
+    if ($day_timestamp==date('d', $now)-1) {
+        $day_timestamp="Yesterday";
+        $month_timestamp="";
+    }
+    $time_timestamp=date('H:i A', $remsec);
+    $convert_timestamp=$day_timestamp." ".$month_timestamp.$year_timestamp." at ".$time_timestamp;
     $name=$row['name'];
     $postUserId=$row['u_id'];
     $postid=$row['id'];
@@ -23,7 +42,7 @@ foreach ($posts_results as $row) {
     <div class='row' class='postContainerTop' style='border-bottom-color:#ccc' id='postContainer".$postid."'>
     <div class='col-lg-5'><table class='post_left_details'><tr><td rowspan='2'><button class='side_button' id='profileButtonOpen'><img src='../../assets/images/user.png'></button></td>
     <td><span id='namePost".$postid."' class='namePost'>".$name."</span></td></tr><tr><td>
-    <span id='namePost".$postid."' class='timePost'> ".$remsec." seconds ago</span></td></tr></table>
+    <span id='namePost".$postid."' class='timePost'> ".$convert_timestamp."</span></td></tr></table>
     </div>
 
     <div class='col-lg-7 text-right side_buttonsPost'>

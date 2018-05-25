@@ -9,7 +9,7 @@ $("#settings_content").hide();
 $("#postsContent").hide();
 $("#circleChangeContent").hide();
 $("#search_content_show").hide();
-
+$("#settings_content_show").hide();
 
 $("#settingsButtonOpen").click(function(){
   $.fn.openContent(2);
@@ -48,6 +48,14 @@ $.fn.retrieve_content_search=function(a,b)
   $.post(a,b,
   function(response,status){ // Required Callback Function
   $("#search_content_show").html(response);
+  });
+};
+
+$.fn.retrieve_content_settings=function(a,b)
+{
+  $.post(a,b,
+  function(response,status){ // Required Callback Function
+  $("#settings_content_show").html(response);
   });
 };
 
@@ -94,7 +102,8 @@ $.fn.openContent=function(a){
     $("#search_content_show").show();
     break;
     case 2:
-    $.fn.retrieveContent(hostAddress+"/index.php/user/settings",{data:'data'});
+    $.fn.retrieve_content_settings(hostAddress+"/index.php/user/settings",{data:'data'});
+    $("#settings_content_show").show();
     break;
     case 3:
     $("#circleChangeContent").fadeIn();

@@ -11,6 +11,6 @@
 <!-- closes the settings content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $("#settings_button_close").click(function(){
-  $.fn.openContent(4);
+  $("#settings_content_show").hide();
 });
 </script>

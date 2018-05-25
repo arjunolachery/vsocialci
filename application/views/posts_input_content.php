@@ -35,9 +35,20 @@
       </div>
     </div>
       <br><br>
-<hr><br>
-<table><tr><td style="border-bottom:thin solid black;width:40%"></td><td rowspan="2" style="width:20%">Top Posts</td><td style="border-bottom:thin solid black;width:40%"></td></tr>
-  <tr><td></td><td></td></tr></table>
+<table width="100%" id="posts_title">
+  <tr>
+    <td width="33%" valign="middle">
+      <hr class="show showright">
+    </td>
+    <td width="1%" style="text-align:center;white-space:nowrap;" valign="middle">
+      <h4> &nbsp;Top Posts&nbsp;</h4>
+    </td>
+    <td width="33%" valign="middle">
+      <hr class="show showleft">
+    </td>
+  </tr>
+</table>
+<br>
 
       <div class="row">
       <div class="col-lg-12" id="posts_viewer">hi</div>
@@ -118,6 +129,7 @@ $.fn.opacity_background_reduce=function(i)
   $("#posts_viewer").css("opacity",opacity_value);
   $("#posts_content_left").css("opacity",opacity_value);
   $("#posts_content_right").css("opacity",opacity_value);
+  $("#posts_title").css("opacity",opacity_value);
   }
   else {
     $(".borderPostInput").css('opacity','1');
@@ -125,6 +137,7 @@ $.fn.opacity_background_reduce=function(i)
     $("#posts_viewer").css("opacity",'1');
     $("#posts_content_left").css("opacity",'1');
     $("#posts_content_right").css("opacity",'1');
+    $("#posts_title").css("opacity",'1');
   }
 }
 

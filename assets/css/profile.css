@@ -147,6 +147,15 @@ textarea:focus
   border:thin solid #ccc;
   border-top:none;
 }
+#settings_content_show
+{
+  position:fixed;
+  z-index:2;
+  background-color: rgb(237, 237, 237);
+  color:grey;
+  border:thin solid #ccc;
+  border-top:none;
+}
 .anchor_search
 {
   font-size: 0.7em;
@@ -160,8 +169,23 @@ textarea:focus
   padding: 1em;
   background: white;
 }
-hr
+.show
 {
-  display: block;
-  color: black;
+  border: 0;
+  //clear:both;
+  display:inline;
+  width: 96%;
+  height: 0.1em;
+}
+.showleft
+{
+  background:linear-gradient(to right, #d8d8d8 , rgb(237, 237, 237));
+}
+.showright
+{
+  background:linear-gradient(to left, #d8d8d8 , rgb(237, 237, 237));
+}
+.in_between_hr
+{
+  display: inline;
 }
