@@ -50,5 +50,14 @@ Work Log (24th May)
   2. need to change camelcase variable names to names with underscore
 2. change name 'profile' method to 'home' (complete)
 2. implement search functionality (working)
-3. implement user profile
-4. implement friend request and acceptances
+3. implement user profile (pending)
+4. implement friend request and acceptances (pending)
+
+*******************
+Work Log (25th May)
+*******************
+
+1. modify css of posts content (done)
+2. change seconds to local time
+3. implement settings feature
+4. need to add "More..." button when post is too long
