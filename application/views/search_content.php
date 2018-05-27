@@ -4,7 +4,7 @@
   <div class='col-lg-3'></div>-->
 
 
-    <div style="border:thin solid #ccc">
+    <div>
       <span id='search_result_value'><?php
       $count=0;
       foreach ($retrieved_search_results as $row) {
@@ -28,10 +28,10 @@
 </div>-->
 <!-- closes the search content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
+$(document).ready(function(){
 $("#searchClose").click(function(){
   $("#search_content_show").hide();
 });
-$(document).ready(function(){
   // alert(document.cookie);
   $("#searchBar").keyup(function(e){
     if(e.keyCode==13)

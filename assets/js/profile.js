@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+  alert('hi');
 //alert(document.location.origin);
 var hostAddress=document.location.origin+'/vsocialci';
 //alert(hostAddress);
@@ -128,5 +130,8 @@ $.fn.openContent=function(a){
   }
 };
 $.fn.openContent(5);
+
+//get location of settings to place
+//alert($("#settingsButtonOpen").offset().top);
 
 });

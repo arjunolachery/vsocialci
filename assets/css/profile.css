@@ -1,14 +1,14 @@
 body
 {
-  background-color:rgb(237, 237, 237);
+  background-color:#ccc;
 }
 .main{
-  background-color: white;
+  background-color:#000066;
   font-family: 'Raleway', sans-serif;
   font-size: 2.5em;
   vertical-align: middle;
   padding:0.5em;
-  color:black;
+  color:white;
   border-bottom:1px solid #ccc;
 }
 #mainContent
@@ -25,7 +25,7 @@ body
   border:none;
   outline:none;
   background:none;
-  opacity: 1;
+  opacity: 0.9;
 }
 .side_button:hover{
   border:none;
@@ -36,19 +36,18 @@ body
 .side_button:active{
   outline:none;
   background:none;
-  opacity: 1;
+  opacity: 0.9;
 }
 #search_bar_input {
-    //border:none;
-    //border-botom:thin solid black;
+    //border:thin solid red;
     outline: none;
     text-align: center;
     border:none;
-    border-bottom: 2px solid #ccc;
+    //border-bottom: 2px solid white;
     //border-radius: 4px;
     font-size: 16px;
-    background-color: white;
-    background-image: url('../../assets/images/searchicon.png');
+    background-color: #000066;
+    background-image: url('../../assets/images/search.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
@@ -144,8 +143,9 @@ textarea:focus
   z-index:2;
   background-color: rgb(237, 237, 237);
   color:grey;
-  border:thin solid #ccc;
+  border:none;
   border-top:none;
+  box-shadow: 0.1em 0.1em 1em black;
 }
 #settings_content_show
 {
@@ -153,8 +153,9 @@ textarea:focus
   z-index:2;
   background-color: rgb(237, 237, 237);
   color:grey;
-  border:thin solid #ccc;
+  border:thick solid black;
   border-top:none;
+  right:100px;
 }
 .anchor_search
 {
@@ -179,13 +180,21 @@ textarea:focus
 }
 .showleft
 {
-  background:linear-gradient(to right, #d8d8d8 , rgb(237, 237, 237));
+  background:linear-gradient(to right, black , rgb(237, 237, 237));
 }
 .showright
 {
-  background:linear-gradient(to left, #d8d8d8 , rgb(237, 237, 237));
+  background:linear-gradient(to left, black , rgb(237, 237, 237));
 }
 .in_between_hr
 {
   display: inline;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: grey;
+    opacity: 1; /* Firefox */
 }
