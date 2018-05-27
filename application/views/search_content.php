@@ -10,10 +10,10 @@
       foreach ($retrieved_search_results as $row) {
           // retrieval from users table
           if ($selector_search==$count) {
-              $color='white';
+              $color='rgb(237, 237, 237)';
               $url=site_url()."/user/profile?email=".$row['email'];
           } else {
-              $color='rgb(237, 237, 237)';
+              $color='white';
           }
           echo "<a class='anchor_search' href='".site_url()."/user/profile?email=".$row['email']."'><div style='background-color:".$color."'>".$row['name']."</div></a>";
           $count++;
@@ -21,7 +21,7 @@
       ?>
       <?php setcookie('search_results_amount', $count, time()+3600);?>
       <div class="anchor_search" id="number_search_results" value=''><center><?php echo $count." matching results"?></center></div></span>
-      <center><button class='side_button' id='searchClose'><img src='../../assets/images/error.png'></button></center>
+      <div class="bottom_dropdown"><center><button class='side_button' id='searchClose'><img src='../../assets/images/error.png'></button></center></div>
     </div>
     <!--
     <div class='col-lg-3'>hi</div>

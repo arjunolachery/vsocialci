@@ -141,21 +141,22 @@ textarea:focus
 {
   position:fixed;
   z-index:2;
-  background-color: rgb(237, 237, 237);
+  background-color: white;
   color:grey;
   border:none;
   border-top:none;
   box-shadow: 0.1em 0.1em 1em black;
+
 }
 #settings_content_show
 {
   position:fixed;
   z-index:2;
-  background-color: rgb(237, 237, 237);
+  background-color: white;
   color:grey;
-  border:thick solid black;
+  border:none;
   border-top:none;
-  right:100px;
+  box-shadow: 0.1em 0.1em 1em black;
 }
 .anchor_search
 {
@@ -197,4 +198,17 @@ textarea:focus
 textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: grey;
     opacity: 1; /* Firefox */
+}
+#clickable_settings
+{
+  background-color: white;
+}
+#clickable_settings:hover
+{
+  background-color: rgb(237, 237, 237);
+  cursor: pointer;
+}
+#bottom_dropdown
+{
+  background: #ededed;
 }

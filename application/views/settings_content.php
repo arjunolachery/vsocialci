@@ -8,10 +8,10 @@
     </div>
     <div class="col-lg-3"></div>
 </div>-->
-<div style="background:red">
-Settings<br>
-Logout<br>
-<center><button class="side_button" id="settings_button_close"><img src="../../assets/images/error.png"></button></center>
+<div id="clickable_settings">
+Settings</div>
+<div id="clickable_settings">Logout</div>
+<div id="bottom_dropdown"><center><button class="side_button" id="settings_button_close"><img src="../../assets/images/error.png"></button></center>
 </div>
 <!-- closes the settings content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>

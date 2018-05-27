@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-  alert('hi');
 //alert(document.location.origin);
 var hostAddress=document.location.origin+'/vsocialci';
 //alert(hostAddress);
@@ -132,6 +131,10 @@ $.fn.openContent=function(a){
 $.fn.openContent(5);
 
 //get location of settings to place
-//alert($("#settingsButtonOpen").offset().top);
+var left_postion_settings=$("#settingsButtonOpen").offset().left;
+var right_position_settings=$(window).width()-left_postion_settings;
+var size_button_settings=$("#settings_container").width();
+//alert($(body).width());
+$("#settings_content_show").css('right',right_position_settings-size_button_settings);
 
 });
