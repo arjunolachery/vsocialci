@@ -18,4 +18,7 @@ Settings</div>
 $("#settings_button_close").click(function(){
   $("#settings_content_show").hide();
 });
+$("#clickable_settings").click(function(){
+  $.fn.openContent(9);
+});
 </script>

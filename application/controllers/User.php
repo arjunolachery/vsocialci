@@ -64,7 +64,7 @@ class User extends CI_Controller
         // load view [posts_input_content] to the method [posts]
         $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
         $data['name']=$data['name']->name;
-        $this->load->view('posts_input_content',$data);
+        $this->load->view('posts_input_content', $data);
     }
     /**
      * search_result contains data of the search result that is executed by the user typing in the search bar
@@ -98,6 +98,16 @@ class User extends CI_Controller
     {
         // load view [settings_content] to the method [settings]
         $this->load->view('settings_content');
+    }
+    /**
+     * [settings_actual the actual settings that show up in home_view and not the drop down
+     * @return [type] [description]
+     */
+    public function settings_actual()
+    {
+        // load view [settings_content] to the method [settings]
+        $data['retrieved_settings']=$this->User_model->retrieve_settings();
+        $this->load->view('settings_content_actual', $data);
     }
     /**
      * notifications contain notifications data when the user logs in

@@ -22,4 +22,13 @@ class User_functions extends CI_Controller
         $postid=$this->input->post('postid');
         $this->User_functions_model->deleteUserPost($postid);
     }
+    public function update_personal_information()
+    {
+        $gender_value=$this->input->post('gender');
+        $date_birth=$this->input->post('dob');
+        $uid=$this->session->userdata('uid');
+        $this->db->where('u_id', $uid);
+        $this->db->update('primary_information', array('gender' => $gender_value,'date_birth' =>$date_birth));
+        echo 1;
+    }
 }

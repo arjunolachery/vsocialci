@@ -11,6 +11,7 @@ $("#postsContent").hide();
 $("#circleChangeContent").hide();
 $("#search_content_show").hide();
 $("#settings_content_show").hide();
+$("#settings_content_actual_show").hide();
 
 $("#settingsButtonOpen").click(function(){
   $.fn.openContent(2);
@@ -18,6 +19,10 @@ $("#settingsButtonOpen").click(function(){
 
 $("#messagesButtonOpen").click(function(){
   $.fn.openContent(6);
+});
+
+$("#clickable_settings").click(function(){
+  alert('wow');
 });
 
 $("#notificationsButtonOpen").click(function(){
@@ -124,6 +129,8 @@ $.fn.openContent=function(a){
     case 8:
     $.fn.retrieveContent(hostAddress+"/index.php/user/friend_requests",{data:'data'});
     break;
+    case 9:
+    $.fn.retrieveContent(hostAddress+"/index.php/user/settings_actual",{data:'data'});
     default:
     break;
   }

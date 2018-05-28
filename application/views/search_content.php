@@ -21,7 +21,7 @@
       ?>
       <?php setcookie('search_results_amount', $count, time()+3600);?>
       <div class="anchor_search" id="number_search_results" value=''><center><?php echo $count." matching results"?></center></div></span>
-      <div class="bottom_dropdown"><center><button class='side_button' id='searchClose'><img src='../../assets/images/error.png'></button></center></div>
+      <div class="bottom_dropdown"><center><button class='side_button' id='searchCloser'><img src='../../assets/images/error.png'></button></center></div>
     </div>
     <!--
     <div class='col-lg-3'>hi</div>
@@ -29,7 +29,7 @@
 <!-- closes the search content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $(document).ready(function(){
-$("#searchClose").click(function(){
+$("#searchCloser").click(function(){
   $("#search_content_show").hide();
 });
   // alert(document.cookie);
