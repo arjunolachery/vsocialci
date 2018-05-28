@@ -69,3 +69,12 @@ Work Log (25th May)
 1. change color scheme (done)
 2. implement settings feature
 3. made minor design changes (done)
+
+Issues
+======
+
+Minor Issues
+------------
+
+1. Search Bar is not vertically aligned with the other elements on the same row
+2. Search input suggestions content does not close after clicking the close button when 0 results are shown
