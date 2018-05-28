@@ -24,6 +24,7 @@ Trivial Tasks
 1. Refine Front End
 2. Add documentation to remaining code
 3. Change variable names to standard form (not camelcase)
+4. Implement a feature that won't show the 'Welcome Message' after logging in for the second time.
 
 ******************
 Issues
