@@ -58,6 +58,14 @@ Work Log (25th May)
 *******************
 
 1. modify css of posts content (done)
-2. change seconds to local time
-3. implement settings feature
-4. need to add "More..." button when post is too long
+2. change seconds to local time (done)
+3. implement settings feature (50% done)
+4. need to add "More..." button when post is too long (pending and not urgent)
+
+*******************
+Work Log (25th May)
+*******************
+
+1. change color scheme (done)
+2. implement settings feature
+3. made minor design changes (done)
