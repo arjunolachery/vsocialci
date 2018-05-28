@@ -10,9 +10,9 @@ Things to work on (Big Picture)
 2. Posting functionality
 3. More to be added
 
-******
+******************
 Issues
-******
+******************
 
 Minor Issues
 ============
@@ -20,9 +20,9 @@ Minor Issues
 1. Search Bar is not vertically aligned with the other elements on the same row
 2. Search input suggestions content does not close after clicking the close button when 0 results are shown
 
-************
+************************
 Suggestions From Dev Team
-************
+************************
 
 1. Change color scheme (done)
   1. Changed black-white scheme to blue-white scheme
