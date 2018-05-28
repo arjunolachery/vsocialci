@@ -11,6 +11,19 @@ Things to work on (Big Picture)
 3. More to be added
 
 ******************
+Urgent Tasks
+******************
+
+1. Focus more on back end as much as possible
+2. Implement Settings Feature
+
+******************
+Trivial Tasks
+******************
+
+1. Refine Front End
+
+******************
 Issues
 ******************
 
