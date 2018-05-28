@@ -22,6 +22,8 @@ Trivial Tasks
 ******************
 
 1. Refine Front End
+2. Add documentation to remaining code
+3. Change variable names to standard form (not camelcase)
 
 ******************
 Issues
