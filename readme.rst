@@ -1,10 +1,3 @@
-###################################
-Vsocial v3.0 with CodeIgniter (beta)
-###################################
-
-Things to work on (Big Picture)
-===============================
-
 
 1. Merge email activation code from homebranch
 2. Posting functionality
