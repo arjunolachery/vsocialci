@@ -201,18 +201,20 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: grey;
     opacity: 1; /* Firefox */
 }
-#clickable_settings
+.clickable_settings
 {
   background-color: white;
+  font-size: 0.85em;
 }
-#clickable_settings:hover
+.clickable_settings:hover
 {
-  background-color: rgb(237, 237, 237);
+  background-color: #f4f4f4;
   cursor: pointer;
 }
 #bottom_dropdown,.bottom_dropdown
 {
-  background: #ededed;
+  background-color: #e5e5e5;
+  border-top: thin solid #ccc;
 }
 .settings_sub_title
 {
@@ -228,7 +230,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   spacing:100px;
   cellpadding:100px;
 }
-td
+.settings_td
 {
   padding:0.5em;
 }
@@ -249,4 +251,9 @@ td
 {
   background-color: white;
   border:none;
+}
+.flex_container
+{
+display: flex;
+align-items:center;
 }

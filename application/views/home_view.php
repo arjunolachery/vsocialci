@@ -30,7 +30,7 @@
 
 <div class="row main">
 <div class="col-lg-1"></div>
-<div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span>vsocial </span></div>
+<div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="../../assets/images/user.png"></span></div>
 <div class="col-lg-4" style="padding:0px">
 
         <div id="searchBar" class="text-center" style="text-align:center;width:100%"><input type="text" placeholder="Search" name="search" id="search_bar_input" autocomplete="off"></div><span id="search_content_show" style="width:33%">

@@ -13,26 +13,26 @@
   <div class="col-lg-6">
     <br>
 
-    <table width="100%"><tr class="settings_option_title_tr"><td width="1%"><h3 style="display:inline;white-space:nowrap;">Personal Info</h3></td><td width="98%"></td><td width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
+    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;white-space:nowrap;">Personal Info</h3></td><td class="settings_td" width="98%"></td><td class="settings_td" width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
     <br>
     <center>
 
     <table class="settings_table_content" width="100%">
       <tr>
-        <td width="10%"></td>
-      <td width="25%" style="text-align:right"><span class="settings_sub_title">Email</span></td>
-      <td width="10%"></td>
-      <td width="45%"><span class="settings_information"><?php echo $retrieved_settings['0']['email'];?></span></td>
-      <td width="10%"></td>
+        <td class="settings_td" width="10%"></td>
+      <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Email</span></td>
+      <td class="settings_td" width="10%"></td>
+      <td class="settings_td" width="45%"><span class="settings_information"><?php echo $retrieved_settings['0']['email'];?></span></td>
+      <td class="settings_td" width="10%"></td>
     </tr>
 
     <tr>
-      <td width="10%"></td>
-    <td width="25%" style="text-align:right"><span class="settings_sub_title">
+      <td class="settings_td" width="10%"></td>
+    <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">
       Gender
     </span></td>
-    <td width="10%"></td>
-    <td width="45%"><span class="settings_information">
+    <td class="settings_td" width="10%"></td>
+    <td class="settings_td" width="45%"><span class="settings_information">
 
       <select name="gender" class="gender_select" id="gender_select">
   <option value="M" <?php if ($retrieved_settings['0']['gender']=='M') {
@@ -44,45 +44,46 @@
 </select>
 
   </td>
-    <td width="10%"></td>
+    <td class="settings_td" width="10%"></td>
   </tr>
 
   <tr>
-    <td width="10%"></td>
-  <td width="25%" style="text-align:right"><span class="settings_sub_title">Date of Birth</span></td>
-  <td width="10%"></td>
-  <td width="45%"><span class="settings_information"><input id="date_birth" type="date" value="<?php echo $retrieved_settings['0']['date_birth'];?>"></span></td>
-  <td width="10%"></td>
+    <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Date of Birth</span></td>
+  <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="45%"><span class="settings_information"><input id="date_birth" type="date" value="<?php echo $retrieved_settings['0']['date_birth'];?>"></span></td>
+  <td class="settings_td" width="10%"></td>
 </tr>
-<tr><td colspan="5"><br><center><div id="save_personal_information_container"><button class="btn btn-success save_button" id="save_personal_information">Save Changes</button></div><div id="save_personal_information_container2"></div></center></td></tr>
+<tr><td class="settings_td" colspan="5"><br><center><div id="save_personal_information_container"><button class="btn btn-success save_button" id="save_personal_information">Save Changes</button></div><div id="save_personal_information_container2"></div></center></td></tr>
   </table>
   <br>
 
 </center>
 
-<table width="100%"><tr class="settings_option_title_tr"><td width="1%"><h3 style="display:inline;">Preferences</h3></td><td width="99%"></td></tr></table>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;">Preferences</h3></td><td class="settings_td" width="99%"></td></tr></table>
 <br>
 <center>
 
   <table class="settings_table_content" cellpadding="200" width="100%">
     <tr>
-      <td width="10%"></td>
-    <td width="25%" style="text-align:right"><span class="settings_sub_title">Auto Login</span></td>
-    <td width="10%"></td>
-    <td width="45%"><span class="settings_information" id="auto_login_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
-    <td width="10%"></td>
+      <td class="settings_td" width="10%"></td>
+    <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Auto Login</span></td>
+    <td class="settings_td" width="10%"></td>
+    <td class="settings_td" width="45%"><span class="settings_information" id="auto_login_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
+    <td class="settings_td" width="10%"></td>
   </tr>
   <tr>
-    <td width="10%"></td>
-  <td width="25%" style="text-align:right"><span class="settings_sub_title">Welcome Screen</span></td>
-  <td width="10%"></td>
-  <td width="45%"><span class="settings_information" id="welcome_screen_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
-  <td width="10%"></td>
+    <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Welcome Screen</span></td>
+  <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="45%"><span class="settings_information" id="welcome_screen_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
+  <td class="settings_td" width="10%"></td>
 </tr>
 
 </table>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
 
-</center><br><br><br
+</center><br><br><br>
   </div>
   <div class="col-lg-3"></div>
 </div>
