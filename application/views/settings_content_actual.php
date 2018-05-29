@@ -15,7 +15,6 @@
 
     <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;white-space:nowrap;">Personal Info</h3></td><td class="settings_td" width="98%"></td><td class="settings_td" width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
     <br>
-    <center>
 
     <table class="settings_table_content" width="100%">
       <tr>
@@ -58,11 +57,9 @@
   </table>
   <br>
 
-</center>
 
 <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;">Preferences</h3></td><td class="settings_td" width="99%"></td></tr></table>
 <br>
-<center>
 
   <table class="settings_table_content" cellpadding="200" width="100%">
     <tr>
@@ -79,11 +76,33 @@
   <td class="settings_td" width="45%"><span class="settings_information" id="welcome_screen_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
   <td class="settings_td" width="10%"></td>
 </tr>
+</table>
+<br>
+
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%" style="white-space: nowrap;"><h3 style="display:inline;">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
+<br><br>
+<table class="settings_table_content" cellpadding="200" width="100%">
+  <tr>
+    <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Current Password</span></td>
+  <td class="settings_td" width="10%"></td>
+  <td class="settings_td" width="45%"><input type="text" name="current_password" id="current_password" class="input_sub_settings"></td>
+  <td class="settings_td" width="10%"></td>
+</tr>
+<tr>
+  <td class="settings_td" width="10%"></td>
+<td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">New Password</span></td>
+<td class="settings_td" width="10%"></td>
+<td class="settings_td" width="45%"><input type="text" name="current_password" id="current_password" class="input_sub_settings"></td>
+<td class="settings_td" width="10%"></td>
+</tr>
+
+<tr><td class="settings_td" colspan="5"><br><center><div id="save_password_container"><button class="btn btn-success save_button" id="save_password">Change Password</button></div><div id="save_password_container2"></div></center></td></tr>
 
 </table>
-<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
 
-</center><br><br><br>
+
+<br><br><br>
   </div>
   <div class="col-lg-3"></div>
 </div>
