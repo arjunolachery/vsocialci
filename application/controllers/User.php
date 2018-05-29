@@ -106,7 +106,9 @@ class User extends CI_Controller
     public function settings_actual()
     {
         // load view [settings_content] to the method [settings]
+        //echo 1;
         $data['retrieved_settings']=$this->User_model->retrieve_settings();
+        //echo $data['retrieved_settings'];
         $this->load->view('settings_content_actual', $data);
     }
     /**

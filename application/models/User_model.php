@@ -53,8 +53,10 @@ class User_model extends CI_Model
           $user=$query->row();
           return $user->activation;
           */
-        $user = $this->db->query('SELECT * FROM users INNER JOIN primary_information on users.user_id = primary_information.u_id ORDER BY id DESC');
+        $uid=$this->session->userdata('uid');
+        $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
         return $user->result_array();
+        //return $uid;
         /*
         $uid=$this->session->userdata('uid');
         $this->db->select('*');
@@ -63,7 +65,7 @@ class User_model extends CI_Model
         $query=$this->db->get();
         $user=$query->row();
         */
-        return $user;
+        //return $user;
         //return $this->session->userdata('uid');
     }
 }

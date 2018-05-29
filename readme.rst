@@ -97,5 +97,16 @@ Work Log (28th May)
 *******************
 
 1. change color scheme (done)
-2. implement settings feature
+2. implement settings feature (half done)
 3. made minor design changes (done)
+
+*******************
+Work Log (29th May)
+*******************
+
+1. implement 'preferences' feature
+  1. created matching icons for 'on' and 'off' switches since it couldn't be found online.
+  2. 'auto-login' and 'welcome-screen' sub features implemented
+
+2. fixed minor issues - post bar's height problem, and search bar
+3. changed color to dark green

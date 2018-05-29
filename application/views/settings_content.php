@@ -20,5 +20,6 @@ $("#settings_button_close").click(function(){
 });
 $("#clickable_settings").click(function(){
   $.fn.openContent(9);
+  //alert('hi');
 });
 </script>

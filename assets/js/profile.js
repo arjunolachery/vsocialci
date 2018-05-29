@@ -45,7 +45,9 @@ $.fn.retrieveContent=function(a,b)
 {
   $.post(a,b,
   function(response,status){ // Required Callback Function
+  $("#mainContent").hide();
   $("#mainContent").html(response);
+  $("#mainContent").fadeIn();
   });
 };
 
@@ -53,7 +55,9 @@ $.fn.retrieve_content_search=function(a,b)
 {
   $.post(a,b,
   function(response,status){ // Required Callback Function
+  //$("#search_content_show").hide();
   $("#search_content_show").html(response);
+  //$("#search_content_show").fadeIn();
   });
 };
 

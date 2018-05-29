@@ -4,6 +4,7 @@
   <div class="col-lg-3" id="posts_content_left"></div>
     <div class="col-lg-6">
       <br><h3>What's up, <?php echo $name?>?</h3></br>
+
       <div class="borderPostInput" style="padding:1em;">
 
       <br>
@@ -15,8 +16,8 @@
 
       <div id="userPostTextContainer">
 
-      <div class="row ">
-      <div class="col-lg-12 textareadivclass" ><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
+      <div class="row">
+      <div class="col-lg-12 textareadivclass"><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></div>
       </div>
 
       <div class="row fromto">
@@ -34,6 +35,7 @@
       </div>
       </div>
     </div>
+
       <br><br>
 <table width="100%" id="posts_title">
   <tr>
@@ -80,12 +82,14 @@ $("#circleChangeClose").click(function(){
 });
 
 //code for textarea (adaptive size change)
+
 $('textarea').each(function () {
-  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+  this.setAttribute('style', 'height:' + (this.scrollHeight+40) + 'px;overflow-y:hidden;');
 }).on('input', function () {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + 'px';
 });
+
 
   $(".fromto").hide();
   var count=0;
@@ -117,6 +121,7 @@ $("#postClose").click(function(){
   $("#textareamail").val('');
   $("#textareamail").css("text-align","center");
   $(".textareadivclass").css("text-align","center");
+  $(".droplinetext").attr('style', 'height:40px');
   $("#textareamail").fadeIn();
 });
 $.fn.opacity_background_reduce=function(i)
@@ -147,6 +152,7 @@ $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
   var data=$("#textareamail").val();
+  $(".droplinetext").attr('style', 'height:40px');
   $(".borderPostInput").css('border','0.2em solid green');
   $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
   $.fn.postData(data);
