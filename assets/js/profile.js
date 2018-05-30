@@ -34,11 +34,11 @@ $("#friendRequestsButtonOpen").click(function(){
 });
 
 $("#searchBar").keyup(function(e){
-  $.fn.searchBarActive(e);
+  searchBarActive(e);
 });
 
 $("#searchBar").focusin(function(){
-  $.fn.searchBarActive();
+  searchBarActive(e);
 });
 
 $.fn.retrieveContent=function(a,b)
@@ -70,8 +70,12 @@ $.fn.retrieve_content_settings=function(a,b)
 };
 
 var select_search_result=0;
-$.fn.searchBarActive=function(e)
+var e;
+function searchBarActive(e)
 {
+//$.fn.searchBarActive=function(e)
+//{
+  e=window.event || e;
   if($("#search_bar_input").val()=="" && e.keyCode==8){
     $("#search_content_show").hide();
   }

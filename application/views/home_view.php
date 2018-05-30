@@ -55,6 +55,7 @@
 
 
 <script>
+
 $("#search_bar_input").focus(function(){
   $("#search_bar_input").animate({"width":"100%"}, 100);
   //$("#search_bar_input").css('width','100%');

@@ -21,7 +21,7 @@
         <td class="settings_td" width="10%"></td>
       <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Email</span></td>
       <td class="settings_td" width="10%"></td>
-      <td class="settings_td" width="45%"><span class="settings_information"><?php echo $retrieved_settings['0']['email'];?></span></td>
+      <td class="settings_td" width="45%"><span class="settings_information"><input type="text" readonly value="<?php echo $retrieved_settings['0']['email'];?>"></span></td>
       <td class="settings_td" width="10%"></td>
     </tr>
 
@@ -153,7 +153,7 @@ var auto_login_val=<?php echo $retrieved_settings['0']['auto_login'];?>;
 var welcome_screen_val=<?php echo $retrieved_settings['0']['welcome_screen'];?>;
 var select_val=0;
 
-updateasd();
+update_initial_buttons();
 
 $("#auto_login_toggle").click(function(){
   select_val=1;
@@ -197,7 +197,7 @@ function(response)
 }
 
 
-function updateasd()
+function update_initial_buttons()
 {
 if(auto_login_val==0)
 {
