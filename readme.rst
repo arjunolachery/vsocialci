@@ -119,3 +119,4 @@ Work Log (30th May)
 1. implement change password functionality (done)
 2. changed email textbox to readonly
 3. resolved issues with searchBar
+4. implemented transition between switches in preferences

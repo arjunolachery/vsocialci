@@ -160,12 +160,18 @@ $("#auto_login_toggle").click(function(){
 
   if(auto_login_val==1)
   {
-  $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
+    $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+  setTimeout(function(){
+    $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
+  },500);
   auto_login_val=0;
   }
   else
   {
+  $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+setTimeout(function(){
   $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/switch-on2.png'?>'>");
+},500);
   auto_login_val=1;
   }
   $.fn.update_preferences();
@@ -175,12 +181,18 @@ $("#welcome_screen_toggle").click(function(){
   select_val=2;
   if(welcome_screen_val==1)
   {
-  $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
+    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+  setTimeout(function(){
+    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
+  },500);
   welcome_screen_val=0;
   }
   else
   {
-  $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-on2.png'?>'>");
+    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+  setTimeout(function(){
+    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-on2.png'?>'>");
+  },500);
   welcome_screen_val=1;
   }
   $.fn.update_preferences();
