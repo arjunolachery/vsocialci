@@ -110,3 +110,10 @@ Work Log (29th May)
 
 2. fixed minor issues - post bar's height problem, and search bar
 3. changed color to dark green
+
+
+*******************
+Work Log (30th May)
+*******************
+
+1. implement change password functionality (done)
