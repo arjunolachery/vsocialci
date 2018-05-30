@@ -13,7 +13,7 @@
   <div class="col-lg-6">
     <br>
 
-    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;white-space:nowrap;">Personal Info</h3></td><td class="settings_td" width="98%"></td><td class="settings_td" width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
+    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;white-space:nowrap;" class="color_theme">Personal Info</h3></td><td class="settings_td" width="98%"></td><td class="settings_td" width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
     <br>
 
     <table class="settings_table_content" width="100%">
@@ -58,7 +58,7 @@
   <br>
 
 
-<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;">Preferences</h3></td><td class="settings_td" width="99%"></td></tr></table>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;" class="color_theme">Preferences</h3></td><td class="settings_td" width="99%"></td></tr></table>
 <br>
 
   <table class="settings_table_content" cellpadding="200" width="100%">
@@ -79,7 +79,7 @@
 </table>
 <br>
 
-<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%" style="white-space: nowrap;"><h3 style="display:inline;">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%" style="white-space: nowrap;"><h3 style="display:inline;" class="color_theme">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
 <br><br>
 <table class="settings_table_content" cellpadding="200" width="100%">
   <tr>

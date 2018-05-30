@@ -70,6 +70,10 @@ padding:0.1em;
 {
   position:relative;
 }
+#posts_title,.color_theme
+{
+  color:#004B4C;
+}
 textarea.droplinetext
 {
   background-color: white;
@@ -188,11 +192,11 @@ textarea:focus
 }
 .showleft
 {
-  background:linear-gradient(to right, black , rgb(237, 237, 237));
+  background:linear-gradient(to right, rgb(0, 102, 102) , rgb(237, 237, 237));
 }
 .showright
 {
-  background:linear-gradient(to left, black , rgb(237, 237, 237));
+  background:linear-gradient(to left, rgb(0, 102, 102) , rgb(237, 237, 237));
 }
 .in_between_hr
 {

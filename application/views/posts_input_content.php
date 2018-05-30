@@ -3,7 +3,7 @@
 <div class="row" id="postsContent">
   <div class="col-lg-3" id="posts_content_left"></div>
     <div class="col-lg-6">
-      <br><h3>What's up, <?php echo $name?>?</h3></br>
+      <br><h3 class="color_theme">What's up, <?php echo $name?>?</h3></br>
 
       <div class="borderPostInput" style="padding:1em;">
 
