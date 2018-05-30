@@ -270,5 +270,16 @@ align-items:center;
 #container_pop_up
 {
   background-color: black;
-
+}
+.profile_pic_container
+{
+  position:relative;
+  background-color: white;
+  text-align: center;
+  border:thin solid #ccc;
+  border-radius:100%;
+}
+.profile_pic_title
+{
+  
 }

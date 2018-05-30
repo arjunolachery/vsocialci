@@ -9,7 +9,18 @@
     <div class="col-lg-3"></div>
 </div>-->
 <div class="row">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-lg-3"></div>
+  <div class="col-lg-6"><br><br><br>
+    <br>
+    <center><?php echo $retrieved_settings['0']['name'];?>
+     <br><br><center><img src="../../assets/images/user128.png" style="border:thin solid #ccc;border-radius:100%;"></center><br><br>
+</div>
+
   <div class="col-lg-3"></div>
+</div>
+</div>
   <div class="col-lg-6">
     <br>
 
@@ -157,21 +168,27 @@ update_initial_buttons();
 
 $("#auto_login_toggle").click(function(){
   select_val=1;
-
+$("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+setTimeout(function(){
+  $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/checked.png'?>'>");
+},500);
   if(auto_login_val==1)
   {
-    $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+
   setTimeout(function(){
+    $("#auto_login_toggle").hide();
     $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
-  },500);
+    $("#auto_login_toggle").fadeIn();
+  },1000);
   auto_login_val=0;
   }
   else
   {
-  $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
 setTimeout(function(){
+  $("#auto_login_toggle").hide();
   $("#auto_login_toggle").html("<img src='<?php echo base_url().'assets/images/switch-on2.png'?>'>");
-},500);
+  $("#auto_login_toggle").fadeIn();
+},1000);
   auto_login_val=1;
   }
   $.fn.update_preferences();
@@ -179,20 +196,26 @@ setTimeout(function(){
 
 $("#welcome_screen_toggle").click(function(){
   select_val=2;
+  $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+  setTimeout(function(){
+    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/checked.png'?>'>");
+  },500);
   if(welcome_screen_val==1)
   {
-    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
   setTimeout(function(){
+    $("#welcome_screen_toggle").hide();
     $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-off2.png'?>'>");
-  },500);
+    $("#welcome_screen_toggle").fadeIn();
+  },1000);
   welcome_screen_val=0;
   }
   else
   {
-    $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
   setTimeout(function(){
+    $("#welcome_screen_toggle").hide();
     $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images/switch-on2.png'?>'>");
-  },500);
+    $("#welcome_screen_toggle").fadeIn();
+  },1000);
   welcome_screen_val=1;
   }
   $.fn.update_preferences();
