@@ -86,14 +86,21 @@
     <td class="settings_td" width="10%"></td>
   <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Current Password</span></td>
   <td class="settings_td" width="10%"></td>
-  <td class="settings_td" width="45%"><input type="text" name="current_password" id="current_password" class="input_sub_settings"></td>
+  <td class="settings_td" width="45%"><input type="password" name="current_password" id="current_password" class="input_sub_settings"></td>
   <td class="settings_td" width="10%"></td>
 </tr>
 <tr>
   <td class="settings_td" width="10%"></td>
 <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">New Password</span></td>
 <td class="settings_td" width="10%"></td>
-<td class="settings_td" width="45%"><input type="text" name="current_password" id="current_password" class="input_sub_settings"></td>
+<td class="settings_td" width="45%"><input type="password" name="new_password" id="new_password" class="input_sub_settings"></td>
+<td class="settings_td" width="10%"></td>
+</tr>
+<tr>
+  <td class="settings_td" width="10%"></td>
+<td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Confirm New Password</span></td>
+<td class="settings_td" width="10%"></td>
+<td class="settings_td" width="45%"><input type="password" name="confirm_new_password" id="confirm_new_password" class="input_sub_settings"></td>
 <td class="settings_td" width="10%"></td>
 </tr>
 
@@ -210,5 +217,37 @@ $("#welcome_screen_toggle").html("<img src='<?php echo base_url().'assets/images
 }
 
 }
+
+$('#save_password').click(function(){
+  $("#save_password_container").hide();
+  $("#save_password_container2").html("<img src='<?php echo base_url().'assets/images/loading.gif';?>' width='32px'>");
+  $("#save_password_container2").show();
+  $.post("<?php echo site_url()?>/user_functions/change_password",{'current_password':$('#current_password').val(),'new_password':$('#new_password').val(),'confirm_new_password':$('#confirm_new_password').val()},
+function(response)
+{
+  var timedelay=500;
+  setTimeout(function () {
+    timedelay=2000;
+    if(response==1)
+    {
+    $("#save_password_container2").html("<img src='<?php echo base_url().'assets/images/checked.png'?>'>");
+  }
+  else {
+    $("#save_password_container2").html("<img src='<?php echo base_url().'assets/images/cancel.png'?>'>");
+    alert(response);
+  }
+    //$("#save_personal_information_container").html("<button class='btn btn-success save_button' id='save_personal_information'>Save Changes</button>");
+  }, 1000);
+  setTimeout(function () {
+    $("#save_password_container2").hide();
+    $("#save_password_container").fadeIn();
+    //$("#save_personal_information_container").html("<button class='btn btn-success save_button' id='save_personal_information'>Save Changes</button>");
+  }, 2000);
+
+});
+});
+
+
+
 
 </script>
