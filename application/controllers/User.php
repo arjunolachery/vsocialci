@@ -204,7 +204,7 @@ class User extends CI_Controller
         $config['validation'] = true; // bool whether to validate email or not
         $message=site_url()."/user/activate_user?key=".$uid_activation_key;
         $this->email->initialize($config);
-        $this->email->from('arjun2olachery@gmail.com', 'Arjun Olachery');
+        $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
         $this->email->to($email);
         $this->email->subject("Vsocial Activation Link");
         $this->email->message($message);
