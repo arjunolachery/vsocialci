@@ -10,7 +10,10 @@ class User_functions extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('form');
+        $this->load->helper(array('form', 'url'));
         $this->load->model('User_functions_model');
+        $this->load->library('upload');
     }
     /**
      * deletePost deletes the post that the user wishes to delete after pressing the delete icon
@@ -86,6 +89,28 @@ class User_functions extends CI_Controller
             }
         } else {
             echo 'Current Password is Incorrect';
+        }
+    }
+    public function upload_photo()
+    {
+        $config['upload_path'] = base_url().'assets/user_images';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']	= '100';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        $config['overwrite'] = 'TRUE';
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        $img = $this->input->post('userfile');
+        if (! $this->upload->do_upload($img)) {
+            $error = array('error' => $this->upload->display_errors());
+            echo "Failed!!";
+            print_r($error);
+        //$this->load->view('upload_form', $error);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            echo "File uploaded successfully!!";
+            //$this->load->view('upload_success', $data);
         }
     }
 }

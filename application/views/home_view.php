@@ -65,6 +65,23 @@
     <center><span id="load_wait_image"><img src="../../assets/images/loading.gif" width="32px"></span>
      <img id="profile_pic_preview" src="#" alt="" /></center>
 </div>
+<br>
+<?php echo form_open_multipart('user_functions/upload_photo');?>
+                <form enctype="multipart/form-data" accept-charset="utf-8" id="myform" method="post" action="">
+                        <label>Select file: </label>
+                        <input type="file" id="myfile" name="myfile"/>
+                        <br><br>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
+                        </div>
+
+                        <div class="msg"></div>
+
+                    <input type="button" id="btn" class="btn-success" value="Upload" />
+                </form>
+
+
+
 <!--
 <form id="form1" runat="server">
         <input type='file' id="profile_pic_input" />
@@ -122,6 +139,48 @@ function readURL(input) {
        readURL(this);
    });
 
+
+   $(function () {
+                  $('#btn').click(function () {
+                      $('.myprogress').css('width', '0');
+                      $('.msg').text('');
+                      var myfile = $('#myfile').val();
+                      alert(myfile);
+                      var data = new FormData(document.getElementById("myfile"));
+                      //var formData = new FormData( $("#myform")[0] );alert(formData);
+                      $('#btn').attr('disabled', 'disabled');
+                       $('.msg').text('Uploading in progress...');
+                      $.ajax({
+                          url: '<?php echo site_url()?>/user_functions/upload_photo',
+                          type: 'POST',
+                          data    : { userfile: $('#myfile')[0].files},
+                          //data: formData,
+                          async : false,
+                          cache : false,
+                          contentType : false,
+                          processData : false,
+                          // this part is progress bar
+                          /**xhr: function () {
+                              var xhr = new window.XMLHttpRequest();
+                              xhr.upload.addEventListener("progress", function (evt) {
+                                  if (evt.lengthComputable) {
+                                      var percentComplete = evt.loaded / evt.total;
+                                      percentComplete = parseInt(percentComplete * 100);
+                                      $('.myprogress').text(percentComplete + '%');
+                                      $('.myprogress').css('width', percentComplete + '%');
+                                  }
+                              }, false);
+                              return xhr;
+                          },*/
+                          success: function (data) {
+                              $('.msg').text(data);
+                              $('#btn').removeAttr('disabled');
+                              //alert('done');
+                              //$('.myprogress').css('width',0 + '%');
+                          }
+                      });
+                  });
+              });
 
 </script>
   </body>
