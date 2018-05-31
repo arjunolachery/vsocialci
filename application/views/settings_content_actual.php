@@ -2,7 +2,7 @@
 <!--<div class="row" id="settings_content">
   <div class="col-lg-3"></div>
     <div class="col-lg-6">
-      <h3>Settings</h3>
+      <span>Settings</span>
       <h4>Here are your updates</h4>
       <center><button class="side_button" id="settings_button_close"><img src="../../assets/images/error.png"></button></center>
     </div>
@@ -14,8 +14,11 @@
       <div class="col-lg-3"></div>
   <div class="col-lg-6"><br><br><br>
     <br>
-    <center><?php echo $retrieved_settings['0']['name'];?>
-     <br><br><center><img src="../../assets/images/user128.png" style="border:thin solid #ccc;border-radius:100%;"></center><br><br>
+    <div class="row back_white">
+      <div class="col-lg-12">
+     <br><br><center><img src="../../assets/images/user128.png" style="border:thin solid #ccc;border-radius:100%;" class="image_user_settings"><br><br><span class="user_name_setting"><?php echo $retrieved_settings['0']['name'];?></span></center><br><br>
+   </div>
+ </div>
 </div>
 
   <div class="col-lg-3"></div>
@@ -24,10 +27,13 @@
   <div class="col-lg-6">
     <br>
 
-    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;white-space:nowrap;" class="color_theme">Personal Info</h3></td><td class="settings_td" width="98%"></td><td class="settings_td" width="1%"><div style="display:inline" align="right"><button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button></div></td></tr></table>
-    <br>
+    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td settings_td_title" width="1%"><span style="display:inline;white-space:nowrap;" class="settings_title_theme">Personal Info</span></td><td class="settings_td add_border_settings_tab" width="98%"></td><td class="settings_td add_border_settings_tab" width="1%"><div style="display:inline" align="right"><!--<button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button>--></div></td></tr></table>
 
     <table class="settings_table_content" width="100%">
+      <tr>
+        <td colspan="5"><br></td>
+      </tr>
+
       <tr>
         <td class="settings_td" width="10%"></td>
       <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Email</span></td>
@@ -65,14 +71,23 @@
   <td class="settings_td" width="10%"></td>
 </tr>
 <tr><td class="settings_td" colspan="5"><br><center><div id="save_personal_information_container"><button class="btn btn-success save_button" id="save_personal_information">Save Changes</button></div><div id="save_personal_information_container2"></div></center></td></tr>
+
+<tr>
+  <td colspan="5"><br></td>
+</tr>
+
   </table>
   <br>
 
 
-<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%"><h3 style="display:inline;" class="color_theme">Preferences</h3></td><td class="settings_td" width="99%"></td></tr></table>
-<br>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td settings_td_title" width="1%"><span style="display:inline;" class="settings_title_theme">Preferences</span></td><td class="settings_td add_border_settings_tab" width="99%"></td></tr></table>
 
   <table class="settings_table_content" cellpadding="200" width="100%">
+
+    <tr>
+      <td colspan="5"><br></td>
+    </tr>
+
     <tr>
       <td class="settings_td" width="10%"></td>
     <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Auto Login</span></td>
@@ -87,12 +102,22 @@
   <td class="settings_td" width="45%"><span class="settings_information" id="welcome_screen_toggle"><img src='<?php echo base_url().'assets/images/switch-on2.png'?>'></span></td>
   <td class="settings_td" width="10%"></td>
 </tr>
+
+<tr>
+  <td colspan="5"><br></td>
+</tr>
+
 </table>
 <br>
 
-<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td" width="1%" style="white-space: nowrap;"><h3 style="display:inline;" class="color_theme">Change Password</h3></td><td class="settings_td" width="99%"></td></tr></table>
-<br><br>
+<table width="100%"><tr class="settings_option_title_tr"><td class="settings_td settings_td_title" width="1%" style="white-space: nowrap;"><span style="display:inline;" class="settings_title_theme">Change Password</span></td><td class="settings_td add_border_settings_tab" width="99%"></td></tr></table>
+
 <table class="settings_table_content" cellpadding="200" width="100%">
+
+  <tr>
+    <td colspan="5"><br></td>
+  </tr>
+
   <tr>
     <td class="settings_td" width="10%"></td>
   <td class="settings_td" width="25%" style="text-align:right"><span class="settings_sub_title">Current Password</span></td>
@@ -117,6 +142,10 @@
 
 <tr><td class="settings_td" colspan="5"><br><center><div id="save_password_container"><button class="btn btn-success save_button" id="save_password">Change Password</button></div><div id="save_password_container2"></div></center></td></tr>
 
+<tr>
+  <td colspan="5"><br></td>
+</tr>
+
 </table>
 
 
@@ -124,6 +153,7 @@
   </div>
   <div class="col-lg-3"></div>
 </div>
+<div id="image_cover"></div>
 <!-- closes the settings content and opens up posts content when the close button is clicked as defined in scripts.js -->
 <script>
 $("#save_personal_information_container2").hide();
@@ -281,6 +311,26 @@ function(response)
 
 });
 });
+
+
+setTimeout(function () {
+  var image_height=$('.image_user_settings').height();
+  var image_width=$('.image_user_settings').width();
+  $('#image_cover').css('height',image_height);
+  $('#image_cover').css('width',image_width);
+  var position_image=$('.image_user_settings').offset();
+  position_image_top=position_image.top;
+  position_image_left=position_image.left;
+  $('#image_cover').offset({ top: position_image_top+1, left: position_image_left+1 });
+}, 100);
+
+$('#image_cover').click(function(){
+  //$('#image_cover').css('background-position','center');
+  alert('clicked');
+});
+
+//alert($('.image_user_settings').width());
+
 
 
 

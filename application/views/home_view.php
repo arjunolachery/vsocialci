@@ -29,7 +29,7 @@
   <body>
 
 <div class="row main">
-<div class="col-lg-1"></div>
+<div class="col-lg-1"><img src="../../assets/images/backward-arrow.png" id="back_arrow_image"></div>
 <div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="../../assets/images/user.png"></span></div>
 <div class="col-lg-4" style="padding:0px">
 
@@ -47,6 +47,7 @@
 </div>
 
 <div id="user_email" style="display:none"><?php echo $email;?></div>
+<div id="top_header_spacing"></div>
 <div id="mainContent">
 </div>
 
@@ -64,6 +65,16 @@ $("#search_bar_input").focusout(function(){
   $("#search_bar_input").animate({"width":"40%"}, 100);
   //$("#search_bar_input").css('width','100%');
 });
+  var height_header=$(".main").height();
+$("#top_header_spacing").height(height_header+50);
+
+$("#back_arrow_image").hide();
+history.pushState({id: 'SOMEID'}, '', '');
+$(window).bind('popstate', function(){
+  window.location.href = window.location.href;
+  });
+
+
 </script>
   </body>
 </html>

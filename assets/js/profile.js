@@ -33,6 +33,10 @@ $("#friendRequestsButtonOpen").click(function(){
   $.fn.openContent(8);
 });
 
+$("#back_arrow_image").click(function(){
+  $.fn.openContent(4);
+});
+
 $("#searchBar").keyup(function(e){
   searchBarActive(e);
 });
@@ -124,21 +128,26 @@ $.fn.openContent=function(a){
     break;
     case 4:
     $.fn.retrieveContent(hostAddress+"/index.php/user/posts",{data:'data'});
+    $("#back_arrow_image").hide();
     break;
     case 5:
     $.fn.retrieveContent(hostAddress+"/index.php/user/welcome_message",{data:'data'});
     break;
     case 6:
     $.fn.retrieveContent(hostAddress+"/index.php/user/messages",{data:'data'});
+    $("#back_arrow_image").fadeIn();
     break;
     case 7:
     $.fn.retrieveContent(hostAddress+"/index.php/user/notifications",{data:'data'});
+    $("#back_arrow_image").fadeIn();
     break;
     case 8:
     $.fn.retrieveContent(hostAddress+"/index.php/user/friend_requests",{data:'data'});
+    $("#back_arrow_image").fadeIn();
     break;
     case 9:
     $.fn.retrieveContent(hostAddress+"/index.php/user/settings_actual",{data:'data'});
+    $("#back_arrow_image").fadeIn();
     default:
     break;
   }
