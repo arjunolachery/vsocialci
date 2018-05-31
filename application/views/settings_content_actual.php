@@ -27,7 +27,7 @@
   <div class="col-lg-6">
     <br>
 
-    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td settings_td_title" width="1%"><span style="display:inline;white-space:nowrap;" class="settings_title_theme">Personal Info</span></td><td class="settings_td add_border_settings_tab" width="98%"></td><td class="settings_td add_border_settings_tab" width="1%"><div style="display:inline" align="right"><!--<button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button>--></div></td></tr></table>
+    <table width="100%"><tr class="settings_option_title_tr"><td class="settings_td settings_td_title" width="1%"><span style="display:inline;white-space:nowrap;" class="settings_title_theme" id="position_upload">Personal Info</span></td><td class="settings_td add_border_settings_tab" width="98%"></td><td class="settings_td add_border_settings_tab" width="1%"><div style="display:inline" align="right"><!--<button class="side_button" id="settings_button_actual_close"><img src="../../assets/images/error.png"></button>--></div></td></tr></table>
 
     <table class="settings_table_content" width="100%">
       <tr>
@@ -326,10 +326,43 @@ setTimeout(function () {
 
 $('#image_cover').click(function(){
   //$('#image_cover').css('background-position','center');
-  alert('clicked');
+  change_opacity(0);
+  $("#notification_pop_up").fadeIn();
+
+});
+
+function change_opacity(opacity_value)
+{
+  if(opacity_value==1)
+  {
+    opacity_value=1;
+  }
+  else {
+   opacity_value=0.1;
+  }
+
+  $(".main").css("opacity",opacity_value);
+  $("#mainContent").css("opacity",opacity_value);
+}
+
+$(document).mouseup(function(e)
+{
+    var container = $("#notification_pop_up");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0)
+    {
+        container.hide();
+        change_opacity(1);
+    }
 });
 
 //alert($('.image_user_settings').width());
+setTimeout(function () {
+  var position_upload_offset=$("#position_upload").offset();
+  $("#notification_pop_up").css('top',position_upload_offset.top);
+  $("#notification_pop_up").css('left',position_upload_offset.left);
+}, 10);
 
 
 

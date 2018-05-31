@@ -47,7 +47,7 @@ class User extends CI_Controller
             "verify_email_message",
         "<div class='alert alert-danger alert-dismissible fade in'>
         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-        Your email hasn't been verified yet. Click <a href='".site_url()."/user/sendlink'>here</a> to send again.</div>"
+        Your email hasn't been verified yet. Click <a href='".site_url()."/user/send_link'>here</a> to send again.</div>"
         );
         }
         // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
@@ -209,8 +209,7 @@ class User extends CI_Controller
         $this->email->subject("Vsocial Activation Link");
         $this->email->message($message);
         $this->email->send();
-        echo 1;
-        //redirect(site_url()."/user/profile", "refresh");
+        redirect(site_url()."/user/home", "refresh");
     }
     /**
      * activate_user is the method to activate the user's email, works by changing the activate value to 1

@@ -127,3 +127,5 @@ Work Log (31st May)
 
 1. Changed the settings style
 2. Added back button
+ 1. Added pushState Browser History feature
+ 2. Removed close button

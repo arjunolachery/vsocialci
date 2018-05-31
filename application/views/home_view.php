@@ -46,9 +46,30 @@
 <div class="col-lg-1"></div>
 </div>
 
+
 <div id="user_email" style="display:none"><?php echo $email;?></div>
 <div id="top_header_spacing"></div>
 <div id="mainContent">
+</div>
+
+
+<div id="notification_pop_up">
+<h3>Upload an Image
+</h3>
+<div id="hide" class="col-lg-8 col-xs-8">
+   <label class="hand-cursor">
+    <input type="file" nv-file-select uploader="$ctrl.uploader" id="profile_pic_input"/>
+    <span class="fa fa-camera"></span>
+    <span class="photo_text hidden-xs">Choose from your device</span>
+  </label><br>
+    <center><span id="load_wait_image"><img src="../../assets/images/loading.gif" width="32px"></span>
+     <img id="profile_pic_preview" src="#" alt="" /></center>
+</div>
+<!--
+<form id="form1" runat="server">
+        <input type='file' id="profile_pic_input" />
+        <img id="profile_pic_preview" src="#" alt="your image" />
+    </form>-->
 </div>
 
 
@@ -73,6 +94,33 @@ history.pushState({id: 'SOMEID'}, '', '');
 $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
+
+$("#notification_pop_up").hide();
+$("#load_wait_image").hide();
+
+function readURL(input) {
+       if (input.files && input.files[0]) {
+         $("#load_wait_image").show();
+         setTimeout(function () {
+
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#profile_pic_preview').attr('src', e.target.result);
+           }
+
+           reader.readAsDataURL(input.files[0]);
+
+         }, 1000);
+          setTimeout(function () {
+            $("#load_wait_image").hide();
+          }, 500);
+       }
+   }
+
+   $("#profile_pic_input").change(function(){
+       readURL(this);
+   });
 
 
 </script>
