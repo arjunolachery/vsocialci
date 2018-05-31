@@ -1,9 +1,10 @@
 <!-- this is the content for the posts -->
 <!-- contains both the posting input area as well as the posts viewer - posts gets loaded to [#posts_viewer] -->
 <div class="row" id="postsContent">
-  <div class="col-lg-3"></div>
+  <div class="col-lg-3" id="posts_content_left"></div>
     <div class="col-lg-6">
-      <br>
+      <br><h3 class="color_theme">What's up, <?php echo $name?>?</h3></br>
+
       <div class="borderPostInput" style="padding:1em;">
 
       <br>
@@ -15,8 +16,8 @@
 
       <div id="userPostTextContainer">
 
-      <div class="row ">
-      <div class="col-lg-12 textareadivclass" ><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></input></div>
+      <div class="row">
+      <div class="col-lg-12 textareadivclass"><textarea class="droplinetext" width="100%" name="droplinetext" id="textareamail" placeholder="Type here to post." cols="100%" onclick="openMail()"></textarea></div>
       </div>
 
       <div class="row fromto">
@@ -34,15 +35,29 @@
       </div>
       </div>
     </div>
-      <br><br>
 
+      <br><br>
+<table width="100%" id="posts_title">
+  <tr>
+    <td width="33%" valign="middle">
+      <hr class="show showright">
+    </td>
+    <td width="1%" style="text-align:center;white-space:nowrap;" valign="middle">
+      <h4> &nbsp;Top Posts&nbsp;</h4>
+    </td>
+    <td width="33%" valign="middle">
+      <hr class="show showleft">
+    </td>
+  </tr>
+</table>
+<br>
 
       <div class="row">
-      <div class="col-12" id="posts_viewer">hi</div>
+      <div class="col-lg-12" id="posts_viewer">hi</div>
       </div>
 
     </div>
-    <div class="col-lg-3 text-center"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
+    <div class="col-lg-3 text-center" id="posts_content_right"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
 </div>
 
 
@@ -67,21 +82,26 @@ $("#circleChangeClose").click(function(){
 });
 
 //code for textarea (adaptive size change)
+
 $('textarea').each(function () {
-  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+  this.setAttribute('style', 'height:' + (this.scrollHeight+40) + 'px;overflow-y:hidden;');
 }).on('input', function () {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + 'px';
 });
 
+
   $(".fromto").hide();
   var count=0;
 // based on the [#textareamail] events such as focus and focusout, the borders change
+//$(".borderPostInput").css('border-color','white');
 $("#textareamail").focusout(function(){
-  $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
+  $(".borderPostInput").css('border','thin solid #ccc');
+  $.fn.opacity_background_reduce(0);
 });
 $("#textareamail").focus(function(){
-  $(".borderPostInput").css('border-color','#0099CC');
+  $(".borderPostInput").css('border','0.2em solid #0099CC');
+  $.fn.opacity_background_reduce(1);
 });
 // when the user starts typing on the textarea of post input, the following things mentioned in the script happen
 $("#textareamail").keypress(function(){
@@ -101,15 +121,39 @@ $("#postClose").click(function(){
   $("#textareamail").val('');
   $("#textareamail").css("text-align","center");
   $(".textareadivclass").css("text-align","center");
+  $(".droplinetext").attr('style', 'height:40px');
   $("#textareamail").fadeIn();
 });
+$.fn.opacity_background_reduce=function(i)
+{
+  var opacity_value=0.1;
+  if (i==1)
+  {
+  $(".borderPostInput").css('opacity','1');
+  $(".main").css("opacity",opacity_value);
+  $("#posts_viewer").css("opacity",opacity_value);
+  $("#posts_content_left").css("opacity",opacity_value);
+  $("#posts_content_right").css("opacity",opacity_value);
+  $("#posts_title").css("opacity",opacity_value);
+  }
+  else {
+    $(".borderPostInput").css('opacity','1');
+    $(".main").css("opacity",'1');
+    $("#posts_viewer").css("opacity",'1');
+    $("#posts_content_left").css("opacity",'1');
+    $("#posts_content_right").css("opacity",'1');
+    $("#posts_title").css("opacity",'1');
+  }
+}
+
 // OPTIMIZE: script below can be optimized
 // text posting script when the user presses [#postConfirm]
 $("#postConfirm").click(function(){
   var textPostNotify="Successfully Posted.";
   var textPostColor="green";
   var data=$("#textareamail").val();
-  $(".borderPostInput").css('border-color','green');
+  $(".droplinetext").attr('style', 'height:40px');
+  $(".borderPostInput").css('border','0.2em solid green');
   $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
   $.fn.postData(data);
   count=0;
@@ -123,7 +167,7 @@ $("#postConfirm").click(function(){
   function show_popup(){
     $("#textareamail").hide();
     $("#textareamail").css("color","black");
-    $(".borderPostInput").css('border-color','rgb(237, 237, 237)');
+    $(".borderPostInput").css('border','thin solid #ccc');
     $("#textareamail").val('');
     $("#textareamail").fadeIn();
    };

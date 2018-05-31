@@ -47,11 +47,13 @@ class User extends CI_Controller
             "verify_email_message",
         "<div class='alert alert-danger alert-dismissible fade in'>
         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-        Your email hasn't been verified yet. Click <a href='".site_url()."/user/sendlink'>here</a> to send again.</div>"
+        Your email hasn't been verified yet. Click <a href='".site_url()."/user/send_link'>here</a> to send again.</div>"
         );
         }
         // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-        $this->load->view("home_view");
+        $data['profile']=false;
+        $data['email']='';
+        $this->load->view('home_view.php', $data);
     }
     /**
      * posts is the method that calls the posts from the posts table for the particular user
@@ -60,7 +62,9 @@ class User extends CI_Controller
     public function posts()
     {
         // load view [posts_input_content] to the method [posts]
-        $this->load->view('posts_input_content');
+        $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
+        $data['name']=$data['name']->name;
+        $this->load->view('posts_input_content', $data);
     }
     /**
      * search_result contains data of the search result that is executed by the user typing in the search bar
@@ -69,7 +73,11 @@ class User extends CI_Controller
     public function search_result()
     {
         // TODO: change $_POST to standard post function in CI
+        // retrieval of search_results is done from User_functions_model->retrieve_search_results
+        $data['selector_search']=$_POST['selector_search'];
         $data['search_data']=$_POST['search_data'];
+        $this->load->model('User_functions_model');
+        $data['retrieved_search_results']=$this->User_functions_model->retrieve_search_results($data['search_data']);
         // load view [search_content] to the method [search_result] with $data [$search_data] loaded into div [search_result_value]
         $this->load->view('search_content', $data);
     }
@@ -90,6 +98,18 @@ class User extends CI_Controller
     {
         // load view [settings_content] to the method [settings]
         $this->load->view('settings_content');
+    }
+    /**
+     * [settings_actual the actual settings that show up in home_view and not the drop down
+     * @return [type] [description]
+     */
+    public function settings_actual()
+    {
+        // load view [settings_content] to the method [settings]
+        //echo 1;
+        $data['retrieved_settings']=$this->User_model->retrieve_settings();
+        //echo $data['retrieved_settings'];
+        $this->load->view('settings_content_actual', $data);
     }
     /**
      * notifications contain notifications data when the user logs in
@@ -143,6 +163,21 @@ class User extends CI_Controller
         $this->load->view('posts_content_view', $data);
     }
     /**
+     * [profile a major functionality that will display the user's content]
+     * @return [type] [description]
+     */
+    public function profile()
+    {
+        $data['email']=$_REQUEST['email'];
+        $data['profile']=true;
+        $this->load->view('home_view.php', $data);
+        //$this->load->view('login_view.php');
+    }
+    public function profile_specific()
+    {
+        echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
+    }
+    /**
      * send_link the email verification link is sent to the user's email
      * @return void
      */
@@ -169,13 +204,12 @@ class User extends CI_Controller
         $config['validation'] = true; // bool whether to validate email or not
         $message=site_url()."/user/activate_user?key=".$uid_activation_key;
         $this->email->initialize($config);
-        $this->email->from('arjun2olachery@gmail.com', 'Arjun Olachery');
+        $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
         $this->email->to($email);
         $this->email->subject("Vsocial Activation Link");
         $this->email->message($message);
         $this->email->send();
-        echo 1;
-        //redirect(site_url()."/user/profile", "refresh");
+        redirect(site_url()."/user/home", "refresh");
     }
     /**
      * activate_user is the method to activate the user's email, works by changing the activate value to 1
