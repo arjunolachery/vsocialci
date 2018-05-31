@@ -296,7 +296,7 @@ align-items:center;
 #image_cover
 {
   background-color: white;
-  background-image: url('../images/upload_arrow.png');
+  background-image: url('../images/change_logo.png');
   background-position: bottom;
   background-repeat: no-repeat;
   opacity: 0.2;
@@ -308,8 +308,6 @@ align-items:center;
 {
   opacity: 0.5;
   cursor:pointer;
-  background-position: center;
-  background-image: url('../images/cloud-upload.png');
 }
 #image_cover2
 {
