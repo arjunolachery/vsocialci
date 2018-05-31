@@ -120,3 +120,10 @@ Work Log (30th May)
 2. changed email textbox to readonly
 3. resolved issues with searchBar
 4. implemented transition between switches in preferences
+
+*******************
+Work Log (31st May)
+*******************
+
+1. Changed the settings style
+2. Added back button
