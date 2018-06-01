@@ -19,6 +19,7 @@ class User extends CI_Controller
         // $this->load->model('User_model') contains database operations related to User controller]
         $this->load->model('Auth_model');
         $this->load->model('User_model');
+        $this->load->model('User_functions_model');
     }
     // TODO: profile method should be renamed to home
     /**
@@ -53,6 +54,7 @@ class User extends CI_Controller
         // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
         $data['profile']=false;
         $data['email']='';
+        $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
         $this->load->view('home_view.php', $data);
     }
     /**

@@ -4,6 +4,8 @@ $(document).ready(function(){
 var hostAddress=document.location.origin+'/vsocialci';
 //alert(hostAddress);
 var searchFirst=0;
+$("#notification_pop_up").hide();
+$("#load_wait_image").hide();
 $("#search_content").hide();
 $("#circleChangeContent").hide();
 $("#settings_content").hide();
@@ -152,8 +154,14 @@ $.fn.openContent=function(a){
     break;
   }
 };
+var welcome_screen_value=$("#welcome_screen_value").val();
+if(welcome_screen_value==1)
+{
 $.fn.openContent(5);
-
+}
+else {
+$.fn.openContent(4);
+}
 //get location of settings to place
 var left_postion_settings=$("#settingsButtonOpen").offset().left;
 var right_position_settings=$(window).width()-left_postion_settings;

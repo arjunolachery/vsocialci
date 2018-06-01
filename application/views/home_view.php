@@ -84,7 +84,7 @@
 
 
 
-
+<input type="text" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
 <script>
 
 $("#search_bar_input").focus(function(){
@@ -104,8 +104,7 @@ $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
 
-$("#notification_pop_up").hide();
-$("#load_wait_image").hide();
+
 
 function readURL(input) {
        if (input.files && input.files[0]) {

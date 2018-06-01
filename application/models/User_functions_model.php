@@ -54,4 +54,14 @@ class User_functions_model extends CI_Model
         $update_check=$this->db->affected_rows();
         return $update_check;
     }
+    public function check_welcome_screen()
+    {
+      $uid=$this->session->userdata('uid');
+      $this->db->select('*');
+      $this->db->from('preferences');
+      $this->db->where(array('u_id'=>$uid));
+      $query=$this->db->get();
+      $user=$query->row();
+      return $user->welcome_screen;
+    }
 }
