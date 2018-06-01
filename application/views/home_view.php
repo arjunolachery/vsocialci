@@ -59,18 +59,9 @@
 <div id="notification_pop_up">
 <h3>Upload an Image
 </h3>
-<div id="hide" class="col-lg-8 col-xs-8">
-   <label class="hand-cursor">
-    <input type="file" nv-file-select uploader="$ctrl.uploader" id="profile_pic_input"/>
-    <span class="fa fa-camera"></span>
-    <span class="photo_text hidden-xs">Choose from your device</span>
-  </label><br>
-    <center><span id="load_wait_image"><img src="../../assets/images/loading.gif" width="32px"></span>
-     <img id="profile_pic_preview" src="#" alt="" /></center>
-</div>
 <br>
 <h1></h1>
-<form action="<?php echo site_url('/upload/do_upload_file'); ?>" class="dropzone">
+<form action="<?php echo site_url('/upload/do_upload_file'); ?>" class="dropzone" id="dropzone">
 
 
 
@@ -86,6 +77,7 @@
 
 <input type="text" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
 <script>
+
 
 $("#search_bar_input").focus(function(){
   $("#search_bar_input").animate({"width":"100%"}, 100);
@@ -104,75 +96,15 @@ $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
 
+  var errors2 = false;
 
-
-function readURL(input) {
-       if (input.files && input.files[0]) {
-         $("#load_wait_image").show();
-         setTimeout(function () {
-
-           var reader = new FileReader();
-
-           reader.onload = function (e) {
-               $('#profile_pic_preview').attr('src', e.target.result);
-           }
-
-           reader.readAsDataURL(input.files[0]);
-
-         }, 1000);
-          setTimeout(function () {
-            $("#load_wait_image").hide();
-          }, 500);
-       }
-   }
-
-   $("#profile_pic_input").change(function(){
-       readURL(this);
-   });
-
-
-   $(function () {
-                  $('#btn').click(function () {
-                    alert('ok');
-                      $('.myprogress').css('width', '0');
-                      $('.msg').text('');
-                      var myfile = $('#userfile').val();
-                      alert(myfile);
-                      var data = new FormData(document.getElementById("userfile"));
-                      //var formData = new FormData( $("#myform")[0] );alert(formData);
-                      $('#btn').attr('disabled', 'disabled');
-                       $('.msg').text('Uploading in progress...');
-                      alert('ok2');
-                      $.ajax({
-                          //url: '<?php echo site_url()?>/user_functions/upload_photo',
-                          url: '<?php echo site_url()?>/upload/do_upload',
-                          type: 'POST',
-                          data: formData,
-                          async : false,
-                          cache : false,
-                          contentType : false,
-                          processData : false,
-                          //this part is progress bar
-                          xhr: function () {
-                            alert('ok xhr');
-                              var xhr = new window.XMLHttpRequest();
-                              xhr.upload.addEventListener("progress", function (evt) {
-                                  if (evt.lengthComputable) {
-                                      var percentComplete = evt.loaded / evt.total;
-                                      percentComplete = parseInt(percentComplete * 100);
-                                      $('.myprogress').text(percentComplete + '%');
-                                      $('.myprogress').css('width', percentComplete + '%');
-                                  }
-                              }, false);
-                              return xhr;
-                          },
-                          success: function (data) {
-                              $('.msg').text(data);
-                              $('#btn').removeAttr('disabled');
-                              alert('done');
-                              $('.myprogress').css('width',0 + '%');
-                          }
-                      });
-                  });
-              });
-              </script>
+  var myDropzone = new Dropzone("#dropzone" , {
+      error: function(file, errorMessage) {
+          errors2 = true;
+      },
+      queuecomplete: function() {
+          if(errors2) alert("There were errors!");
+          else alert("Done Uploading!");
+      }
+    });
+</script>
