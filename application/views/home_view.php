@@ -61,8 +61,14 @@
 </h3>
 <br>
 <h1></h1>
-<form action="<?php echo site_url('/upload/do_upload_file'); ?>" class="dropzone" id="dropzone">
 
+
+  <form action="<?php echo site_url('/upload/do_upload_file'); ?>" method="POST" class="dropzone" id="my-dropzone">
+         <div class="fallback">
+             <input name="file" type="file"/>
+             <input type="submit" value="Upload" />
+         </div>
+ </form>
 
 
 <!--
@@ -96,6 +102,7 @@ $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
 
+/*
   var errors2 = false;
 
   var myDropzone = new Dropzone("#dropzone" , {
@@ -107,4 +114,36 @@ $(window).bind('popstate', function(){
           else alert("Done Uploading!");
       }
     });
+*/
+
+
+/*
+Dropzone.options.myAwesomeDropzone = {
+  accept: function(file, done) {
+    console.log("uploaded");
+    done();
+  },
+  init: function() {
+    this.on("addedfile", function() {
+      if (this.files[1]!=null){
+        this.removeFile(this.files[0]);
+      }
+    });
+  }
+};
+*/
+
+
+
+
+//script for removing extra files from the dropzone, just change the #my-dropzone selector
+  new Dropzone("#my-dropzone",
+   { maxFiles: 1,
+     init: function() {
+       this.on("maxfilesexceeded", function(file) {
+         this.removeFile(file);
+         alert('max reached');
+       }); }
+     });
+
 </script>

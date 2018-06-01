@@ -336,6 +336,8 @@ function change_opacity(opacity_value)
   if(opacity_value==1)
   {
     opacity_value=1;
+    Dropzone.forElement("#my-dropzone").removeAllFiles(true);
+    //$('#my-dropzone').removeAllFiles(true);
   }
   else {
    opacity_value=0.1;
