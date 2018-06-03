@@ -129,3 +129,10 @@ Work Log (31st May)
 2. Added back button
  1. Added pushState Browser History feature
  2. Removed close button
+
+*******************
+Work Log (1st June)
+*******************
+
+1. Implemented Profile picture
+2. Crop profile picture (to be done)

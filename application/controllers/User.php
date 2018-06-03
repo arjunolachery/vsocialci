@@ -55,6 +55,7 @@ class User extends CI_Controller
         $data['profile']=false;
         $data['email']='';
         $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         $this->load->view('home_view.php', $data);
     }
     /**
@@ -110,6 +111,7 @@ class User extends CI_Controller
         // load view [settings_content] to the method [settings]
         //echo 1;
         $data['retrieved_settings']=$this->User_model->retrieve_settings();
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         //echo $data['retrieved_settings'];
         $this->load->view('settings_content_actual', $data);
     }

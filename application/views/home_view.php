@@ -33,7 +33,7 @@
 
 <div class="row main">
 <div class="col-lg-1"><img src="../../assets/images/backward-arrow.png" id="back_arrow_image"></div>
-<div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="../../assets/images/user.png"></span></div>
+<div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="<?php echo $profile_pic_file_name?>" width="32px" height="32px" id="top_profile_pic"></span></div>
 <div class="col-lg-4" style="padding:0px">
 
         <div id="searchBar" class="text-center" style="text-align:center;width:100%"><input type="text" placeholder="Search" name="search" id="search_bar_input" autocomplete="off"></div><span id="search_content_show" style="width:33%">
@@ -69,6 +69,8 @@
              <input type="submit" value="Upload" />
          </div>
  </form>
+ <br><br>
+ <div id="show_image_upload"></div>
 
 
 <!--
@@ -102,19 +104,39 @@ $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
 
-/*
+
   var errors2 = false;
 
-  var myDropzone = new Dropzone("#dropzone" , {
-      error: function(file, errorMessage) {
+  var myDropzone = new Dropzone("#my-dropzone" ,
+  {
+    maxFiles: 1,
+    init: function() {
+        this.on("success", function(file, responseText) {
+            //alert(responseText);
+            var profile_pic_name=responseText;
+            $("#top_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>"+profile_pic_name);
+              $("#setting_side_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>"+profile_pic_name);
+        });
+      this.on("maxfilesexceeded", function(file) {
+        this.removeFile(file);
+        alert('max reached');
+      }); },
+      error: function(file, errorMessage)
+      {
           errors2 = true;
       },
       queuecomplete: function() {
-          if(errors2) alert("There were errors!");
-          else alert("Done Uploading!");
+          if(errors2) {
+            alert("There were errors!");
+            errors2=false;
+          }
+          else {
+            //alert("Done Uploading!");
+
+          }
       }
-    });
-*/
+});
+
 
 
 /*
@@ -137,13 +159,5 @@ Dropzone.options.myAwesomeDropzone = {
 
 
 //script for removing extra files from the dropzone, just change the #my-dropzone selector
-  new Dropzone("#my-dropzone",
-   { maxFiles: 1,
-     init: function() {
-       this.on("maxfilesexceeded", function(file) {
-         this.removeFile(file);
-         alert('max reached');
-       }); }
-     });
 
 </script>
