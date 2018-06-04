@@ -328,6 +328,7 @@ $('#image_cover').click(function(){
   //$('#image_cover').css('background-position','center');
   change_opacity(0);
   $("#notification_pop_up").fadeIn();
+  $('body').css('overflow','hidden');
 
 });
 
@@ -341,7 +342,7 @@ function change_opacity(opacity_value)
   }
   else {
    opacity_value=0.1;
-  }
+   }
 
   $(".main").css("opacity",opacity_value);
   $("#mainContent").css("opacity",opacity_value);
@@ -355,6 +356,7 @@ $(document).mouseup(function(e)
     if (!container.is(e.target) && container.has(e.target).length === 0)
     {
         container.hide();
+        $('body').css('overflow','auto');
         change_opacity(1);
     }
 });

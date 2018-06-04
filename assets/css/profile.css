@@ -220,6 +220,10 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: grey;
     opacity: 1; /* Firefox */
 }
+.image_caption_input::placeholder
+{
+  color: #ccc;
+}
 .clickable_settings
 {
   background-color: white;
@@ -319,7 +323,9 @@ align-items:center;
 }
 #top_header_spacing
 {
-  background-color: white;
+  background-color:rgb(0, 102, 102);
+  border-bottom:1px solid #ccc;
+  opacity: 0;
 }
 #top_profile_pic
 {
@@ -357,6 +363,7 @@ align-items:center;
   padding: 2em;
   border:thin solid #ccc;
   overflow-y: scroll;
+  box-shadow: 0.1em 0.1em 3em black;
 }
 
 #hide input[type=file] {

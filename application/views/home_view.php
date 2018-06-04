@@ -62,8 +62,8 @@ $num_files=0;
 
 
 <div id="notification_pop_up">
-<h3>Upload an Image
-</h3>
+<span class="settings_title_theme">Upload an Image
+</span><br>
 <br>
 <h1></h1>
 
@@ -134,6 +134,7 @@ $(window).bind('popstate', function(){
               ?>
              $("#caption_submit_result").append(<?php echo $num_files_done?>);
              $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
+             $("#preview"+num_files_done).attr('width',"128px");
              if(num_files==num_files_done)
              {
                $("#submit_button_profile").removeAttr("disabled");
@@ -142,10 +143,10 @@ $(window).bind('popstate', function(){
               });
         this.on("addedfile",function(file){
           num_files++;
-          $("#caption_submit_input").append("<br><img src='../../assets/images/loading.gif' width='128px' id='preview"+num_files+"'>&nbsp;<input type='text' placeholder='Add a caption' id='pic"+num_files+"'>");
+          $("#caption_submit_input").append("<br><br><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<input type='text' class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'>");
           if(num_files==1)
           {
-          $("#caption_submit_button").append("<br><input type='submit' disabled id='submit_button_profile'>");
+          $("#caption_submit_button").append("<br><input type='button' disabled id='submit_button_profile' onclick='submit_profile_pic()' value='Submit'>");
         }
         if(num_files != num_files_done)
         {
@@ -173,6 +174,7 @@ $(window).bind('popstate', function(){
       }
 });
 
+/*
 myDropzone.on("addedfile", function(file) {
   caption = file.caption == undefined ? "" : file.caption;
   file._captionLabel = Dropzone.createElement("<p>Caption:</p>")
@@ -180,8 +182,28 @@ myDropzone.on("addedfile", function(file) {
   file.previewElement.appendChild(file._captionLabel);
   file.previewElement.appendChild(file._captionBox);
 });
+*/
+
+function submit_profile_pic()
+{
+  //var data;
+  var current_data={};
+  var value_submit=$("#caption_submit_result").html();
+  value_submit=value_submit.length - 4;
+  alert(value_submit);
+  var i=1;
+  for(i=1;i<=value_submit;i++)
+  {
+    current_data[i-1]=$("#pic"+i).val();
+  }
+  $.post("<?php echo site_url().'/user_functions/caption_profile_update'?>",{'data_caption':current_data},function(response){
+    alert(response);
+  });
+  //alert(current_data[0]+current_data[1]);
+}
+
+
 
 var height_notification_pop_up=$(window).height();
-alert(height_notification_pop_up);
 $("#notification_pop_up").css("height",height_notification_pop_up-200);
 </script>
