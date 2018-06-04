@@ -358,6 +358,11 @@ $(document).mouseup(function(e)
         container.hide();
         $('body').css('overflow','auto');
         change_opacity(1);
+        $("#caption_submit_input").html('');
+        $("#caption_submit_button").html('');
+        $("#caption_submit_result").html('');
+        num_files=0;
+        num_files_done=0;
     }
 });
 

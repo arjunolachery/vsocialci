@@ -8,6 +8,7 @@ class User_functions_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Auth_model');
     }
     /**
      * [deleteUserPost is executed whenever the user pressed the delete button]
@@ -68,6 +69,20 @@ class User_functions_model extends CI_Model
     {
         $uid=$this->session->userdata('uid');
         $user = $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid'");
+        $profile_pic_file_name = $user->result_array();
+        $profile_pic_head_location=base_url().'uploads/';
+        foreach ($profile_pic_file_name as $value) {
+            if ($value['set_profile_pic']==1) {
+                $profile_pic_name=$value['profile_pic_file_name'];
+            }
+        }
+        $profile_pic_val=$profile_pic_head_location.$profile_pic_name;
+        return $profile_pic_val;
+    }
+    public function get_profile_pic_friend($friend_email)
+    {
+        $this->
+        $user = $this->db->query("SELECT * FROM profile_pic WHERE u_id='6'");
         $profile_pic_file_name = $user->result_array();
         $profile_pic_head_location=base_url().'uploads/';
         foreach ($profile_pic_file_name as $value) {

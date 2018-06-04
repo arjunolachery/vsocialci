@@ -197,7 +197,12 @@ class User extends CI_Controller
     }
     public function profile_specific()
     {
-        echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
+        //echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
+        $data['email']=$_POST['data'];
+        //$data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['email']);
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['email']);
+        print_r($data);
+        //$this->load->view('profile_view.php', $data);
     }
     /**
      * send_link the email verification link is sent to the user's email

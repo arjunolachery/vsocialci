@@ -7,6 +7,8 @@ class User_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        //$this->load->model('Auth_model.php');
+        $this->load->model('Auth_model');
     }
     /**
      * [check_activation_status to check whether the user's email has been activated]
@@ -54,6 +56,32 @@ class User_model extends CI_Model
           return $user->activation;
           */
         $uid=$this->session->userdata('uid');
+        $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
+        return $user->result_array();
+        //return $uid;
+        /*
+        $uid=$this->session->userdata('uid');
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where(array('user_id'=>$uid));
+        $query=$this->db->get();
+        $user=$query->row();
+        */
+        //return $user;
+        //return $this->session->userdata('uid');
+    }
+    public function retrieve_settings_friend($email_friend)
+    {
+        /*
+          $this->db->select('*');
+          $this->db->from('users');
+          $this->db->where(array('user_id'=>$uid));
+          $query=$this->db->get();
+          $user=$query->row();
+          return $user->activation;
+          */
+        $val=$this->Auth_model->retrieve_user_email($email_friend);
+        $uid=$val['user_id'];
         $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
         return $user->result_array();
         //return $uid;

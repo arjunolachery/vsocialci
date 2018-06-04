@@ -123,8 +123,12 @@ $(window).bind('popstate', function(){
   var set_profile_pic=0;
   var myDropzone = new Dropzone("#my-dropzone" ,
   {
-    maxFiles: 10,
+    maxFiles: 1,
     init: function() {
+      this.on("maxfilesexceeded", function(file) {
+        this.removeFile(file);
+        alert('max reached');
+      });
         this.on("success", function(file, responseText) {
             num_files_done++;
             //alert(responseText);
@@ -138,7 +142,7 @@ $(window).bind('popstate', function(){
              $("#caption_submit_result").append(<?php echo $num_files_done?>);
              $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
              $("#preview"+num_files_done).attr('width',"128px");
-             $("#options"+num_files_done).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
+            // $("#options"+num_files_done).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
              if(num_files==num_files_done)
              {
                $("#submit_button_profile").removeAttr("disabled");
@@ -147,7 +151,11 @@ $(window).bind('popstate', function(){
               });
         this.on("addedfile",function(file){
           num_files++;
-          $("#caption_submit_input").append("<br><br><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<input type='text' class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'><span id='options"+num_files+"'></span>");
+
+          //<div id="clickable_settings" class="flex_container clickable_settings">&nbsp;
+          //<img src="../../assets/images/settings.png" style="vertical-align:middle">&nbsp;<span>Settings&nbsp;</span></div>
+
+          $("#caption_submit_input").append("<br><br><div class='flex_container' id='pic_show'"+num_files+"><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<textarea class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'></textarea><span id='options"+num_files+"'></span></div>");
           $('pic'+num_files).keypress(function(event){if(event.keyCode == 13){event.preventDefault();alert('hi');}});
           if(num_files==1)
           {
@@ -159,10 +167,7 @@ $(window).bind('popstate', function(){
           $("#submit_button_profile").attr("disabled");
         }
       });
-      this.on("maxfilesexceeded", function(file) {
-        //this.removeFile(file);
-        alert('max reached');
-      }); },
+       },
       error: function(file, errorMessage)
       {
           errors2 = true;
@@ -188,7 +193,7 @@ myDropzone.on("addedfile", function(file) {
   file.previewElement.appendChild(file._captionBox);
 });
 */
-$('.image_caption_input').keypress(function(event){if(event.keyCode == 13){event.preventDefault();}});
+//$('.image_caption_input').keypress(function(event){if(event.keyCode == 13){event.preventDefault();}});
 
 function submit_profile_pic()
 {
@@ -196,14 +201,14 @@ function submit_profile_pic()
   var current_data={};
   var value_submit=$("#caption_submit_result").html();
   value_submit=value_submit.length - 4;
-  alert(value_submit);
+  //alert(value_submit);
   var i=1;
   for(i=1;i<=value_submit;i++)
   {
     current_data[i-1]=$("#pic"+i).val();
   }
   $.post("<?php echo site_url().'/user_functions/caption_profile_update'?>",{'data_caption':current_data},function(response){
-    alert(response);
+      alert("Uploaded");
   });
   //alert(current_data[0]+current_data[1]);
 }
