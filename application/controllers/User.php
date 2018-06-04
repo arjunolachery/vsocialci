@@ -172,6 +172,23 @@ class User extends CI_Controller
      */
     public function profile()
     {
+      // TODO: user_id to be renamed to uid in table
+      // $uid has the user_id from the users table which is set in the session variable uid from the login method
+      $uid=$this->session->userdata('uid');
+      // OPTIMIZE: user_logged isn't required, just use uid
+      // proceed to the following 'if branch' if the user_logged session variable has not been set
+      if (!isset($_SESSION['user_logged'])) {
+          // set session variable error to value 'Please login first to view this page.'
+          // and redirect to login page
+          $this->session->set_flashdata("error", "Please login first to view this page.");
+          redirect("auth/");
+      }
+      // $activation_status has value 0 or 1 depending on whether the user's email account has been verified or not
+      //$activation_status=$this->User_model->check_activation_status($uid);
+      //proceed to the following 'if branch' if the user's email account has not been verified
+
+      // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
+      $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         $data['email']=$_REQUEST['email'];
         $data['profile']=true;
         $this->load->view('home_view.php', $data);

@@ -109,11 +109,12 @@ var height_header=$(".main").height();
 $("#top_header_spacing").height(height_header+15);
 
 $("#back_arrow_image").hide();
+/*
 history.pushState({id: 'SOMEID'}, '', '');
 $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
-
+*/
 
   var errors2 = false;
   var num_files=0;
@@ -136,7 +137,7 @@ $(window).bind('popstate', function(){
              $("#caption_submit_result").append(<?php echo $num_files_done?>);
              $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
              $("#preview"+num_files_done).attr('width',"128px");
-             $("#options"+num_files_done).append("&nbsp;<button class='side_button'><img src='<?php echo base_url().'assets/images/error.png'?>'></button");
+             //$("#options"+num_files_done).append("&nbsp;<img src='<?php echo base_url().'assets/images/error.png'?>' class='side_button_setting' id='"delete_button"+num_files_done'>");
              if(num_files==num_files_done)
              {
                $("#submit_button_profile").removeAttr("disabled");
@@ -176,15 +177,6 @@ $(window).bind('popstate', function(){
       }
 });
 
-/*
-myDropzone.on("addedfile", function(file) {
-  caption = file.caption == undefined ? "" : file.caption;
-  file._captionLabel = Dropzone.createElement("<p>Caption:</p>")
-  file._captionBox = Dropzone.createElement("<textarea class='caption' id='"+file.filename+"' type='text' name='caption' class='dropzone_caption'>"+caption+"</textarea>")
-  file.previewElement.appendChild(file._captionLabel);
-  file.previewElement.appendChild(file._captionBox);
-});
-*/
 
 function submit_profile_pic()
 {

@@ -25,19 +25,19 @@ body
   font-size: 2em;
   color:black;
 }
-.side_button{
+.side_button,.side_button_setting{
   border:none;
   outline:none;
   background:none;
   opacity: 0.9;
 }
-.side_button:hover{
+.side_button:hover,.side_button_setting:hover{
   border:none;
   outline:none;
   background:none;
   opacity: 0.5;
 }
-.side_button:active{
+.side_button:active,.side_button_setting:active{
   outline:none;
   background:none;
   opacity: 0.9;
