@@ -1,5 +1,8 @@
 <!-- this is the main profile content where everything else loads into [#mainContent] -->
-
+<?php
+$num_files_done=0;
+$num_files=0;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,6 +34,7 @@
   </head>
   <body>
 
+<div class="container-fluid" id="height_header_main">
 <div class="row main">
 <div class="col-lg-1"><img src="../../assets/images/backward-arrow.png" id="back_arrow_image"></div>
 <div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="<?php echo $profile_pic_file_name?>" width="32px" height="32px" id="top_profile_pic"></span></div>
@@ -47,6 +51,7 @@
   &nbsp;<span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show">hi</span></span>
 </div>
 <div class="col-lg-1"></div>
+</div>
 </div>
 
 
@@ -69,6 +74,15 @@
              <input type="submit" value="Upload" />
          </div>
  </form>
+ <br>
+ <form id="caption_submit">
+   <div id="caption_submit_input">
+   </div>
+   <div id="caption_submit_button">
+   </div>
+   <div id="caption_submit_result" hidden>
+   </div>
+</form>
 
 
 <!--
@@ -83,8 +97,6 @@
 
 <input type="text" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
 <script>
-
-
 $("#search_bar_input").focus(function(){
   $("#search_bar_input").animate({"width":"100%"}, 100);
   //$("#search_bar_input").css('width','100%');
@@ -93,8 +105,8 @@ $("#search_bar_input").focusout(function(){
   $("#search_bar_input").animate({"width":"40%"}, 100);
   //$("#search_bar_input").css('width','100%');
 });
-  var height_header=$(".main").height();
-$("#top_header_spacing").height(height_header+50);
+var height_header=$(".main").height();
+$("#top_header_spacing").height(height_header+15);
 
 $("#back_arrow_image").hide();
 history.pushState({id: 'SOMEID'}, '', '');
@@ -104,19 +116,45 @@ $(window).bind('popstate', function(){
 
 
   var errors2 = false;
-
+  var num_files=0;
+  var num_files_done=0;
   var myDropzone = new Dropzone("#my-dropzone" ,
   {
-    maxFiles: 1,
+    maxFiles: 10,
     init: function() {
         this.on("success", function(file, responseText) {
+            num_files_done++;
             //alert(responseText);
+            this.removeAllFiles();
             var profile_pic_name=responseText;
             $("#top_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>"+profile_pic_name);
               $("#setting_side_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>"+profile_pic_name);
-        });
+              <?php
+              $num_files_done=$num_files_done+1;
+              ?>
+             $("#caption_submit_result").append(<?php echo $num_files_done?>);
+             $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
+             if(num_files==num_files_done)
+             {
+               $("#submit_button_profile").removeAttr("disabled");
+               $("#submit_button_profile").attr("enabled");
+             }
+              });
+        this.on("addedfile",function(file){
+          num_files++;
+          $("#caption_submit_input").append("<br><img src='../../assets/images/loading.gif' width='128px' id='preview"+num_files+"'>&nbsp;<input type='text' placeholder='Add a caption' id='pic"+num_files+"'>");
+          if(num_files==1)
+          {
+          $("#caption_submit_button").append("<br><input type='submit' disabled id='submit_button_profile'>");
+        }
+        if(num_files != num_files_done)
+        {
+          $("#submit_button_profile").removeAttr("enabled");
+          $("#submit_button_profile").attr("disabled");
+        }
+      });
       this.on("maxfilesexceeded", function(file) {
-        this.removeFile(file);
+        //this.removeFile(file);
         alert('max reached');
       }); },
       error: function(file, errorMessage)
@@ -135,4 +173,15 @@ $(window).bind('popstate', function(){
       }
 });
 
+myDropzone.on("addedfile", function(file) {
+  caption = file.caption == undefined ? "" : file.caption;
+  file._captionLabel = Dropzone.createElement("<p>Caption:</p>")
+  file._captionBox = Dropzone.createElement("<textarea class='caption' id='"+file.filename+"' type='text' name='caption' class='dropzone_caption'>"+caption+"</textarea>")
+  file.previewElement.appendChild(file._captionLabel);
+  file.previewElement.appendChild(file._captionBox);
+});
+
+var height_notification_pop_up=$(window).height();
+alert(height_notification_pop_up);
+$("#notification_pop_up").css("height",height_notification_pop_up-200);
 </script>

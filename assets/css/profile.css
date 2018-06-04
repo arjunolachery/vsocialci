@@ -7,16 +7,17 @@ body
   font-family: 'Raleway', sans-serif;
   font-size: 2.5em;
   vertical-align: middle;
-  padding:0.5em;
+  padding:0.2em;
   color:white;
   border-bottom:1px solid #ccc;
   position: fixed;
-  width: 100%;
   z-index: 4;
+  width: 100%;
 }
 #mainContent
 {
   background-color: rgb(237, 237, 237);
+  width: 100%;
 }
 .main2{
   background-color: rgb(237, 237, 237);
@@ -52,14 +53,14 @@ body
     font-size: 16px;
     background-color: rgb(0, 102, 102);
     background-image: url('../../assets/images/search.png');
-    background-position: 10px 10px;
+    background-position: 0px 0px;
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
+    padding: 3px 2px 6px 2px;
 }
 
 .amountOnIcon{
   position:absolute;
-  top:0.1em;
+  top:0.35em;
   left:0.7em;
 }
 .amountOnIconCss{
@@ -316,10 +317,23 @@ align-items:center;
   vertical-align: center;
   text-align: center;
 }
+#top_header_spacing
+{
+  background-color: white;
+}
+#top_profile_pic
+{
+  border-radius: 100%;
+}
 .back_white
 {
   border:thin solid rgb(221, 221, 221);
   background-color: rgb(240, 240, 240);
+}
+.back_white_container
+{
+  border:thin solid red;
+  background-color: red;
 }
 .user_name_setting
 {
@@ -342,6 +356,7 @@ align-items:center;
   position: fixed;
   padding: 2em;
   border:thin solid #ccc;
+  overflow-y: scroll;
 }
 
 #hide input[type=file] {

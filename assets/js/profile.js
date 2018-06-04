@@ -1,10 +1,9 @@
 $(document).ready(function(){
-
+$("#notification_pop_up").hide();
 //alert(document.location.origin);
 var hostAddress=document.location.origin+'/vsocialci';
 //alert(hostAddress);
 var searchFirst=0;
-$("#notification_pop_up").hide();
 $("#load_wait_image").hide();
 $("#search_content").hide();
 $("#circleChangeContent").hide();
