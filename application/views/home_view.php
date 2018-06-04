@@ -22,7 +22,7 @@ $num_files=0;
     <?php
     if ($profile==1) {
         ?>
-  <script src="<?php echo base_url(); ?>assets/js/profile2.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/profile3.js"></script>
       <?php
     } else {
         ?>
@@ -108,13 +108,14 @@ $("#search_bar_input").focusout(function(){
 var height_header=$(".main").height();
 $("#top_header_spacing").height(height_header+15);
 
-$("#back_arrow_image").hide();
 /*
+$("#back_arrow_image").hide();
 history.pushState({id: 'SOMEID'}, '', '');
 $(window).bind('popstate', function(){
   window.location.href = window.location.href;
   });
-*/
+  */
+
 
   var errors2 = false;
   var num_files=0;
@@ -137,7 +138,7 @@ $(window).bind('popstate', function(){
              $("#caption_submit_result").append(<?php echo $num_files_done?>);
              $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
              $("#preview"+num_files_done).attr('width',"128px");
-             //$("#options"+num_files_done).append("&nbsp;<img src='<?php echo base_url().'assets/images/error.png'?>' class='side_button_setting' id='"delete_button"+num_files_done'>");
+             $("#options"+num_files_done).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
              if(num_files==num_files_done)
              {
                $("#submit_button_profile").removeAttr("disabled");
@@ -147,6 +148,7 @@ $(window).bind('popstate', function(){
         this.on("addedfile",function(file){
           num_files++;
           $("#caption_submit_input").append("<br><br><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<input type='text' class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'><span id='options"+num_files+"'></span>");
+          $('pic'+num_files).keypress(function(event){if(event.keyCode == 13){event.preventDefault();alert('hi');}});
           if(num_files==1)
           {
           $("#caption_submit_button").append("<br><input type='button' disabled id='submit_button_profile' onclick='submit_profile_pic()' value='Submit'>");
@@ -177,6 +179,16 @@ $(window).bind('popstate', function(){
       }
 });
 
+/*
+myDropzone.on("addedfile", function(file) {
+  caption = file.caption == undefined ? "" : file.caption;
+  file._captionLabel = Dropzone.createElement("<p>Caption:</p>")
+  file._captionBox = Dropzone.createElement("<textarea class='caption' id='"+file.filename+"' type='text' name='caption' class='dropzone_caption'>"+caption+"</textarea>")
+  file.previewElement.appendChild(file._captionLabel);
+  file.previewElement.appendChild(file._captionBox);
+});
+*/
+$('.image_caption_input').keypress(function(event){if(event.keyCode == 13){event.preventDefault();}});
 
 function submit_profile_pic()
 {

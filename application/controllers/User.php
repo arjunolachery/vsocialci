@@ -191,6 +191,7 @@ class User extends CI_Controller
       $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         $data['email']=$_REQUEST['email'];
         $data['profile']=true;
+        $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
         $this->load->view('home_view.php', $data);
         //$this->load->view('login_view.php');
     }
