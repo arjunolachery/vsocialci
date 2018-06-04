@@ -65,6 +65,12 @@ class User_functions_model extends CI_Model
         $user=$query->row();
         return $user->welcome_screen;
     }
+    public function get_uid_from_email($email)
+    {
+      $user = $this->db->query("SELECT * FROM users WHERE email='$email'");
+      $user_result = $user->result_array();
+      return $user_result[0]['user_id'];
+    }
     public function get_profile_pic()
     {
         $uid=$this->session->userdata('uid');
@@ -79,10 +85,11 @@ class User_functions_model extends CI_Model
         $profile_pic_val=$profile_pic_head_location.$profile_pic_name;
         return $profile_pic_val;
     }
-    public function get_profile_pic_friend($friend_email)
+    public function get_profile_pic_friend($uid)
     {
-        $this->
-        $user = $this->db->query("SELECT * FROM profile_pic WHERE u_id='6'");
+        //$this->
+        //get uid of $email
+        $user = $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid'");
         $profile_pic_file_name = $user->result_array();
         $profile_pic_head_location=base_url().'uploads/';
         foreach ($profile_pic_file_name as $value) {

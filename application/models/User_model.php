@@ -70,7 +70,7 @@ class User_model extends CI_Model
         //return $user;
         //return $this->session->userdata('uid');
     }
-    public function retrieve_settings_friend($email_friend)
+    public function retrieve_settings_friend($uid)
     {
         /*
           $this->db->select('*');
@@ -80,8 +80,6 @@ class User_model extends CI_Model
           $user=$query->row();
           return $user->activation;
           */
-        $val=$this->Auth_model->retrieve_user_email($email_friend);
-        $uid=$val['user_id'];
         $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
         return $user->result_array();
         //return $uid;

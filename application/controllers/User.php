@@ -112,7 +112,6 @@ class User extends CI_Controller
         //echo 1;
         $data['retrieved_settings']=$this->User_model->retrieve_settings();
         $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
-        //echo $data['retrieved_settings'];
         $this->load->view('settings_content_actual', $data);
     }
     /**
@@ -188,7 +187,7 @@ class User extends CI_Controller
       //proceed to the following 'if branch' if the user's email account has not been verified
 
       // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-      $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         $data['email']=$_REQUEST['email'];
         $data['profile']=true;
         $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
@@ -200,9 +199,11 @@ class User extends CI_Controller
         //echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
         $data['email']=$_POST['data'];
         //$data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['email']);
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['email']);
-        print_r($data);
-        //$this->load->view('profile_view.php', $data);
+        $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['uid']);
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['uid']);
+        //print_r($data);
+        $this->load->view('profile_view.php', $data);
     }
     /**
      * send_link the email verification link is sent to the user's email
