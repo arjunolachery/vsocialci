@@ -364,7 +364,9 @@ $(document).mouseup(function(e)
 //alert($('.image_user_settings').width());
 setTimeout(function () {
   var position_upload_offset=$("#position_upload").offset();
-  $("#notification_pop_up").css('top',position_upload_offset.top);
+  var window_height=$(window).height();
+  window_height/=8;
+  $("#notification_pop_up").css('top',window_height);
   $("#notification_pop_up").css('left',position_upload_offset.left);
 }, 10);
 

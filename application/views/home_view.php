@@ -118,6 +118,7 @@ $(window).bind('popstate', function(){
   var errors2 = false;
   var num_files=0;
   var num_files_done=0;
+  var set_profile_pic=0;
   var myDropzone = new Dropzone("#my-dropzone" ,
   {
     maxFiles: 10,
@@ -135,6 +136,7 @@ $(window).bind('popstate', function(){
              $("#caption_submit_result").append(<?php echo $num_files_done?>);
              $("#preview"+num_files_done).attr('src',"<?php echo base_url().'uploads/'?>"+responseText);
              $("#preview"+num_files_done).attr('width',"128px");
+             $("#options"+num_files_done).append("&nbsp;<button class='side_button'><img src='<?php echo base_url().'assets/images/error.png'?>'></button");
              if(num_files==num_files_done)
              {
                $("#submit_button_profile").removeAttr("disabled");
@@ -143,7 +145,7 @@ $(window).bind('popstate', function(){
               });
         this.on("addedfile",function(file){
           num_files++;
-          $("#caption_submit_input").append("<br><br><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<input type='text' class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'>");
+          $("#caption_submit_input").append("<br><br><img src='../../assets/images/loading.gif' width='32px' id='preview"+num_files+"'>&nbsp;<input type='text' class='image_caption_input' placeholder='Add a caption' id='pic"+num_files+"'><span id='options"+num_files+"'></span>");
           if(num_files==1)
           {
           $("#caption_submit_button").append("<br><input type='button' disabled id='submit_button_profile' onclick='submit_profile_pic()' value='Submit'>");

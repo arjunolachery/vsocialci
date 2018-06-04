@@ -115,7 +115,9 @@ class User_functions extends CI_Controller
     }
     public function caption_profile_update()
     {
-      $img = $this->input->post('data_caption');
-      print_r($img);
+      $img_caption = $this->input->post('data_caption');
+      //print_r($img);
+      $update_captions_result=$this->User_functions_model->update_caption('profile',$img_caption);
+
     }
 }
