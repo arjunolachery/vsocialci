@@ -21,6 +21,7 @@ class Friend extends CI_Controller
       //insert into db;
       $friend_id=$_POST['friend_id'];
       $this->Friend_model->send_friend_request($friend_id);
+      echo 1;
     }
     public function cancel_friend_request()
     {

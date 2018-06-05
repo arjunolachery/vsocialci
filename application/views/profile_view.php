@@ -92,9 +92,7 @@
 </div>
 
 <script>
-$("#send_friend_request").click(function(){
-  alert('Send');
-});
+
 $("#cancel_friend_request").click(function(){
   alert('Cancel');
 });
