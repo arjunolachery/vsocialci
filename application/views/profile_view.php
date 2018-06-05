@@ -1,11 +1,5 @@
 <!-- this is the main profile content where everything else loads into [#mainContent] -->
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">Hello</div>
-    <div class="col-lg-6">Hello, <?php echo $email;?></div>
-  </div>
-</div>
 
 
 <div class="row">
