@@ -102,7 +102,7 @@ class User_functions extends CI_Controller
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
         $img = $this->input->post('userfile');
-        if (! $this->upload->do_upload($img)) {
+        if (! $this->user_functions->upload_photo($img)) {
             $error = array('error' => $this->upload->display_errors());
             echo "Failed!!";
             print_r($error);
@@ -112,5 +112,12 @@ class User_functions extends CI_Controller
             echo "File uploaded successfully!!";
             //$this->load->view('upload_success', $data);
         }
+    }
+    public function caption_profile_update()
+    {
+      $img_caption = $this->input->post('data_caption');
+      //print_r($img);
+      $update_captions_result=$this->User_functions_model->update_caption('profile',$img_caption);
+
     }
 }

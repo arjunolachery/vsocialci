@@ -39,6 +39,16 @@ class Auth_model extends CI_Model
         $user=$query->row();
         return $user;
     }
+    public function retrieve_user_email($email)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where(array('email'=>$email));
+        $query=$this->db->get();
+        $user=$query->row();
+        return $user;
+    }
+
     /**
      * [checkUserExist used to check if the email exists mainly during the sign up operation]
      * if it exists then the user cannot be able to sign up

@@ -16,7 +16,7 @@
     <br>
     <div class="row back_white">
       <div class="col-lg-12">
-     <br><br><center><img src="../../assets/images/user128.png" style="border:thin solid #ccc;border-radius:100%;" class="image_user_settings"><br><br><span class="user_name_setting"><?php echo $retrieved_settings['0']['name'];?></span></center><br><br>
+     <br><br><center><img id="setting_side_profile_pic" src="<?php echo $profile_pic_file_name?>" style="border:thin solid #ccc;border-radius:100%;" height="128px" width="128px" class="image_user_settings"><br><br><span class="user_name_setting"><?php echo $retrieved_settings['0']['name'];?></span></center><br><br>
    </div>
  </div>
 </div>
@@ -328,6 +328,7 @@ $('#image_cover').click(function(){
   //$('#image_cover').css('background-position','center');
   change_opacity(0);
   $("#notification_pop_up").fadeIn();
+  $('body').css('overflow','hidden');
 
 });
 
@@ -336,10 +337,12 @@ function change_opacity(opacity_value)
   if(opacity_value==1)
   {
     opacity_value=1;
+    Dropzone.forElement("#my-dropzone").removeAllFiles(true);
+    //$('#my-dropzone').removeAllFiles(true);
   }
   else {
    opacity_value=0.1;
-  }
+   }
 
   $(".main").css("opacity",opacity_value);
   $("#mainContent").css("opacity",opacity_value);
@@ -353,14 +356,22 @@ $(document).mouseup(function(e)
     if (!container.is(e.target) && container.has(e.target).length === 0)
     {
         container.hide();
+        $('body').css('overflow','auto');
         change_opacity(1);
+        $("#caption_submit_input").html('');
+        $("#caption_submit_button").html('');
+        $("#caption_submit_result").html('');
+        num_files=0;
+        num_files_done=0;
     }
 });
 
 //alert($('.image_user_settings').width());
 setTimeout(function () {
   var position_upload_offset=$("#position_upload").offset();
-  $("#notification_pop_up").css('top',position_upload_offset.top);
+  var window_height=$(window).height();
+  window_height/=8;
+  $("#notification_pop_up").css('top',window_height);
   $("#notification_pop_up").css('left',position_upload_offset.left);
 }, 10);
 

@@ -1,46 +1,105 @@
 <!-- this is the main profile content where everything else loads into [#mainContent] -->
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Login Page</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/profile.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/profile.js"></script>
-  </head>
-  <body>
 
-<div class="row main">
-<div class="col-lg-4" style="padding:0.17em 0em 0em 0.4em">vsocial</div>
-<div class="col-lg-4 text-center">
 
-        <input type="text" placeholder="Search" name="search" id="searchBar">
-    </div>
-
-<div class="col-lg-4 text-right">
-  &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/chat.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/friend-request.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface2.png"></button>
-</div>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-lg-3"></div>
+  <div class="col-lg-6"><br><br><br>
+    <br>
+    <div class="row back_white">
+      <div class="col-lg-12">
+     <br><br><center><img id="setting_side_profile_pic" src="<?php echo $profile_pic_file_name?>" style="border:thin solid #ccc;border-radius:100%;" height="128px" width="128px" class="image_user_settings"><br><br><span class="user_name_setting"><?php echo $retrieved_settings[0]['name'];?></span></center><br><br>
+   </div>
+ </div>
 </div>
 
+  <div class="col-lg-3"></div>
+</div>
+</div>
+  <div class="col-lg-6"><br><br><br>
+    <?php
+    if(empty($friend))
+    {
+      $friend_val=0;
+      $message="To view the user's posts, add as a friend.";
+    }
+    else
+    {
+      if($uid==$friend[0]['u_id'])
+      {
+        //sent a friend request
+        if($friend[0]['status_friend']==0)
+        {
+          $friend_val=1;
+          $message="Friend Request has been sent.";
+        }
+        else
+        {
+          $friend_val=2;
+          $message="You are friends!";
+        }
+      }
+      else
+      {
+        //received a friend Request
+        if($friend[0]['status_friend']==0)
+        {
+          $friend_val=3;
+          $message="You got a friend request from this user.";
+        }
+        else
+        {
+          $friend_val=2;
+          $message="You are friends!";
+        }
+      }
+    }
+    echo $message.'<br>';
+
+    switch($friend_val)
+    {
+      case 0:
+      echo "<button id='send_friend_request'>Send Friend Request</button>";
+      break;
+
+      case 1;
+      echo "<button id='cancel_friend_request'>Cancel Friend Request</button>";
+      break;
+
+      case 2:
+      echo "<button id='remove_friend'>Remove Friend</button>";
+      break;
+
+      case 3;
+      echo "<button id='accept_friend_request'>Accept Friend Request</button>";
+      break;
+
+      default:
+      echo "Error";
+    }
+
+
+    //echo $friend[0]['u_id'].$friend[0]['friend_id'].$friend[0]['status_friend'];
+    //print_r($friend);
+    ?>
+
+    <br>
+<br>
+  </div>
+  <div class="col-lg-3"></div>
 </div>
 
-<div id="mainContent">
-</div>
+<script>
 
-
-
-
-
-
-  </body>
-</html>
+$("#cancel_friend_request").click(function(){
+  alert('Cancel');
+});
+$("#remove_friend").click(function(){
+  alert('Remove');
+});
+$("#accept_friend_request").click(function(){
+  alert('Accept');
+});
+</script>
