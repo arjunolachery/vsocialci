@@ -197,12 +197,14 @@ class User extends CI_Controller
     public function profile_specific()
     {
         //echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
+        $data['uid']=$this->session->userdata('uid');
         $data['email']=$_POST['data'];
         //$data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['email']);
-        $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['uid']);
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['uid']);
-        //print_r($data);
+        $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
+        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['friend_uid']);
+        //check whether friend
+        $data['friend']=$this->User_functions_model->friends_data($data['uid'],$data['friend_uid']);
         $this->load->view('profile_view.php', $data);
     }
     /**

@@ -147,4 +147,11 @@ class User_functions_model extends CI_Model
     }
       echo $num_images;
     }
+    public function friends_data($uid,$friend_uid)
+    {
+      //return $uid.$friend_uid;
+      $result_images= $this->db->query("SELECT * FROM friends WHERE u_id='$uid' AND friend_id='$friend_uid'");
+      $friends_table = $result_images->result_array();
+      return $friends_table;
+    }
 }
