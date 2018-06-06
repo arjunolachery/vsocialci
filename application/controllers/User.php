@@ -139,8 +139,11 @@ class User extends CI_Controller
      */
     public function messages()
     {
+        //get names of friends
+        $data['friends_list']=$this->Friend_model->retrieve_friends_list();
+        $data['uid']=$this->session->userdata('uid');
         // load view [messages_content] to the method [messages]
-        $this->load->view('messages_content');
+        $this->load->view('messages_content',$data);
     }
     /**
      * post_data method that deals with the posting of a user's new post

@@ -9,13 +9,13 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
     /**
-     * retrieveUserPrimaryDetails retrieves the user data when the $email and $password variable data are passed
+     * retrieve_user_primary_details retrieves the user data when the $email and $password variable data are passed
      * mainly used for checking whether the user exists on logging in
      * @param  [text] $email    [email of the user]
      * @param  [text] $password [password of the user]
      * @return [void]
      */
-    public function retrieveUserPrimaryDetails($email, $password)
+    public function retrieve_user_primary_details($email, $password)
     {
         $this->db->select('*');
         $this->db->from('users');

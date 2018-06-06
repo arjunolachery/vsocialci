@@ -22,7 +22,7 @@ $num_files=0;
     <?php
     if ($profile==1) {
         ?>
-  <script src="<?php echo base_url(); ?>assets/js/profile3.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/profile4.js"></script>
       <?php
     } else {
         ?>
@@ -93,7 +93,9 @@ $num_files=0;
 </div>
 
 
-
+<div id="notification_side_message">
+Arjun added you.<br>
+</div>
 
 <input type="text" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
 <script>

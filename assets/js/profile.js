@@ -22,10 +22,6 @@ $("#messagesButtonOpen").click(function(){
   $.fn.openContent(6);
 });
 
-$("#clickable_settings").click(function(){
-  alert('wow');
-});
-
 $("#notificationsButtonOpen").click(function(){
   $.fn.openContent(7);
 });
@@ -35,7 +31,7 @@ $("#friendRequestsButtonOpen").click(function(){
 });
 
 $("#back_arrow_image").click(function(){
-  window.location.href = "http://localhost/vsocialci/";
+  $.fn.openContent(4);
 });
 
 $("#searchBar").keyup(function(e){

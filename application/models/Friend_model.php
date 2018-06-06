@@ -55,7 +55,6 @@ class Friend_model extends CI_Model
     public function friend_status_check($friend)
     {
         $uid=$this->session->userdata('uid');
-        print_r($friend);
         if (empty($friend)) {
             $friend_val=0;
             $message="To view the user's posts, add as a friend.";
@@ -66,8 +65,8 @@ class Friend_model extends CI_Model
                     $friend_val=1;
                     $message="Friend Request has been sent.";
                 } else {
-                    $friend_val=1;
-                    $message="You are friends!";
+                    $friend_val=3;
+                    //$message="You are friends!";
                 }
             } else {
                 //received a friend Request
@@ -75,31 +74,54 @@ class Friend_model extends CI_Model
                     $friend_val=2;
                     $message="You got a friend request from this user.";
                 } else {
-                    $friend_val=1;
-                    $message="You are friends!";
+                    $friend_val=3;
+                    //$message="You are friends!";
                 }
             }
         }
-        echo $message.'<br>';
 
         switch ($friend_val) {
 
               case 0:
-              $button="<button id='send_friend_request'>Send Friend Request</button>";
+              $button="<button id='send_friend_request' onclick='send_friend_request();' class='button_friend'>Send Friend Request</button>";
               break;
 
               case 1:
-              $button="<button id='remove_friend'>Remove Friend</button>";
+              $button="<button id='remove_friend' onclick='remove_friend_request();' class='button_friend'>Remove Friend</button>";
               break;
 
               case 2:
-              $button="<button id='accept_friend_request'>Accept Friend Request</button>";
+              $button="<button id='accept_friend_request' onclick='accept_friend_request();' class='button_friend'>Accept Friend Request</button>";
+              break;
+
+              case 3:
+              $button="<button id='remove_friend' onclick='remove_friend();' class='button_friend_2'>Remove Friend</button>";
               break;
 
               default:
               $button="Error";
             }
-        $result_array=['message'=>$message,'friend_val'=>$friend_val,'button'=>$button];
+        if($friend_val==3)
+        {
+          $result_array=['friend_val'=>$friend_val,'button'=>$button];
+        }
+        else {
+          $result_array=['message'=>$message,'friend_val'=>$friend_val,'button'=>$button];
+        }
         return $result_array;
+    }
+    //returns a complete array of friends table only with rows having user id as either the friend field or the uid field.
+    public function retrieve_friends_list()
+    {
+      # code...
+      $uid=$this->session->userdata('uid');
+      $result_check_friend= $this->db->query("SELECT * FROM friends,users,profile_pic WHERE set_profile_pic=1 AND friends.status_friend=1 AND ((friends.u_id='$uid'  AND users.user_id=friends.friend_id AND users.user_id=profile_pic.u_id) OR  (friends.friend_id='$uid'  AND users.user_id=friends.u_id AND users.user_id=profile_pic.u_id)) ORDER BY users.name");
+      $result_check_friend_val = $result_check_friend->result_array();
+      if (empty($result_check_friend_val)) {
+          return 0;
+      } else {
+          return $result_check_friend_val;
+      }
+
     }
 }
