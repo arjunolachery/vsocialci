@@ -18,20 +18,70 @@ class Friend extends CI_Controller
      */
     public function send_friend_request()
     {
-      //insert into db;
-      $friend_id=$_POST['friend_id'];
-      $this->Friend_model->send_friend_request($friend_id);
-      echo 1;
-    }
-    public function cancel_friend_request()
-    {
-      //delete from db;
+        //insert into db;
+
+        $friend_id=$_POST['friend_id'];
+        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
+        if ($check_exist==1) {
+            $this->Friend_model->send_friend_request_model($friend_id);
+        } else {
+            echo "Already sent";
+        }
+
+        //return 1;
+
+        echo $friend_id;
+        //return 1;
     }
     public function remove_friend()
     {
-      //delete from db;
+        //delete from db;
+
+        $friend_id=$_POST['friend_id'];
+        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
+        if ($check_exist==1) {
+            $this->Friend_model->remove_friend_model($friend_id);
+            //echo $val;
+            echo 'done';
+        } else {
+            echo "Doesn't exist";
+        }
+
+        //return 1;
+
+
+        //return 1;
     }
     public function accept_friend_request()
     {
-      //update status to 1;
+        //update status to 1;
+
+        $friend_id=$_POST['friend_id'];
+
+        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
+        if ($check_exist==1) {
+            $this->Friend_model->accept_friend_request_model($friend_id);
+            echo "Friendship exists";
+        } else {
+            echo "Friendship doesn't exist";
+        }
+
+        //return 1;
+
+
+        //return 1;
+
+        //echo $friend_id;
     }
+    public function get_friendship_status()
+    {
+        // code...
+        // $data['uid']=$this->session->userdata('uid');
+        $data['email']=$_POST['email'];
+        //$data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['email']);
+        $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+        $data['friend_status']=$this->Friend_model->friend_status_check($data['friend']);
+        print_r($data);
+    }
+}

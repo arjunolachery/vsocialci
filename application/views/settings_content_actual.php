@@ -371,6 +371,7 @@ setTimeout(function () {
   var position_upload_offset=$("#position_upload").offset();
   var window_height=$(window).height();
   window_height/=8;
+$("#notification_pop_up").css('position','fixed');
   $("#notification_pop_up").css('top',window_height);
   $("#notification_pop_up").css('left',position_upload_offset.left);
 }, 10);

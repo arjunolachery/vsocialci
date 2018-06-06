@@ -35,7 +35,7 @@ $("#friendRequestsButtonOpen").click(function(){
 });
 
 $("#back_arrow_image").click(function(){
-  $.fn.openContent(4);
+  window.location.href = "http://localhost/vsocialci/";
 });
 
 $("#searchBar").keyup(function(e){

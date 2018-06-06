@@ -359,7 +359,8 @@ align-items:center;
 {
   width: 50%;
   background-color:rgb(237, 237, 237);
-  position: fixed;
+  position: static;
+  display:none;
   padding: 2em;
   border:thin solid #ccc;
   overflow-y: scroll;

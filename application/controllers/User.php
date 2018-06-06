@@ -20,6 +20,7 @@ class User extends CI_Controller
         $this->load->model('Auth_model');
         $this->load->model('User_model');
         $this->load->model('User_functions_model');
+        $this->load->model('Friend_model');
     }
     // TODO: profile method should be renamed to home
     /**
@@ -171,22 +172,22 @@ class User extends CI_Controller
      */
     public function profile()
     {
-      // TODO: user_id to be renamed to uid in table
-      // $uid has the user_id from the users table which is set in the session variable uid from the login method
-      $uid=$this->session->userdata('uid');
-      // OPTIMIZE: user_logged isn't required, just use uid
-      // proceed to the following 'if branch' if the user_logged session variable has not been set
-      if (!isset($_SESSION['user_logged'])) {
-          // set session variable error to value 'Please login first to view this page.'
-          // and redirect to login page
-          $this->session->set_flashdata("error", "Please login first to view this page.");
-          redirect("auth/");
-      }
-      // $activation_status has value 0 or 1 depending on whether the user's email account has been verified or not
-      //$activation_status=$this->User_model->check_activation_status($uid);
-      //proceed to the following 'if branch' if the user's email account has not been verified
+        // TODO: user_id to be renamed to uid in table
+        // $uid has the user_id from the users table which is set in the session variable uid from the login method
+        $uid=$this->session->userdata('uid');
+        // OPTIMIZE: user_logged isn't required, just use uid
+        // proceed to the following 'if branch' if the user_logged session variable has not been set
+        if (!isset($_SESSION['user_logged'])) {
+            // set session variable error to value 'Please login first to view this page.'
+            // and redirect to login page
+            $this->session->set_flashdata("error", "Please login first to view this page.");
+            redirect("auth/");
+        }
+        // $activation_status has value 0 or 1 depending on whether the user's email account has been verified or not
+        //$activation_status=$this->User_model->check_activation_status($uid);
+        //proceed to the following 'if branch' if the user's email account has not been verified
 
-      // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
+        // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
         $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
         $data['email']=$_REQUEST['email'];
         $data['profile']=true;
@@ -204,7 +205,8 @@ class User extends CI_Controller
         $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
         $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['friend_uid']);
         //check whether friend
-        $data['friend']=$this->User_functions_model->friends_data($data['uid'],$data['friend_uid']);
+        $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+        $data['friend_status']=$this->Friend_model->friend_status_check($data['friend']);
         $this->load->view('profile_view.php', $data);
     }
     /**
