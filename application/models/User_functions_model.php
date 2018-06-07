@@ -106,10 +106,10 @@ class User_functions_model extends CI_Model
         foreach ($profile_pic_file_name as $value) {
             if ($value['set_profile_pic']==1) {
                 $profile_pic_name=$value['profile_pic_file_name'];
+                $profile_pic_val=$profile_pic_head_location.$profile_pic_name;
+                return $profile_pic_val;
             }
         }
-        $profile_pic_val=$profile_pic_head_location.$profile_pic_name;
-        return $profile_pic_val;
     }
     public function remove_set_profile()
     {

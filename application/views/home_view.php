@@ -25,7 +25,7 @@ $num_files=0;
 
     <?php
     //loads a script based on whether the user is viewing a profile or is at his home screen
-    if ($profile==1) {
+    if ($profile==true) {
         ?>
       <script src="<?php echo base_url(); ?>assets/js/profile4.js"></script>
       <?php
@@ -61,9 +61,7 @@ $num_files=0;
     </div>
 
 <!--for jquery purpose-->
-    <div id="user_email" style="display:none">
-      <?php echo $email;?>
-    </div>
+      <input type="hidden" value="<?php echo $email;?>" id="user_email">
 <!--to keep spacing between the fixed header and the other content at the top-->
     <div id="top_header_spacing"></div>
 <!-- the main area where all the content loads into such as messages, settings etc.-->

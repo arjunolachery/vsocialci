@@ -19,6 +19,7 @@ class User extends CI_Controller
         $this->load->model('User_model');
         $this->load->model('User_functions_model');
         $this->load->model('Friend_model');
+        $this->load->model('Home_model');
     }
     /**
      * home is the method that is primarily called after the user logs in
@@ -34,12 +35,15 @@ class User extends CI_Controller
         $activation_status=$this->User_model->proceed_to_home();
     }
     /**
-     * posts is the method that calls the posts from the posts table for the particular user
+     * posts is the method that calls the posts from the posts table for the particular logged in user
+     * this function is called from profile.js whenever the welcome screen is off, or the user clicks close on the welcome screen or presses the back_button_image
+     * only if welcome_screen is disabled
      * @return void
      */
     public function posts()
     {
         // load view [posts_input_content] to the method [posts]
+        //$this->Home_model->show_posts()
         $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
         if (!empty($data['name'])) {
             $data['name']=$data['name']->name;
@@ -172,6 +176,7 @@ class User extends CI_Controller
         $data['profile']=true;
         $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
         $this->load->view('home_view.php', $data);
+        //WORKS!
         //$this->load->view('login_view.php');
     }
     public function profile_specific()
@@ -179,8 +184,10 @@ class User extends CI_Controller
         //echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
         $data['uid']=$this->session->userdata('uid');
         $data['email']=$_POST['data'];
-        //$data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['email']);
+        //echo $data['email'];
         $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
+
         $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
         $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['friend_uid']);
         //check whether friend
