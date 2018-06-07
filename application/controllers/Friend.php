@@ -14,58 +14,24 @@ class Friend extends CI_Controller
      * profile is the method that is primarily called after the user logs in
      * @return void
      */
+
+    //$link_get_status=site_url().'/friend/get_friendship_status';
+    //$link_get_status_2=site_url().'/friend/get_friendship_status_2';
+    //$link_posts=site_url().'/friend/get_posts';
     public function send_friend_request()
     {
         //insert into db;
-
-        $friend_id=$_POST['friend_id'];
-        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
-        if ($check_exist==1) {
-            $this->Friend_model->send_friend_request_model($friend_id);
-        } else {
-            echo "Already sent";
-        }
-        echo $friend_id;
+        $this->Friend_model->send_friend_request_model();
     }
     public function remove_friend()
     {
         //delete from db;
-
-        $friend_id=$_POST['friend_id'];
-        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
-        if ($check_exist==1) {
-            $this->Friend_model->remove_friend_model($friend_id);
-            //echo $val;
-            echo 'done';
-        } else {
-            echo "Doesn't exist";
-        }
-
-        //return 1;
-
-
-        //return 1;
+        $this->Friend_model->remove_friend_model();
     }
     public function accept_friend_request()
     {
         //update status to 1;
-
-        $friend_id=$_POST['friend_id'];
-
-        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
-        if ($check_exist==1) {
-            $this->Friend_model->accept_friend_request_model($friend_id);
-            echo "Friendship exists";
-        } else {
-            echo "Friendship doesn't exist";
-        }
-
-        //return 1;
-
-
-        //return 1;
-
-        //echo $friend_id;
+        $this->Friend_model->accept_friend_request_model();
     }
     public function get_friendship_status()
     {

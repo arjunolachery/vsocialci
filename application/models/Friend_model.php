@@ -10,6 +10,39 @@ class Friend_model extends CI_Model
      * @param  [int] $postid [the unique id of post]
      * @return [void]
      */
+    public function send_friend_request_model()
+    {
+        //insert into db;
+        //
+        $friend_id=$_POST['friend_id'];
+        $check_exist=$this->check_friend_exist($friend_id);
+
+        if ($check_exist==1) {
+            $uid=$this->session->userdata('uid');
+            $data=array('u_id' => $uid,
+          'friend_id' => $friend_id,
+          'time_friend' => time(),
+          'status_friend' => 0
+         );
+            $this->db->insert('friends', $data);
+            return 1;
+        } else {
+            echo "Already sent";
+        }
+    }
+    public function remove_friend_model()
+    {
+        //delete from db;
+        $friend_id=$_POST['friend_id'];
+        $uid=$this->session->userdata('uid');
+        $check_exist=$this->check_friend_exist($friend_id);
+        if ($check_exist==1) {
+            $delete_query= $this->db->query("DELETE FROM friends WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
+            return 1;
+        } else {
+            echo "Doesn't exist";
+        }
+    }
     public function check_friend_exist($friend_id)
     {
         //$uid=$this->session->userdata('uid');
@@ -23,34 +56,18 @@ class Friend_model extends CI_Model
             return 1;
         }
     }
-    public function send_friend_request_model($friend_id)
-    {
-        //insert into db;
-        //
-        $uid=$this->session->userdata('uid');
-        $data=array('u_id' => $uid,
-       'friend_id' => $friend_id,
-       'time_friend' => time(),
-       'status_friend' => 0
-      );
-        $this->db->insert('friends', $data);
-        return 1;
-    }
-    public function remove_friend_model($friend_id)
-    {
-        //delete from db;
-        $uid=$this->session->userdata('uid');
-
-        $delete_query= $this->db->query("DELETE FROM friends WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
-
-        return 1;
-    }
-    public function accept_friend_request_model($friend_id)
+    public function accept_friend_request_model()
     {
         //update status to 1;
+        $friend_id=$_POST['friend_id'];
         $uid=$this->session->userdata('uid');
-        $update_query= $this->db->query("UPDATE friends SET status_friend='1' WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
-        return 1;
+        $check_exist=$this->Friend_model->check_friend_exist($friend_id);
+        if ($check_exist==1) {
+            $update_query= $this->db->query("UPDATE friends SET status_friend='1' WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
+            return 1;
+        } else {
+            echo "Friendship doesn't exist";
+        }
     }
     public function friend_status_check($friend)
     {
@@ -101,27 +118,24 @@ class Friend_model extends CI_Model
               default:
               $button="Error";
             }
-        if($friend_val==3)
-        {
-          $result_array=['friend_val'=>$friend_val,'button'=>$button];
-        }
-        else {
-          $result_array=['message'=>$message,'friend_val'=>$friend_val,'button'=>$button];
+        if ($friend_val==3) {
+            $result_array=['friend_val'=>$friend_val,'button'=>$button];
+        } else {
+            $result_array=['message'=>$message,'friend_val'=>$friend_val,'button'=>$button];
         }
         return $result_array;
     }
     //returns a complete array of friends table only with rows having user id as either the friend field or the uid field.
     public function retrieve_friends_list()
     {
-      # code...
-      $uid=$this->session->userdata('uid');
-      $result_check_friend= $this->db->query("SELECT * FROM friends,users,profile_pic WHERE set_profile_pic=1 AND friends.status_friend=1 AND ((friends.u_id='$uid'  AND users.user_id=friends.friend_id AND users.user_id=profile_pic.u_id) OR  (friends.friend_id='$uid'  AND users.user_id=friends.u_id AND users.user_id=profile_pic.u_id)) ORDER BY users.name");
-      $result_check_friend_val = $result_check_friend->result_array();
-      if (empty($result_check_friend_val)) {
-          return 0;
-      } else {
-          return $result_check_friend_val;
-      }
-
+        # code...
+        $uid=$this->session->userdata('uid');
+        $result_check_friend= $this->db->query("SELECT * FROM friends,users,profile_pic WHERE set_profile_pic=1 AND friends.status_friend=1 AND ((friends.u_id='$uid'  AND users.user_id=friends.friend_id AND users.user_id=profile_pic.u_id) OR  (friends.friend_id='$uid'  AND users.user_id=friends.u_id AND users.user_id=profile_pic.u_id)) ORDER BY users.name");
+        $result_check_friend_val = $result_check_friend->result_array();
+        if (empty($result_check_friend_val)) {
+            return 0;
+        } else {
+            return $result_check_friend_val;
+        }
     }
 }
