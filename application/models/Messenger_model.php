@@ -10,25 +10,27 @@ class Messenger_model extends CI_Model
      * @param  [int] $postid [the unique id of post]
      * @return [void]
      */
-    public function retrieve_messages_model($friend_id)
+    public function retrieve_messages_model()
     {
+        $data['uid']=$this->session->userdata('uid');
+        $friend_id=$_POST['friend_id'];
+        $data['friend_id']=$friend_id;
         $uid=$this->session->userdata('uid');
         $result_check_friend= $this->db->query("SELECT * FROM messages WHERE ((u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id'))");
         $result_check_friend_val = $result_check_friend->result_array();
-        return $result_check_friend_val;
-
+        $data['messages']=$result_check_friend_val;
+        //get messages from model
+        $this->load->view('messages_box_content', $data);
     }
     public function send_message_model()
     {
-      $uid=$this->session->userdata('uid');
-      $data=array('u_id' => $uid,
+        $uid=$this->session->userdata('uid');
+        $data=array('u_id' => $uid,
      'friend_id' => $_POST['friend_id'],
      'content_message' => $_POST['message_content'],
      'time_message' => time()
     );
-      $this->db->insert('messages', $data);
-      return 1;
-
+        $this->db->insert('messages', $data);
+        return 1;
     }
-
 }
