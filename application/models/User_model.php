@@ -79,7 +79,9 @@ class User_model extends CI_Model
         'timestamp' => time(),
       );
         $this->db->insert('posts', $data);
-        return 1;
+        //echo 1 needed to load the post again as soon as its loaded.
+        echo 1;
+        //return 1;
     }
     /**
      * [retrieve_settings the settings data that is to be retrieved to the home_view]

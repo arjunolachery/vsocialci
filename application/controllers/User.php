@@ -43,12 +43,7 @@ class User extends CI_Controller
     public function posts()
     {
         // load view [posts_input_content] to the method [posts]
-        //$this->Home_model->show_posts()
-        $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
-        if (!empty($data['name'])) {
-            $data['name']=$data['name']->name;
-            $this->load->view('posts_input_content', $data);
-        }
+        $this->Home_model->show_posts();
     }
     /**
      * search_result contains data of the search result that is executed by the user typing in the search bar
@@ -57,13 +52,8 @@ class User extends CI_Controller
     public function search_result()
     {
         // TODO: change $_POST to standard post function in CI
-        // retrieval of search_results is done from User_functions_model->retrieve_search_results
-        $data['selector_search']=$_POST['selector_search'];
-        $data['search_data']=$_POST['search_data'];
-        $this->load->model('User_functions_model');
-        $data['retrieved_search_results']=$this->User_functions_model->retrieve_search_results($data['search_data']);
-        // load view [search_content] to the method [search_result] with $data [$search_data] loaded into div [search_result_value]
-        $this->load->view('search_content', $data);
+        // retrieval of search_results is done from User_functions_model->show_search_results
+        $this->Home_model->show_search_result();
     }
     /**
      * welcome_message contains result for the welcome message when the user logs in
@@ -72,7 +62,7 @@ class User extends CI_Controller
     public function welcome_message()
     {
         // load view [welcome_content] to the method [welcome_message]
-        $this->load->view('welcome_content');
+        $this->Home_model->show_welcome_message();
     }
     /**
      * settings contain settings data when the user logs in
@@ -81,7 +71,7 @@ class User extends CI_Controller
     public function settings()
     {
         // load view [settings_content] to the method [settings]
-        $this->load->view('settings_content');
+        $this->Home_model->show_settings();
     }
     /**
      * [settings_actual the actual settings that show up in home_view and not the drop down
@@ -89,11 +79,7 @@ class User extends CI_Controller
      */
     public function settings_actual()
     {
-        // load view [settings_content] to the method [settings]
-        //echo 1;
-        $data['retrieved_settings']=$this->User_model->retrieve_settings();
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
-        $this->load->view('settings_content_actual', $data);
+        $this->Home_model->show_settings_actual();
     }
     /**
      * notifications contain notifications data when the user logs in
@@ -101,8 +87,7 @@ class User extends CI_Controller
      */
     public function notifications()
     {
-        // load view [notifications_content] to the method [notifications]
-        $this->load->view('notifications_content');
+        $this->Home_model->show_notifications();
     }
     /**
      * friend_requests contain friend_requests data when the user logs in
@@ -111,7 +96,7 @@ class User extends CI_Controller
     public function friend_requests()
     {
         // load view [friend_requests_content] to the method [friend_requests]
-        $this->load->view('friend_requests_content');
+        $this->Home_model->show_friend_requests();
     }
     /**
      * messages contain messages data when the user logs in
@@ -119,11 +104,7 @@ class User extends CI_Controller
      */
     public function messages()
     {
-        //get names of friends
-        $data['friends_list']=$this->Friend_model->retrieve_friends_list();
-        $data['uid']=$this->session->userdata('uid');
-        // load view [messages_content] to the method [messages]
-        $this->load->view('messages_content', $data);
+        $this->Home_model->show_messages();
     }
     /**
      * post_data method that deals with the posting of a user's new post
@@ -133,7 +114,7 @@ class User extends CI_Controller
     {
         // user's post data is sent to the function [user_post_data] from the model [User_model]
         $this->User_model->user_post_data($_SESSION['uid'], $_POST['message']);
-        echo 1;
+        //echo 1;
     }
     /**
      * posts_input_content_view method calls the posts that are to be visible to the user's profile]
@@ -141,13 +122,7 @@ class User extends CI_Controller
      */
     public function posts_content()
     {
-        // store session uid value
-        $data['uid']=$this->session->userdata('uid');
-        // retrieval of posts is done from User_functions_model->retrieve_posts
-        $this->load->model('User_functions_model');
-        $data['posts_results']=$this->User_functions_model->retrieve_posts();
-        // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
-        $this->load->view('posts_content_view', $data);
+        $this->Home_model->show_posts_content();
     }
     /**
      * [profile a major functionality that will display the user's content]
@@ -155,45 +130,11 @@ class User extends CI_Controller
      */
     public function profile()
     {
-        // TODO: user_id to be renamed to uid in table
-        // $uid has the user_id from the users table which is set in the session variable uid from the login method
-        $uid=$this->session->userdata('uid');
-        // OPTIMIZE: user_logged isn't required, just use uid
-        // proceed to the following 'if branch' if the user_logged session variable has not been set
-        if (!isset($_SESSION['user_logged'])) {
-            // set session variable error to value 'Please login first to view this page.'
-            // and redirect to login page
-            $this->session->set_flashdata("error", "Please login first to view this page.");
-            redirect("auth/");
-        }
-        // $activation_status has value 0 or 1 depending on whether the user's email account has been verified or not
-        //$activation_status=$this->User_model->check_activation_status($uid);
-        //proceed to the following 'if branch' if the user's email account has not been verified
-
-        // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
-        $data['email']=$_REQUEST['email'];
-        $data['profile']=true;
-        $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
-        $this->load->view('home_view.php', $data);
-        //WORKS!
-        //$this->load->view('login_view.php');
+        $this->Home_model->show_profile();
     }
     public function profile_specific()
     {
-        //echo "<br><br>You are now viewing a profile<br><br> email: ".$_POST['data'];
-        $data['uid']=$this->session->userdata('uid');
-        $data['email']=$_POST['data'];
-        //echo $data['email'];
-        $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
-
-        $data['retrieved_settings']=$this->User_model->retrieve_settings_friend($data['friend_uid']);
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic_friend($data['friend_uid']);
-        //check whether friend
-        $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
-        $data['friend_status']=$this->Friend_model->friend_status_check($data['friend']);
-        $this->load->view('profile_view.php', $data);
+        $this->Home_model->show_profile_specific();
     }
     /**
      * send_link the email verification link is sent to the user's email
@@ -201,33 +142,7 @@ class User extends CI_Controller
      */
     public function send_link()
     {
-        // TODO: get user's email
-        // TODO: generate nice email
-        // OPTIMIZE: create a model that gets the user details and use that to get the attribute values
-        // $uid_activation_key gets the activation key of the user from the user's table
-        // $config contains email configuration
-        $query_result=$this->Auth_model->retrieve_user($this->session->userdata('uid'));
-        $email=$query_result->email;
-        // TODO: change activationKey to activation_key (changed in database)
-        $uid_activation_key=$query_result->activationKey;
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'ssl://smtp.gmail.com';
-        $config['smtp_port'] = '465';
-        $config['smtp_timeout'] = '7';
-        $config['smtp_user'] = 'vsocial2018@gmail.com';
-        $config['smtp_pass'] = 'vsocial201812345$';
-        $config['charset'] = 'utf-8';
-        $config['newline'] = "\r\n";
-        $config['mailtype'] = 'html'; // or html
-        $config['validation'] = true; // bool whether to validate email or not
-        $message=site_url()."/user/activate_user?key=".$uid_activation_key;
-        $this->email->initialize($config);
-        $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
-        $this->email->to($email);
-        $this->email->subject("Vsocial Activation Link");
-        $this->email->message($message);
-        $this->email->send();
-        redirect(site_url()."/user/home", "refresh");
+        $this->Auth_model->send_link_model();
     }
     /**
      * activate_user is the method to activate the user's email, works by changing the activate value to 1
@@ -235,26 +150,10 @@ class User extends CI_Controller
      */
     public function activate_user()
     {
-        $data=array(
-          'activation'=>1,
-          'activation_time'=>time(),
-        );
-        $this->db->where('activation_key', $_REQUEST['key']);
-        $this->db->update('users', $data);
-        echo "<script>alert('".$_REQUEST['key']."')</script>";
+        $this->Auth_model->activate_user_model();
     }
     public function logout()
     {
-        $this->session->unset_userdata('uid');
-        $this->session->unset_userdata('__ci_last_regenerate');
-        $this->session->unset_userdata('user_logged');
-        $this->session->unset_userdata('success');
-        $this->session->unset_userdata('error');
-        header('location:'.base_url());
-        //redirect(site_url(), "refresh");
-    }
-    public function logout_again()
-    {
-        redirect(site_url()."/user/logout", "refresh");
+        $this->Auth_model->logout_model();
     }
 }

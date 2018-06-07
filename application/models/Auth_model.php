@@ -202,4 +202,58 @@ class Auth_model extends CI_Model
             return 0;
         }
     }
+    public function send_link_model()
+    {
+        // TODO: get user's email
+        // TODO: generate nice email
+        // OPTIMIZE: create a model that gets the user details and use that to get the attribute values
+        // $uid_activation_key gets the activation key of the user from the user's table
+        // $config contains email configuration
+        $query_result=$this->Auth_model->retrieve_user($this->session->userdata('uid'));
+        $email=$query_result->email;
+        // TODO: change activationKey to activation_key (changed in database)
+        $uid_activation_key=$query_result->activationKey;
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.gmail.com';
+        $config['smtp_port'] = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user'] = 'vsocial2018@gmail.com';
+        $config['smtp_pass'] = 'vsocial201812345$';
+        $config['charset'] = 'utf-8';
+        $config['newline'] = "\r\n";
+        $config['mailtype'] = 'html'; // or html
+        $config['validation'] = true; // bool whether to validate email or not
+        $message=site_url()."/user/activate_user?key=".$uid_activation_key;
+        $this->email->initialize($config);
+        $this->email->from('vsocial2018@gmail.com', 'Vsocial Team');
+        $this->email->to($email);
+        $this->email->subject("Vsocial Activation Link");
+        $this->email->message($message);
+        $this->email->send();
+        redirect(site_url()."/user/home", "refresh");
+    }
+    /**
+     * activate_user is the method to activate the user's email, works by changing the activate value to 1
+     * @return void
+     */
+    public function activate_user_model()
+    {
+        $data=array(
+          'activation'=>1,
+          'activation_time'=>time(),
+        );
+        $this->db->where('activation_key', $_REQUEST['key']);
+        $this->db->update('users', $data);
+        echo "<script>alert('".$_REQUEST['key']."')</script>";
+    }
+    public function logout_model()
+    {
+        $this->session->unset_userdata('uid');
+        $this->session->unset_userdata('__ci_last_regenerate');
+        $this->session->unset_userdata('user_logged');
+        $this->session->unset_userdata('success');
+        $this->session->unset_userdata('error');
+        header('location:'.base_url());
+        //redirect(site_url(), "refresh");
+    }
 }
