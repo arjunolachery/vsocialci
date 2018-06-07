@@ -9,12 +9,14 @@
     <?php
 
   echo "<h3>Your Friends</h3>";
-
-  foreach ($friends_list as $key) {
-    # code...
-    echo "<div class='name_div' id='name".$key['user_id']."'><img src='".base_url()."uploads/".$key['profile_pic_file_name']."' width='32px'>&nbsp;".$key['name']."</div>";
-    echo "<script>$('#name".$key['user_id']."').click(function(){";
-    echo "$('#submit_message_input').attr('enabled');
+  if ($friends_list==0) {
+      echo "Add friends to get started.";
+  } else {
+      foreach ($friends_list as $key) {
+          # code...
+          echo "<div class='name_div' id='name".$key['user_id']."'><img src='".base_url()."uploads/".$key['profile_pic_file_name']."' width='32px'>&nbsp;".$key['name']."</div>";
+          echo "<script>$('#name".$key['user_id']."').click(function(){";
+          echo "$('#submit_message_input').attr('enabled');
       $('#submit_message_input').removeAttr('disabled');
       $('#send_message_input').attr('enabled');
       $('#send_message_input').removeAttr('disabled');
@@ -26,6 +28,7 @@
 
 
     </script>";
+      }
   }
   ?></div>
 <div class="col-lg-3"></div>

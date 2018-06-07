@@ -145,6 +145,14 @@ $.fn.openContent=function(a){
     case 9:
     $.fn.retrieveContent(hostAddress+"/index.php/user/settings_actual",{data:'data'});
     $("#back_arrow_image").fadeIn();
+    break;
+    case 10:
+    $.fn.retrieveContent(hostAddress+"/index.php/user/posts",{data:'data'});
+    $("#back_arrow_image").hide();
+    break;
+    case 11:
+    window.location = hostAddress+"/index.php/user/logout";
+    break;
     default:
     break;
   }

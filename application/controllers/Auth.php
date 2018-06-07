@@ -96,6 +96,32 @@ class Auth extends CI_Controller
                     if (!($this->Auth_model->checkUserExist($this->input->post('email')))) {
                         // insert sign up data to the users table
                         $this->db->insert('users', $data);
+                        //get user id
+                        $user_details=$this->Auth_model->retrieve_user_email($this->input->post('email'));
+                        $uid=$user_details->user_id;
+                        //add data to other tables
+                        $data_preferences=array(
+                        'u_id'       =>$uid,
+                        'auto_login'      =>0,
+                        'welcome_screen'   =>1,
+                        );
+                        $this->db->insert('preferences', $data_preferences);
+
+                        $data_primary_information=array(
+                        'u_id'       =>$uid,
+                        'gender'      =>'-',
+                        'date_birth'   =>'yyyy-mm-dd',
+                        );
+                        $this->db->insert('primary_information', $data_primary_information);
+
+                        $data_profile_pic=array(
+                        'u_id'       =>$uid,
+                        'profile_pic_file_name'      =>'user128.png',
+                        'time_profile_pic'   =>time(),
+                        'set_profile_pic'   =>1
+                        );
+                        $this->db->insert('profile_pic', $data_profile_pic);
+
                         // set session variable {success} and unset {error}
                         $this->session->set_userdata("success", "You have successfully signed up. Proceed to log in.");
                         $this->session->unset_userdata('error');

@@ -150,6 +150,9 @@ $.fn.openContent=function(a){
     $.fn.retrieveContent(hostAddress+"/index.php/user/posts",{data:'data'});
     $("#back_arrow_image").hide();
     break;
+    case 11:
+    window.location = hostAddress+"/index.php/user/logout";
+    break;
     default:
     break;
   }

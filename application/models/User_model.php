@@ -22,7 +22,9 @@ class User_model extends CI_Model
         $this->db->where(array('user_id'=>$uid));
         $query=$this->db->get();
         $user=$query->row();
-        return $user->activation;
+        if (!empty($user)) {
+            return $user->activation;
+        }
     }
     /**
      * user_post_data posts the user's post into the posts table

@@ -62,6 +62,10 @@ class Auth_model extends CI_Model
         $this->db->where(array('email'=>$email));
         $query=$this->db->get();
         $user=$query->row();
-        return $user->email;
+        if (!empty($user)) {
+            return $user->email;
+        } else {
+            return 0;
+        }
     }
 }

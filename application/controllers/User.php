@@ -67,8 +67,10 @@ class User extends CI_Controller
     {
         // load view [posts_input_content] to the method [posts]
         $data['name']=$this->Auth_model->retrieve_user($uid=$this->session->userdata('uid'));
-        $data['name']=$data['name']->name;
-        $this->load->view('posts_input_content', $data);
+        if (!empty($data['name'])) {
+            $data['name']=$data['name']->name;
+            $this->load->view('posts_input_content', $data);
+        }
     }
     /**
      * search_result contains data of the search result that is executed by the user typing in the search bar
@@ -143,7 +145,7 @@ class User extends CI_Controller
         $data['friends_list']=$this->Friend_model->retrieve_friends_list();
         $data['uid']=$this->session->userdata('uid');
         // load view [messages_content] to the method [messages]
-        $this->load->view('messages_content',$data);
+        $this->load->view('messages_content', $data);
     }
     /**
      * post_data method that deals with the posting of a user's new post
@@ -259,5 +261,19 @@ class User extends CI_Controller
         $this->db->where('activation_key', $_REQUEST['key']);
         $this->db->update('users', $data);
         echo "<script>alert('".$_REQUEST['key']."')</script>";
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('uid');
+        $this->session->unset_userdata('__ci_last_regenerate');
+        $this->session->unset_userdata('user_logged');
+        $this->session->unset_userdata('success');
+        $this->session->unset_userdata('error');
+        header('location:'.base_url());
+        //redirect(site_url(), "refresh");
+    }
+    public function logout_again()
+    {
+        redirect(site_url()."/user/logout", "refresh");
     }
 }

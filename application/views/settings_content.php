@@ -23,4 +23,13 @@ $("#clickable_settings").click(function(){
   $.fn.openContent(9);
   //alert('hi');
 });
+$("#clickable_logout").click(function(){
+  var r=confirm("Are you sure?");
+  if(r==true)
+  {
+  $.fn.openContent(11);
+  }
+  $("#settings_content_show").hide();
+  //alert('hi');
+});
 </script>
