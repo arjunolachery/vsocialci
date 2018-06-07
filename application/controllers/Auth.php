@@ -14,6 +14,7 @@ class Auth extends CI_Controller
         * [$this->load->model('Auth_model') contains database operations related to Auth]
          */
         $this->load->model('Auth_model');
+        $this->load->model('Redirect_model');
     }
     /**
      * [index method class where users can log in to the platform]
@@ -21,50 +22,31 @@ class Auth extends CI_Controller
      */
     public function index()
     {
-        // session variable error is unset in the beginning only if the message is not 'Please login first to view the page'
-        // session variable error could be any of the following values = 'Account does not exist', 'You have already signed up', 'Type in the complete address',
-        // 'Please login first to view the page'
-        if (!($this->session->userdata('error')=='Please login first to view the page')) {
-            $this->session->unset_userdata('error');
-        }
-        // session variable success is unset in the beginning only if the message is not 'You have successfully signed up. Proceed to log in.'
-        // session variable error could be any of the following values = 'You have successfully signed up. Proceed to log in.', 'Welcome, [name]'
-        if (!($this->session->userdata('success')=='You have successfully signed up. Proceed to log in.')) {
-            $this->session->unset_userdata('success');
-        }
-        // login form validation rules are defined here
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
-        // proceed to the following 'if branch' if the user has entered email and password correctly on the login form
-        if ($this->form_validation->run()==true) {
-            // collect post values of email and password from the login form
-            // password is encrypted with md5 php built-in algorithm
-            $email    =$this->input->post('email');
-            $password =md5($this->input->post('password'));
-            // $user stores the values from a specific row of the user table for the logged in user
-            $user=$this->Auth_model->retrieve_user_primary_details($email, $password);
+
+        //[manage_sessions to set, unset and modify various sessions on load of the landing page]
+        $this->Auth_model->manage_sessions();
+        // login form validation rules are defined in the model method. The result is either 1 or 0 depending on the success of the form validation
+        $form_validation_result=$this->Auth_model->form_validation_result();
+        // proceed to the following 'if branch' if the user has entered email and password adhering to the form validation rules as defined in the previous method
+        if ($form_validation_result==true) {
+            //this model collects the user's entered details in the login form and check if the user exists; stored into $user
+            $user=$this->Auth_model->retrieve_user_primary_details_from_post($_POST);
             // proceed to the following 'if branch' if the user has been found in the user table after logging in
             if ($user) {
-                // set session variables {succcess, uid, user_logged} and unset {error}
-                // redirect to user controller, profile method after successfully logging in
-                $this->session->set_userdata("success", "Welcome,".$user->name);
-                $this->session->set_userdata("uid", $user->user_id);
-                $this->session->unset_userdata('error');
-                $this->session->set_userdata("user_logged", true);
-                redirect("user/home", "refresh");
+                //sets the success sessions and other session variable changes when the user logs in
+                $this->Auth_model->login_protocol($user);
             }
             // proceed to the following 'else branch' if the user has not been found in the user table after logging in
             else {
-                // set session varibles {error} and unset {success}
-                $this->session->set_userdata("error", "Account does not exist");
-                $this->session->unset_userdata('success');
+                //sets the error sessions and other session variable changes when the user's log in fails
+                $this->Auth_model->login_protocol_failed();
             }
         }
-        // load {login} view into the {index} method of the current controller
-        // with the session varibles {success,error,uid,user_logged} that have been set or unset based on the if else conditions
+        //redirect to home module after logging in successfully
         if ($this->session->userdata('uid')) {
-            redirect("user/home", "refresh");
+            $this->Redirect_model->go_home();
         }
+        // load {login} view into the {index} method of the current controller regardless of the login errors or successes
         $this->load->view("login_view");
     }
     /**
