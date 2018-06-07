@@ -30,7 +30,7 @@ class Auth_model extends CI_Model
      * [form_validation_result to run the form validation on the login form]
      * @return [void]
      */
-    public function form_validation_result()
+    public function login_form_validation_result()
     {
         // login form validation rules are defined here
         $this->form_validation->set_rules('email', 'Email', 'required');
@@ -72,7 +72,73 @@ class Auth_model extends CI_Model
         $this->session->set_userdata("error", "Account does not exist");
         $this->session->unset_userdata('success');
     }
+    public function signup_form_validation_result()
+    {
+        // apply form validation rules to the sign up form
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+        $this->form_validation->set_rules('passwordconf', 'Confirm Password', 'required|min_length[5]|matches[password]');
+        return $this->form_validation->run();
+    }
+    public function sign_up()
+    {
+        // add user sign up details in users table
+        $data=array(
+      'name'       =>$this->input->post('name'),
+      'email'      =>$this->input->post('email'),
+      'password'   =>md5($this->input->post('password')),
+      'time'       =>time(),
+      'activation' =>0,
+      );
+        // proceed to the following 'if branch' only if the posted email has characters '@' and '.'
+        if (strchr($this->input->post('email'), "@")!="" && strchr($this->input->post('email'), ".")!="") {
+            // proceed to the following 'if branch' only if the posted email does not currently exist in the users table
+            if (!($this->checkUserExist($this->input->post('email')))) {
+                // insert sign up data to the users table
+                $this->db->insert('users', $data);
+                //get user id
+                $user_details=$this->retrieve_user_email($this->input->post('email'));
+                $uid=$user_details->user_id;
+                //add data to other tables
+                $data_preferences=array(
+              'u_id'       =>$uid,
+              'auto_login'      =>0,
+              'welcome_screen'   =>1,
+              );
+                $this->db->insert('preferences', $data_preferences);
 
+                $data_primary_information=array(
+              'u_id'       =>$uid,
+              'gender'      =>'-',
+              'date_birth'   =>'yyyy-mm-dd',
+              );
+                $this->db->insert('primary_information', $data_primary_information);
+
+                $data_profile_pic=array(
+              'u_id'       =>$uid,
+              'profile_pic_file_name'      =>'user128.png',
+              'time_profile_pic'   =>time(),
+              'set_profile_pic'   =>1
+              );
+                $this->db->insert('profile_pic', $data_profile_pic);
+
+                // set session variable {success} and unset {error}
+                $this->session->set_userdata("success", "You have successfully signed up. Proceed to log in.");
+                $this->session->unset_userdata('error');
+                // redirect to the index method of the Auth controller since it the default controller
+                redirect("/", "refresh");
+            }
+            // proceed to the following 'else branch' only if the posted email currently exist in the users table
+            else {
+                // set session variable {error} to value 'You have already signed up.'
+                $this->session->set_userdata("error", "You have already signed up.");
+            }
+        } else {
+            // set session variable {error} to 'Type in the complete email address'
+            $this->session->set_userdata("error", "Type in the complete email address");
+        }
+    }
 
 
     /**
