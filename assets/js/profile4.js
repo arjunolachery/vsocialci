@@ -169,6 +169,37 @@ var size_button_settings=$("#settings_container").width();
 //alert($(body).width());
 $("#settings_content_show").css('right',right_position_settings-size_button_settings);
 
-get_friendship_status();
+$("#search_bar_input").focus(function(){
+  $("#search_bar_input").animate({"width":"100%"}, 100);
+  //$("#search_bar_input").css('width','100%');
+});
+$("#search_bar_input").focusout(function(){
+  $("#search_bar_input").animate({"width":"40%"}, 100);
+  //$("#search_bar_input").css('width','100%');
+});
+var height_header=$(".main").height();
+$("#top_header_spacing").height(height_header+15);
+
+/*
+$("#back_arrow_image").hide();
+history.pushState({id: 'SOMEID'}, '', '');
+$(window).bind('popstate', function(){
+  window.location.href = window.location.href;
+  });
+  */
+
+
+
+
+/*
+myDropzone.on("addedfile", function(file) {
+  caption = file.caption == undefined ? "" : file.caption;
+  file._captionLabel = Dropzone.createElement("<p>Caption:</p>")
+  file._captionBox = Dropzone.createElement("<textarea class='caption' id='"+file.filename+"' type='text' name='caption' class='dropzone_caption'>"+caption+"</textarea>")
+  file.previewElement.appendChild(file._captionLabel);
+  file.previewElement.appendChild(file._captionBox);
+});
+*/
+
 
 });

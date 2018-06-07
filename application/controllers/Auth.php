@@ -42,7 +42,7 @@ class Auth extends CI_Controller
             $email    =$this->input->post('email');
             $password =md5($this->input->post('password'));
             // $user stores the values from a specific row of the user table for the logged in user
-            $user=$this->Auth_model->retrieveUserPrimaryDetails($email, $password);
+            $user=$this->Auth_model->retrieve_user_primary_details($email, $password);
             // proceed to the following 'if branch' if the user has been found in the user table after logging in
             if ($user) {
                 // set session variables {succcess, uid, user_logged} and unset {error}

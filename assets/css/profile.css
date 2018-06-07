@@ -227,7 +227,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 .clickable_settings
 {
   background-color: white;
-  font-size: 0.85em;
+  font-size: 0.65em;
 }
 .clickable_settings:hover
 {
@@ -245,7 +245,7 @@ textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 }
 .settings_information
 {
-  font-size: 1.5em;
+  font-size: 1em;
 }
 .settings_table_content
 {
@@ -359,7 +359,8 @@ align-items:center;
 {
   width: 50%;
   background-color:rgb(237, 237, 237);
-  position: fixed;
+  position: static;
+  display:none;
   padding: 2em;
   border:thin solid #ccc;
   overflow-y: scroll;
@@ -383,4 +384,118 @@ color:#666F77;
 background-image: none;
 background-color:#2D6C7A;
 color:#FFFFFF;
+}
+#notification_side_message
+{
+  position:fixed;
+  display: none;
+  bottom:0px;
+  right:0px;
+  border:thin solid black;
+  background-color: green;
+  padding:1em;
+  text-align: center;
+  color:white;
+  width: 20%;
+}
+#messages_left_side
+{
+  padding:0px;
+}
+#messages_middle_side
+{
+  background-color: none;
+}
+#messages_right_side
+{
+}
+.button_friend
+{
+  border:thin solid black;
+  background-color: white;
+  border:thin solid #ccc;
+  color:grey;
+}
+.button_friend_2
+{
+  width:100%;
+  border:thin solid black;
+  background-color: white;
+  border:thin solid #ccc;
+  border-radius: 15%;
+  border-bottom:none;
+  border-bottom-left-radius:0%;
+  border-bottom-right-radius:0%;
+  color:grey;
+}
+.friendship_status_2
+{
+  width:100%;
+}
+.name_div
+{
+  border-bottom:thin solid rgb(200,200,200);
+  padding:1em;
+}
+.name_div:hover
+{
+  background-color: rgb(200,200,200);
+  cursor: pointer;
+}
+#messages_show
+{
+  width: 100%;
+  height: 400px;
+  overflow-y: scroll;
+  border:thin solid rgb(200,200,200);
+}
+#submit_message_input
+{
+  width: 80%;
+  padding:1em;
+  border:thin solid rgb(200,200,200);
+  border-top:none;
+}
+#send_message_input
+{
+  width: 20%;
+  padding:1em;
+  border:thin solid rgb(200,200,200);
+  border-left:none;
+  border-top:none;
+  background-color:rgb(0, 102, 102);
+  font-family: 'Raleway', sans-serif;
+  color:white;
+}
+#message_result
+{
+  position: relative;
+  top:40%;
+  text-align: center;
+}
+#submit_message_input:focus
+{
+  outline:none;
+}
+.message_display_left
+{
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.message_display_right
+{
+  background-color: white;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+.message_display_time
+{
+  font-size: 0.7em;
+  color:grey;
+}
+.message_display_date
+{
+  font-size: 0.9em;
+  color:grey;
 }

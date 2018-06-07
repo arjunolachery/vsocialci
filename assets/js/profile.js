@@ -22,10 +22,6 @@ $("#messagesButtonOpen").click(function(){
   $.fn.openContent(6);
 });
 
-$("#clickable_settings").click(function(){
-  alert('wow');
-});
-
 $("#notificationsButtonOpen").click(function(){
   $.fn.openContent(7);
 });

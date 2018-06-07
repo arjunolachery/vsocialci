@@ -29,6 +29,13 @@ class User_functions_model extends CI_Model
         $query = $this->db->query('SELECT * FROM users INNER JOIN posts on users.user_id = posts.u_id ORDER BY id DESC');
         return $query->result_array();
     }
+
+    public function retrieve_posts_2($uid)
+    {
+        $query = $this->db->query("SELECT * FROM users,posts WHERE users.user_id=$uid AND posts.u_id=$uid ORDER BY posts.id DESC");
+        return $query->result_array();
+    }
+
     public function retrieve_search_results($search_data)
     {
         //return $this->session->userdata('uid').$search_data;
@@ -67,9 +74,9 @@ class User_functions_model extends CI_Model
     }
     public function get_uid_from_email($email)
     {
-      $user = $this->db->query("SELECT * FROM users WHERE email='$email'");
-      $user_result = $user->result_array();
-      return $user_result[0]['user_id'];
+        $user = $this->db->query("SELECT * FROM users WHERE email='$email'");
+        $user_result = $user->result_array();
+        return $user_result[0]['user_id'];
     }
     public function get_profile_pic()
     {
@@ -123,35 +130,34 @@ class User_functions_model extends CI_Model
         $this->db->insert('profile_pic', $data);
         return 1;
     }
-    public function update_caption($album,$img_captions)
+    public function update_caption($album, $img_captions)
     {
-      $uid=$this->session->userdata('uid');
-      $num_images=sizeof($img_captions);
-      //select $num_images last uploaded
-      $result_images= $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid' ORDER BY id DESC LIMIT $num_images");
-      $profile_pic_file_name = $result_images->result_array();
-      //print_r($profile_pic_file_name);
-      /*
-      for($i=0;$i<$num_images;$i++)
-      {
-        echo $profile_pic_file_name[$i]['id']."<br>";
-      }
-      */
-      for($i=0;$i<$num_images;$i++)
-      {
-      $data=array(
-        'caption' => $img_captions[$num_images-$i-1],
-      );
-      $this->db->where('id', $profile_pic_file_name[$i]['id']);
-      $this->db->update('profile_pic', $data);
+        $uid=$this->session->userdata('uid');
+        $num_images=sizeof($img_captions);
+        //select $num_images last uploaded
+        $result_images= $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid' ORDER BY id DESC LIMIT $num_images");
+        $profile_pic_file_name = $result_images->result_array();
+        //print_r($profile_pic_file_name);
+        /*
+          for($i=0;$i<$num_images;$i++)
+          {
+            echo $profile_pic_file_name[$i]['id']."<br>";
+          }
+          */
+        for ($i=0;$i<$num_images;$i++) {
+            $data=array(
+            'caption' => $img_captions[$num_images-$i-1],
+        );
+            $this->db->where('id', $profile_pic_file_name[$i]['id']);
+            $this->db->update('profile_pic', $data);
+        }
+        echo $num_images;
     }
-      echo $num_images;
-    }
-    public function friends_data($uid,$friend_uid)
+    public function friends_data($uid, $friend_uid)
     {
-      //return $uid.$friend_uid;
-      $result_images= $this->db->query("SELECT * FROM friends WHERE u_id='$uid' AND friend_id='$friend_uid'");
-      $friends_table = $result_images->result_array();
-      return $friends_table;
+        //return $uid.$friend_uid;
+        $result_images= $this->db->query("SELECT * FROM friends WHERE (u_id='$uid' AND friend_id='$friend_uid') OR (friend_id='$uid' AND u_id='$friend_uid')");
+        $friends_table = $result_images->result_array();
+        return $friends_table;
     }
 }

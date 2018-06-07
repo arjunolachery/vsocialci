@@ -36,20 +36,12 @@ class User_functions extends CI_Controller
     }
     public function update_preferences()
     {
-        /*
-        $gender_value=$this->input->post('gender');
-        $date_birth=$this->input->post('dob');
-        $uid=$this->session->userdata('uid');
-        $this->db->where('u_id', $uid);
-        $this->db->update('primary_information', array('gender' => $gender_value,'date_birth' =>$date_birth));
-        */
         $uid=$this->session->userdata('uid');
         $auto_login_value=$this->input->post('auto_login_val');
         $welcome_screen_val=$this->input->post('welcome_screen_val');
         $select_value=$this->input->post('select_val');
         $this->db->where('u_id', $uid);
         $this->db->update('preferences', array('auto_login' => $auto_login_value,'welcome_screen' =>$welcome_screen_val));
-
         echo $auto_login_value.$welcome_screen_val.$select_value;
     }
     public function change_password()
@@ -115,9 +107,8 @@ class User_functions extends CI_Controller
     }
     public function caption_profile_update()
     {
-      $img_caption = $this->input->post('data_caption');
-      //print_r($img);
-      $update_captions_result=$this->User_functions_model->update_caption('profile',$img_caption);
-
+        $img_caption = $this->input->post('data_caption');
+        //print_r($img);
+        $update_captions_result=$this->User_functions_model->update_caption('profile', $img_caption);
     }
 }

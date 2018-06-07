@@ -22,7 +22,7 @@ $num_files=0;
     <?php
     if ($profile==1) {
         ?>
-  <script src="<?php echo base_url(); ?>assets/js/profile3.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/profile4.js"></script>
       <?php
     } else {
         ?>
@@ -48,7 +48,7 @@ $num_files=0;
   &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">9</span>&nbsp;</span></sup></span></button>
   &nbsp;<button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/group-button.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">9</span>&nbsp;</span></sup></span></button>
   &nbsp;<button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">9</span>&nbsp;</span></sup></span></button>
-  &nbsp;<span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show">hi</span></span>
+  &nbsp;<span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show"></span></span>
 </div>
 <div class="col-lg-1"></div>
 </div>
@@ -93,7 +93,9 @@ $num_files=0;
 </div>
 
 
-
+<div id="notification_side_message">
+Arjun added you.<br>
+</div>
 
 <input type="text" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
 <script>
