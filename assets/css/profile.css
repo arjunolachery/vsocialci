@@ -477,3 +477,25 @@ color:#FFFFFF;
 {
   outline:none;
 }
+.message_display_left
+{
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.message_display_right
+{
+  background-color: white;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+.message_display_time
+{
+  font-size: 0.7em;
+  color:grey;
+}
+.message_display_date
+{
+  font-size: 0.9em;
+  color:grey;
+}

@@ -50,7 +50,13 @@ $("#submit_message_input").keydown(function(e){
   if(e.keyCode==13){
     //entered
     var message=$("#submit_message_input").val();
+    if(message !="")
+    {
     submit_message();
+    }
+    else {
+      alert("Message is empty!");
+    }
   }
 });
 $("#send_message_input").click(function(){
@@ -62,6 +68,8 @@ function submit_message()
   $("#submit_message_input").val('');
   retrieve_messages_private();
   });
+  $('#messages_show').animate({ scrollTop: $(document).height() }, 1200);
+
 };
 
 function retrieve_messages_private(){

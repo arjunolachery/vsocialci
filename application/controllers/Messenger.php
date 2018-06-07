@@ -21,11 +21,10 @@ class Messenger extends CI_Controller
     public function retrieve_messages()
     {
       $data['uid']=$this->session->userdata('uid');
-      $friend_id=$_POST['friend_id'];
-      $messages=$this->Messenger_model->retrieve_messages_model($friend_id);
+      $data['friend_id']=$_POST['friend_id'];
+      $data['messages']=$this->Messenger_model->retrieve_messages_model($data['friend_id']);
       //get messages from model
-
-      print_r($messages);
+      $this->load->view('messages_box_content',$data);
       # code...
     }
     public function send_message()

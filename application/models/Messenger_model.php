@@ -13,7 +13,7 @@ class Messenger_model extends CI_Model
     public function retrieve_messages_model($friend_id)
     {
         $uid=$this->session->userdata('uid');
-        $result_check_friend= $this->db->query("SELECT * FROM messages WHERE u_id='$uid' OR friend_id='$uid'");
+        $result_check_friend= $this->db->query("SELECT * FROM messages WHERE ((u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id'))");
         $result_check_friend_val = $result_check_friend->result_array();
         return $result_check_friend_val;
 
