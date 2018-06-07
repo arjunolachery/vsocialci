@@ -140,6 +140,7 @@ class Auth_model extends CI_Model
         }
     }
 
+    // TODO: Check if the below code needs to be present or can be optimised
 
     /**
      * retrieve_user_primary_details retrieves the user data when the $email and $password variable data are passed
