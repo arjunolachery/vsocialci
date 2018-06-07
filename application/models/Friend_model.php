@@ -4,6 +4,8 @@ class Friend_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Auth_model');
+        $this->load->model('User_functions_model');
     }
     /**
      * [deleteUserPost is executed whenever the user pressed the delete button]
@@ -43,19 +45,6 @@ class Friend_model extends CI_Model
             echo "Doesn't exist";
         }
     }
-    public function check_friend_exist($friend_id)
-    {
-        //$uid=$this->session->userdata('uid');
-        return 1;
-
-        $result_check_friend= $this->db->query("SELECT * FROM friends WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
-        $result_check_friend_val = $result_check_friend->result_array();
-        if (empty($result_check_friend_val)) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
     public function accept_friend_request_model()
     {
         //update status to 1;
@@ -67,6 +56,50 @@ class Friend_model extends CI_Model
             return 1;
         } else {
             echo "Friendship doesn't exist";
+        }
+    }
+    public function get_friendship_status_model()
+    {
+      $data['uid']=$this->session->userdata('uid');
+      $data['email']=$_POST['email'];
+      $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+      $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+      $data['friend_status']=$this->friend_status_check($data['friend']);
+      if ($data['friend_status']['friend_val']!=3) {
+          echo $data['friend_status']['message']."<br>".$data['friend_status']['button'];
+      } else {
+          echo $data['friend_status']['button'];
+      }
+    }
+    public function get_friendship_status_2_model()
+    {
+    $data['uid']=$this->session->userdata('uid');
+    $data['email']=$_POST['email'];
+    $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+    $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+    $data['friend_status']=$this->friend_status_check($data['friend']);
+    echo $data['friend_status']['friend_val'];
+    }
+    public function get_posts_model()
+    {
+      $data['email']=$_POST['email'];
+      $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+      // retrieval of posts is done from User_functions_model->retrieve_posts
+      $data['posts_results']=$this->User_functions_model->retrieve_posts_2($data['uid']);
+      // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
+      $this->load->view('posts_content_view', $data);
+    }
+    public function check_friend_exist($friend_id)
+    {
+        //$uid=$this->session->userdata('uid');
+        return 1;
+
+        $result_check_friend= $this->db->query("SELECT * FROM friends WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
+        $result_check_friend_val = $result_check_friend->result_array();
+        if (empty($result_check_friend_val)) {
+            return 0;
+        } else {
+            return 1;
         }
     }
     public function friend_status_check($friend)

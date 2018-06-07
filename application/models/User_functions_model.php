@@ -135,6 +135,18 @@ class User_functions_model extends CI_Model
         $this->db->insert('profile_pic', $data);
         return 1;
     }
+    public function insert_timeline_pic_db($file_name)
+    {
+        $uid=$this->session->userdata('uid');
+        $data=array(
+      'u_id' => $uid,
+      'pic_file_name' => $file_name,
+      'time_pic' => time(),
+      'album' => 'timeline'
+    );
+        $this->db->insert('pictures', $data);
+        return 1;
+    }
     public function update_caption($album, $img_captions)
     {
         $uid=$this->session->userdata('uid');
@@ -155,6 +167,47 @@ class User_functions_model extends CI_Model
         );
             $this->db->where('id', $profile_pic_file_name[$i]['id']);
             $this->db->update('profile_pic', $data);
+
+            $data_2=array(
+          'u_id' => $uid,
+          'picture_id' => $profile_pic_file_name[$i]['id']."p",
+          'timestamp' => time(),
+        );
+            $this->db->insert('posts', $data_2);
+            return 1;
+
+        }
+        echo $num_images;
+    }
+    public function update_caption_2($album, $img_captions)
+    {
+        $uid=$this->session->userdata('uid');
+        $num_images=sizeof($img_captions);
+        //select $num_images last uploaded
+        $result_images= $this->db->query("SELECT * FROM pictures WHERE u_id='$uid' ORDER BY id DESC LIMIT $num_images");
+        $profile_pic_file_name = $result_images->result_array();
+        //print_r($profile_pic_file_name);
+        /*
+          for($i=0;$i<$num_images;$i++)
+          {
+            echo $profile_pic_file_name[$i]['id']."<br>";
+          }
+          */
+        for ($i=0;$i<$num_images;$i++) {
+            $data=array(
+            'image_caption' => $img_captions[$num_images-$i-1],
+        );
+            $this->db->where('id', $profile_pic_file_name[$i]['id']);
+            $this->db->update('pictures', $data);
+
+            $data_2=array(
+          'u_id' => $uid,
+          'picture_id' => $profile_pic_file_name[$i]['id'],
+          'timestamp' => time(),
+        );
+            $this->db->insert('posts', $data_2);
+            return 1;
+
         }
         echo $num_images;
     }
@@ -259,5 +312,11 @@ class User_functions_model extends CI_Model
         $img_caption = $this->input->post('data_caption');
         //print_r($img);
         $update_captions_result=$this->update_caption('profile', $img_caption);
+    }
+    public function caption_image_update_model()
+    {
+        $img_caption = $this->input->post('data_caption');
+        //print_r($img);
+        $update_captions_result=$this->update_caption_2('profile', $img_caption);
     }
 }

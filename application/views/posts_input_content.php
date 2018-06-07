@@ -1,5 +1,9 @@
 <!-- this is the content for the posts -->
 <!-- contains both the posting input area as well as the posts viewer - posts gets loaded to [#posts_viewer] -->
+<?php
+$num_files_done_2=0;
+$num_files_2=0;
+ ?>
 <div class="row" id="postsContent">
   <div class="col-lg-3" id="posts_content_left"></div>
     <div class="col-lg-6">
@@ -8,7 +12,7 @@
       <div class="borderPostInput" style="padding:1em;">
 
       <br>
-      <h4 style="display:inline"><span id="circleDefinition"><button class="side_button" id="circleChangeButton">everyone</button></span>&nbsp;<button class="side_button" id="imageUploadButton"><img src="../../assets/images/photo.png"></button></h4><br>
+      <h4 style="display:inline"><span id="circleDefinition"><button class="side_button" id="circleChangeButton">everyone</button></span>&nbsp;<button class="side_button" id="imageUploadButton"><img src="../../assets/images/photo(1).png"></button></h4><br>
       <div id="circleChangeContent"><ul><li>asas</li><li>asas</li><li>asas</li></ul>
       <center><button class="side_button" id="circleChangeClose"><img src="../../assets/images/error.png"></button></center>
       </div>
@@ -30,7 +34,22 @@
       </div>
       <div id="userPostImageContainer">
       <div id="imageUploadWrapper" class="text-center">
-        <button class="side_button"><img src="<?php echo base_url();?>assets/images/cloud-computing.png"></button>
+        <form action="<?php echo site_url('/upload/do_upload_file_timeline'); ?>" method="POST" class="dropzone" id="my-dropzone-2">
+          <div class="fallback">
+            <input name="file" type="file" />
+            <input type="submit" value="Upload" />
+          </div>
+        </form>
+        <br>
+        <!-- dynamic div where the images get loaded once its uploaded so that users can add captions to it-->
+        <form id="caption_submit_2">
+          <div id="caption_submit_input_2">
+          </div>
+          <div id="caption_submit_button_2">
+          </div>
+          <div id="caption_submit_result_2" hidden>
+          </div>
+        </form>
         <br><br>
       </div>
       </div>
@@ -200,7 +219,6 @@ $("#imageUploadButton").click(function(){
   imageButtonSet=!imageButtonSet;
   if(imageButtonSet)
   {
-    $("#imageUploadButton").html("<img src='../../assets/images/photo(1).png'>");
     $.fn.changeToPostImage();
   }
   else
@@ -210,14 +228,6 @@ $("#imageUploadButton").click(function(){
 });
 
 //to swich between icons (black and white) and (color) depending on state of post input
-$("#imageUploadButton").hover(function(){
-  $("#imageUploadButton").html("<img src='../../assets/images/photo(1).png'>");
-});
-
-$("#imageUploadButton").mouseleave(function(){
-  if(!imageButtonSet)
-  $("#imageUploadButton").html("<img src='../../assets/images/photo.png'>");
-});
 
 //functions to switch between text and image posting
 $.fn.changeToPostImage=function()
@@ -233,26 +243,75 @@ $.fn.changeToPostText=function()
   $(".borderPostInput").css("background-color","white");
 };
 
-//drag and drop images scripts
-$(".borderPostInput").on('dragenter', function (e){
- //$("#userPostImageContainer").html('dragenter');
-});
-
-$("body").on('dragover', function (e){
- e.preventDefault();
- $("#userPostImageContainer").html("<div id='imageUploadWrapper' class='text-center'><button class='side_button'><img src='<?php echo base_url();?>assets/images/cloud-computing.png'></button><br>Drag Here<br></div>");
- $(".borderPostInput").css("border"," dotted black");
-
-});
-
-$(".borderPostInput").on('drop', function (e){
- //$(this).css('background', '#D8F9D3');
- e.preventDefault();
- //var image = e.originalEvent.dataTransfer.files;
- //createFormData(image);
- $("#userPostImageContainer").html('drop');
-});
-
 //load posts into [#posts_viewer] on load of this page
 $("#posts_viewer").load(hostAddress+"/index.php/user/posts_content");
+
+
+//dropzone script
+var errors2_2 = false;
+var num_files_2 = 0;
+var num_files_done_2 = 0;
+var set_profile_pic = 0;
+var myDropzone_2 = new Dropzone("#my-dropzone-2", {
+  maxFiles: 1,
+  init: function() {
+    this.on("maxfilesexceeded", function(file) {
+      this.removeFile(file);
+      alert('max reached');
+    });
+    this.on("success", function(file, responseText) {
+      num_files_done_2++;
+      //alert(responseText);
+      this.removeAllFiles();
+      var profile_pic_name = responseText;
+      <?php
+        $num_files_done_2=$num_files_done_2+1;
+        ?>
+      $("#caption_submit_result_2").append(<?php echo $num_files_done_2?>);
+      $("#preview" + num_files_done_2).attr('src', "<?php echo base_url().'uploads/'?>" + responseText);
+      $("#preview" + num_files_done_2).attr('width', "128px");
+      // $("#options"+num_files_done_2).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
+      if (num_files_2 == num_files_done_2) {
+        $("#submit_button_profile_2").removeAttr("disabled");
+        $("#submit_button_profile_2").attr("enabled");
+      }
+    });
+    this.on("addedfile", function(file) {
+      num_files_2++;
+
+      //<div id="clickable_settings" class="flex_container clickable_settings">&nbsp;
+      //<img src="../../assets/images/settings.png" style="vertical-align:middle">&nbsp;<span>Settings&nbsp;</span></div>
+
+      $("#caption_submit_input_2").append("<br><br><div class='flex_container' id='pic_show'" + num_files_2 + "><img src='../../assets/images/loading.gif' width='32px' id='preview" + num_files_2 +
+        "'>&nbsp;<textarea class='image_caption_input' placeholder='Add a caption' id='pic" + num_files_2 + "'></textarea><span id='options" + num_files_2 + "'></span></div>");
+        /*
+      $('pic' + num_files_2).keypress(function(event) {
+        if (event.keyCode == 13) {
+          event.preventDefault();
+          alert('hi');
+        }
+      });*/
+      if (num_files_2 == 1) {
+        $("#caption_submit_button_2").append("<br><input type='button' disabled id='submit_button_profile_2' onclick='submit_timeline_pic()' value='Submit'>");
+      }
+      if (num_files_2 != num_files_done_2) {
+        $("#submit_button_profile_2").removeAttr("enabled");
+        $("#submit_button_profile_2").attr("disabled");
+      }
+    });
+  },
+  error: function(file, errorMessage) {
+    errors2_2 = true;
+  },
+  queuecomplete: function() {
+    if (errors2_2) {
+      alert("There were errors!");
+      errors2_2 = false;
+    } else {
+      //alert("Done Uploading!");
+
+    }
+  }
+});
+
 </script>

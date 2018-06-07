@@ -17,4 +17,8 @@
        {
            $this->Upload_model->do_upload_file_model();
        }
+       public function do_upload_file_timeline()
+       {
+           $this->Upload_model->do_upload_file_timeline_model();
+       }
    }

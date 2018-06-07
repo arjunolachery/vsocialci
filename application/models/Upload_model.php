@@ -27,4 +27,20 @@ class Upload_model extends CI_Model
             echo $fileName;
         }
     }
+    public function do_upload_file_timeline_model()
+    {
+        $uid=$this->session->userdata('uid');
+        if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            $fileName=time().$uid.rand(1, 999).$fileName;
+            $this->session->set_userdata('profile_pic_value', $fileName);
+            $targetPath = getcwd() . '/uploads/';
+            $targetFile = $targetPath . $fileName ;
+            move_uploaded_file($tempFile, $targetFile);
+            //remove set value on all other profile pictures
+            $insert_db=$this->User_functions_model->insert_timeline_pic_db($fileName);
+            echo $fileName;
+        }
+    }
 }

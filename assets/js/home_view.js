@@ -39,7 +39,7 @@ function submit_profile_pic() {
   //var data;
   var current_data = {};
   var value_submit = $("#caption_submit_result").html();
-  value_submit = value_submit.length - 4;
+  value_submit = value_submit.length ;
   //alert(value_submit);
   var i = 1;
   for (i = 1; i <= value_submit; i++) {
@@ -48,6 +48,25 @@ function submit_profile_pic() {
   $.post("http://localhost/vsocialci/index.php/user_functions/caption_profile_update", {
     'data_caption': current_data
   }, function(response) {
+    alert(value_submit);
+    alert("Uploaded");
+  });
+  //alert(current_data[0]+current_data[1]);
+}
+function submit_timeline_pic() {
+  //var data;
+  var current_data = {};
+  var value_submit = $("#caption_submit_result_2").html();
+  value_submit = value_submit.length ;
+  //alert(value_submit);
+  var i = 1;
+  for (i = 1; i <= value_submit; i++) {
+    current_data[i - 1] = $("#pic" + i).val();
+  }
+  $.post("http://localhost/vsocialci/index.php/user_functions/caption_image_update", {
+    'data_caption': current_data
+  }, function(response) {
+    alert(value_submit);
     alert("Uploaded");
   });
   //alert(current_data[0]+current_data[1]);

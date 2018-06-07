@@ -43,4 +43,8 @@ class User_functions extends CI_Controller
     {
         $this->User_functions_model->caption_profile_update_model();
     }
+    public function caption_image_update()
+    {
+        $this->User_functions_model->caption_image_update_model();
+    }
 }
