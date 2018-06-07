@@ -15,49 +15,23 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('Auth_model') contains database operations related to Auth controller]
-        // $this->load->model('User_model') contains database operations related to User controller]
         $this->load->model('Auth_model');
         $this->load->model('User_model');
         $this->load->model('User_functions_model');
         $this->load->model('Friend_model');
     }
-    // TODO: profile method should be renamed to home
     /**
-     * profile is the method that is primarily called after the user logs in
+     * home is the method that is primarily called after the user logs in
      * @return void
      */
     public function home()
     {
-        // TODO: user_id to be renamed to uid in table
-        // $uid has the user_id from the users table which is set in the session variable uid from the login method
-        $uid=$this->session->userdata('uid');
-        // OPTIMIZE: user_logged isn't required, just use uid
-        // proceed to the following 'if branch' if the user_logged session variable has not been set
-        if (!isset($_SESSION['user_logged'])) {
-            // set session variable error to value 'Please login first to view this page.'
-            // and redirect to login page
-            $this->session->set_flashdata("error", "Please login first to view this page.");
-            redirect("auth/");
-        }
+        //check wheter the user has logged in. If not, it will redirect to Auth
+        $this->User_model->check_logged_in();
         // $activation_status has value 0 or 1 depending on whether the user's email account has been verified or not
-        $activation_status=$this->User_model->check_activation_status($uid);
-        //proceed to the following 'if branch' if the user's email account has not been verified
-        if ($activation_status==0) {
-            // set session variable verify_email_message to let the user know to verify the email again.
-            $this->session->set_flashdata(
-            "verify_email_message",
-        "<div class='alert alert-danger alert-dismissible fade in'>
-        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-        Your email hasn't been verified yet. Click <a href='".site_url()."/user/send_link'>here</a> to send again.</div>"
-        );
-        }
-        // load the profile view to the profile method only if the user has been logged in successfully as mentioned before
-        $data['profile']=false;
-        $data['email']='';
-        $data['welcome_screen_enabled']=$this->User_functions_model->check_welcome_screen();
-        $data['profile_pic_file_name']=$this->User_functions_model->get_profile_pic();
-        $this->load->view('home_view.php', $data);
+        $activation_status=$this->User_model->check_activation_status();
+        // load the home view to the home method only if the user has been logged in successfully as mentioned before
+        $activation_status=$this->User_model->proceed_to_home();
     }
     /**
      * posts is the method that calls the posts from the posts table for the particular user

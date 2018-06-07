@@ -7,12 +7,9 @@ class Friend extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('Auth_model') contains database operations related to Auth controller]
-        // $this->load->model('User_model') contains database operations related to User controller]
         $this->load->model('Friend_model');
         $this->load->model('User_functions_model');
     }
-    // TODO: profile method should be renamed to home
     /**
      * profile is the method that is primarily called after the user logs in
      * @return void
@@ -28,11 +25,7 @@ class Friend extends CI_Controller
         } else {
             echo "Already sent";
         }
-
-        //return 1;
-
         echo $friend_id;
-        //return 1;
     }
     public function remove_friend()
     {
@@ -84,15 +77,12 @@ class Friend extends CI_Controller
         $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
         $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
         $data['friend_status']=$this->Friend_model->friend_status_check($data['friend']);
-        if($data['friend_status']['friend_val']!=3)
-        {
-        echo $data['friend_status']['message']."<br>".$data['friend_status']['button'];
+        if ($data['friend_status']['friend_val']!=3) {
+            echo $data['friend_status']['message']."<br>".$data['friend_status']['button'];
+        } else {
+            echo $data['friend_status']['button'];
         }
-        else {
-          echo $data['friend_status']['button'];
-
-        }
-      // echo "hi";
+        // echo "hi";
     }
     public function get_friendship_status_2()
     {
@@ -106,15 +96,15 @@ class Friend extends CI_Controller
         $data['friend_status']=$this->Friend_model->friend_status_check($data['friend']);
         echo $data['friend_status']['friend_val'];
 
-      // echo "hi";
+        // echo "hi";
     }
     public function get_posts()
     {
-      $data['email']=$_POST['email'];
-      $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-      // retrieval of posts is done from User_functions_model->retrieve_posts
-      $data['posts_results']=$this->User_functions_model->retrieve_posts_2($data['uid']);
-      // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
-      $this->load->view('posts_content_view', $data);
+        $data['email']=$_POST['email'];
+        $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        // retrieval of posts is done from User_functions_model->retrieve_posts
+        $data['posts_results']=$this->User_functions_model->retrieve_posts_2($data['uid']);
+        // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
+        $this->load->view('posts_content_view', $data);
     }
 }
