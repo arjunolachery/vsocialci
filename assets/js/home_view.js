@@ -74,7 +74,7 @@ function submit_timeline_pic() {
 
 function go_to_bottom_message()
 {
-  $('#messages_show').animate({ scrollTop: $(document).height() }, 1);
+  $('#messages_show').animate({ scrollTop: '300000' }, 500);
 }
 
 var height_notification_pop_up = $(window).height();

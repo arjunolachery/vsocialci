@@ -229,4 +229,16 @@ class Home_model extends CI_Model
         $this->db->where('type_checked_on', 'm');
         $this->db->update('checked_on', $data_checked_on);
     }
+    public function notification_message_time_update_model()
+    {
+        $friend_id=$_POST['friend_id'];
+        $friend_id_m=$friend_id."m";
+        $uid=$this->session->userdata('uid');
+        $data_checked_on=array(
+    'time_checked_on'=>time(),
+  );
+        $this->db->where('u_id', $uid);
+        $this->db->where('type_checked_on', $friend_id_m);
+        $this->db->update('checked_on', $data_checked_on);
+    }
 }

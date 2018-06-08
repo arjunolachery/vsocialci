@@ -46,4 +46,8 @@ class Friend extends CI_Controller
     {
         echo $this->Home_model->show_messages_number();
     }
+    public function notification_message_time_update()
+    {
+        echo $this->Home_model->notification_message_time_update_model();
+    }
 }

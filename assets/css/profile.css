@@ -501,13 +501,13 @@ color:#FFFFFF;
 }
 .name_friend_list
 {
-  font-size: 2em;
+  font-size: 1.45em;
 }
 .name_friend_list_container
 {
   border-bottom:thin solid #ccc;
   background-color: rgb(237, 237, 237);
-  border:thin solid #ccc;
+  border:thin solid rgb(220, 220, 220);
   padding:1em;
 }
 .name_friend_list_container:hover
@@ -555,4 +555,12 @@ a:hover
 {
   background-color: rgb(0, 102, 102);
   color:white
+}
+.button_points
+{
+  background-color:white;
+  border-radius: 0.5em;
+  padding:0.3em;
+  font-size: 1.3em;
+  color:green;
 }

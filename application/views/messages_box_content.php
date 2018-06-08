@@ -49,4 +49,3 @@ foreach ($messages as $key) {
     }
     echo "<br>";
 }
-echo "<script>go_to_bottom_message()</script>";

@@ -246,24 +246,40 @@ function update_amount_messages(){
 var choose=0;
 function foo() {
 
+/*
   $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
   $("#friendRequestsAmount").html(response);
-  if(response==0)
-  {
-    $(".friend_requests_amount_sup").hide();
-  }
-});
+  });
 $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
 $("#messagesAmount").html(response);
-if(response==0)
-{
-  $(".messages_amount_sup").hide();
-}
 });
-    setTimeout(foo, 500);
+*/
 }
+setTimeout(foo, 500);
 
-foo();
+setInterval(function() {
+            // code to be repeated
+            $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+              if(response==0)
+              {
+                $(".friend_requests_amount_sup").hide();
+              }
+              else {
+              $(".friend_requests_amount_sup").show();
+              }
+            $("#friendRequestsAmount").html(response);
+            });
+          $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+            if(response==0)
+            {
+              $(".messages_amount_sup").hide();
+            }
+            else {
+            $(".messages_amount_sup").show();
+            }
+          $("#messagesAmount").html(response);
+          });
+      }, 1000); // every 1000 ms
 
 function update_amount_friends(){
   $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){

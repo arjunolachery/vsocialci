@@ -28,33 +28,27 @@ foreach ($posts_results as $row) {
     $postid=$row['id'];
     $content=$row['content'];
     $picture_id=$row['picture_id'];
-    if($picture_id!=0)
-    {
-      if (strpos($picture_id, 'p') !== false)
-      {
-        //profile pic
-      $picture_id=substr($picture_id, 0, -1);
-      $sql ="SELECT * FROM profile_pic WHERE id='$picture_id'";
-      $query = $this->db->query($sql);
-      $query_array=$query->result_array();
-      $pic_link=base_url()."uploads/".$query_array[0]['profile_pic_file_name'];
-      $content=$query_array[0]['caption']."<br>"."<img src='".$pic_link."' width='100%'>";
-      $convert_timestamp=$convert_timestamp."<br>| Added a new profile picture";
-      }
-      else
-      {
-        //timeline pic
-        $sql ="SELECT * FROM pictures WHERE id='$picture_id'";
-        $query = $this->db->query($sql);
-        $query_array=$query->result_array();
-        $pic_link=base_url()."uploads/".$query_array[0]['pic_file_name'];
-        $content=$query_array[0]['image_caption']."<br>"."<img src='".$pic_link."' width='100%'>";
-        $convert_timestamp=$convert_timestamp."<br>| Added a new picture";
-
-      }
-      //picture exists
+    if ($picture_id!=0) {
+        if (strpos($picture_id, 'p') !== false) {
+            //profile pic
+            $picture_id=substr($picture_id, 0, -1);
+            $sql ="SELECT * FROM profile_pic WHERE id='$picture_id'";
+            $query = $this->db->query($sql);
+            $query_array=$query->result_array();
+            $pic_link=base_url()."uploads/".$query_array[0]['profile_pic_file_name'];
+            $content=$query_array[0]['caption']."<br>"."<img src='".$pic_link."' width='100%'>";
+            $convert_timestamp=$convert_timestamp."<br>| Added a new profile picture";
+        } else {
+            //timeline pic
+            $sql ="SELECT * FROM pictures WHERE id='$picture_id'";
+            $query = $this->db->query($sql);
+            $query_array=$query->result_array();
+            $pic_link=base_url()."uploads/".$query_array[0]['pic_file_name'];
+            $content=$query_array[0]['image_caption']."<br>"."<img src='".$pic_link."' width='100%'>";
+            $convert_timestamp=$convert_timestamp."<br>| Added a new picture";
+        }
+        //picture exists
       //check if picture belongs to profile or timeline by searching for p in pic id
-
     }
     // each post is displayed under 2 main divs
     // with first part [#postContainer{postid}]
@@ -76,11 +70,12 @@ foreach ($posts_results as $row) {
 
     <div class='col-lg-7 text-right side_buttonsPost'>
     <span id='side_buttonsPost".$postid."'>";
+    echo "<button class='side_button'><img src='".base_url()."assets/images/new_up_arrow.png'></button><button class='side_button'><span class='button_points'>+1</span></button>
+    <button class='side_button'><img src='".base_url()."assets/images/new_down_arrow.png'></button><br><br>";
     if ($this->session->userdata('uid') == $postUserId) {
         echo "<button class='side_button'id='deletePost".$postid."'><img src='".base_url()."assets/images/remove.png'></button>";
     }
-    echo "<button class='side_button'><img src='".base_url()."assets/images/up-arrow.png'></button>
-    <button class='side_button'><img src='".base_url()."assets/images/chevron.png'></button>
+    echo "
     </span>
     </div>
 
