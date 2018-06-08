@@ -105,6 +105,7 @@ class User extends CI_Controller
     public function messages()
     {
         $this->Home_model->show_messages();
+        $this->Home_model->update_messages_container_seen();
     }
     /**
      * post_data method that deals with the posting of a user's new post

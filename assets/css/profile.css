@@ -542,3 +542,17 @@ a:hover
   color:white;
 
 }
+.messages_new
+{
+  border:thin solid green;
+  background-color:rgb(0, 102, 102);
+  border-radius: 0.2em;
+  padding:0.3em;
+  font-size: 1em;
+  color:white;
+}
+.green_message
+{
+  background-color: rgb(0, 102, 102);
+  color:white
+}

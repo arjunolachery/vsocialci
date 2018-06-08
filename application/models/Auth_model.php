@@ -123,12 +123,19 @@ class Auth_model extends CI_Model
               );
                 $this->db->insert('profile_pic', $data_profile_pic);
 
-                $data_checked_on_friends=array(
+                $data_checked_on=array(
+                  array(
               'u_id'       =>$uid,
               'type_checked_on'      =>'f',
               'time_checked_on'   =>time(),
-              );
-                $this->db->insert('checked_on', $data_checked_on_friends);
+            ),
+            array(
+              'u_id'       =>$uid,
+              'type_checked_on'      =>'m',
+              'time_checked_on'   =>time(),
+            )
+            );
+                $this->db->insert_batch('checked_on', $data_checked_on);
 
                 // set session variable {success} and unset {error}
                 $this->session->set_userdata("success", "You have successfully signed up. Proceed to log in.");

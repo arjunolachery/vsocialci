@@ -7,14 +7,29 @@
 <div class="col-lg-3"></div>
 <div class="col-lg-6">
     <?php
-
   echo "<h3>Your Friends</h3>";
   if ($friends_list==0) {
       echo "Add friends to get started.";
   } else {
       foreach ($friends_list as $key) {
           # code...
-          echo "<div class='name_div' id='name".$key['user_id']."'><img src='".base_url()."uploads/".$key['profile_pic_file_name']."' width='32px'>&nbsp;".$key['name']."</div>";
+          //count number of messages that are later than the given time
+          $key['time_checked_on'];
+          $uid=$this->session->userdata('uid');
+          $user_id_value=$key['user_id'];
+          $time_checked_on=$key['time_checked_on'];
+          //$select_messages_query=$this->db->query("SELECT * FROM messages WHERE ((u_id=$uid AND friend_id=$user_id_value) OR (u_id=$user_id_value AND friend_id=$uid)) AND time_message>$time_checked_on");
+          $select_messages_query=$this->db->query("SELECT * FROM messages WHERE friend_id=$uid AND u_id=$user_id_value AND time_message>$time_checked_on");
+          //$select_messages_query=$this->db->query("SELECT * FROM messages WHERE u_id=$uid AND friend_id=$key['user_id']");
+          $select_messages_query_array=$select_messages_query->result_array();
+          $new_messages=sizeof($select_messages_query_array);
+          echo "<div class='name_div' id='name".$key['user_id']."'><img src='".base_url()."uploads/".$key['profile_pic_file_name']."' width='32px'>&nbsp;".$key['name']."&nbsp;&nbsp;&nbsp;";
+          if ($new_messages>0) {
+              echo "<span class='messages_new'>";
+              echo $new_messages;
+              echo "</span>";
+          }
+          echo "</div>";
           echo "<script>$('#name".$key['user_id']."').click(function(){";
           echo "$('#submit_message_input').attr('enabled');
       $('#submit_message_input').removeAttr('disabled');

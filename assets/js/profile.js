@@ -110,13 +110,8 @@ function searchBarActive(e)
 };
 
 $.fn.openContent=function(a){
-  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
-  $("#friendRequestsAmount").html(response);
-  if(response==0)
-  {
-    $(".friend_requests_amount_sup").hide();
-  }
-});
+  update_amount_friends();
+  update_amount_messages();
   switch(a)
   {
     case 1:
@@ -163,6 +158,13 @@ $.fn.openContent=function(a){
     default:
     break;
   }
+  $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+  $("#messagesAmount").html(response);
+  if(response==0)
+  {
+    $(".messages_amount_sup").hide();
+  }
+  });
   $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
   $("#friendRequestsAmount").html(response);
   if(response==0)
@@ -217,6 +219,68 @@ myDropzone.on("addedfile", function(file) {
   file.previewElement.appendChild(file._captionBox);
 });
 */
+function update_amount_friends(){
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
+}
 
+function update_amount_messages(){
+  $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+  $("#messagesAmount").html(response);
+  if(response==0)
+  {
+    $(".messages_amount_sup").hide();
+  }
+});
+}
 
 });
+
+//outside the main function
+
+var choose=0;
+function foo() {
+
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
+$.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+$("#messagesAmount").html(response);
+if(response==0)
+{
+  $(".messages_amount_sup").hide();
+}
+});
+    setTimeout(foo, 500);
+}
+
+foo();
+
+function update_amount_friends(){
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
+}
+
+function update_amount_messages(){
+  $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+  $("#messagesAmount").html(response);
+  if(response==0)
+  {
+    $(".messages_amount_sup").hide();
+  }
+});
+}

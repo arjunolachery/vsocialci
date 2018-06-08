@@ -51,7 +51,7 @@ $num_files=0;
         </div>
 
         <div class="col-lg-3 text-right">
-          &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
+          &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon messages_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
           <button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/group-button.png"><sup class="amountOnIcon friend_requests_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
           <button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
           <span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show"></span></span>
@@ -95,7 +95,7 @@ $num_files=0;
 <!-- this is for future development, it is now hidden-->
 <?php // TODO: notifications to be developed?>
     <div id="notification_side_message">
-      Arjun added you.<br>
+      You deleted a post.<br>
     </div>
 <!-- for jquery purpose-->
     <input type="hidden" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
