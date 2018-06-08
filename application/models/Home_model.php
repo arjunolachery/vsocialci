@@ -51,7 +51,60 @@ class Home_model extends CI_Model
     public function show_friend_requests()
     {
         // load view [friend_requests_content] to the method [friend_requests]
-        $this->load->view('friend_requests_content');
+        $uid=$this->session->userdata('uid');
+        $select_friend_requests=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.friend_id=$uid AND profile_pic.u_id=friends.u_id AND users.user_id=friends.u_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=0) ORDER BY friends.time_friend DESC");
+        $data['friend_requests']=$select_friend_requests->result_array();
+        $select_friend_acceptances=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.u_id=$uid AND profile_pic.u_id=friends.friend_id AND users.user_id=friends.friend_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=1) ORDER BY friends.time_friend DESC");
+        $data['friend_acceptances']=$select_friend_acceptances->result_array();
+
+        $select_checked_on_time=$this->db->query("SELECT * FROM checked_on WHERE u_id=$uid AND type_checked_on='f'");
+        $data['checked_on']=$select_checked_on_time->result_array();
+
+        $data['friend_requests_number']=$this->show_friend_requests_number();
+
+        $this->load->view('friend_requests_content',$data);
+        $this->update_checked_on_friends();
+    }
+    public function show_friend_requests_number()
+    {
+      $uid=$this->session->userdata('uid');
+      $select_friend_requests=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.friend_id=$uid AND profile_pic.u_id=friends.u_id AND users.user_id=friends.u_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=0) ORDER BY friends.time_friend DESC");
+      $data['friend_requests']=$select_friend_requests->result_array();
+      $select_friend_acceptances=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.u_id=$uid AND profile_pic.u_id=friends.friend_id AND users.user_id=friends.friend_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=1) ORDER BY friends.time_friend DESC");
+      $data['friend_acceptances']=$select_friend_acceptances->result_array();
+
+      $select_checked_on_time=$this->db->query("SELECT * FROM checked_on WHERE u_id=$uid AND type_checked_on='f'");
+      $data['checked_on']=$select_checked_on_time->result_array();
+      $add='';
+      $count=0;
+
+      foreach ($data['friend_requests'] as $key) {
+        $add=$add.$key['time_friend'];
+        if($data['checked_on'][0]['time_checked_on']<$key['time_friend'])
+        {
+            $count++;
+        }
+      }
+      foreach ($data['friend_acceptances'] as $key) {
+        $add=$add.$key['time_friend'];
+        if($data['checked_on'][0]['time_checked_on']<$key['time_friend'])
+        {
+            $count++;
+        }
+      }
+      return $count;
+      //return $data['checked_on'][0]['time_checked_on'].$add;
+    }
+    public function update_checked_on_friends()
+    {
+      $uid=$this->session->userdata('uid');
+      $data['checked_on_time']=
+      $data_checked_on=array(
+        'time_checked_on'=>time(),
+      );
+      $this->db->where('u_id',$uid);
+      $this->db->where('type_checked_on','f');
+      $this->db->update('checked_on', $data_checked_on);
     }
     public function show_messages()
     {

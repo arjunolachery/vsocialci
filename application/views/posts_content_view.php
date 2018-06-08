@@ -91,19 +91,25 @@ foreach ($posts_results as $row) {
     </div>
 
     </div>
-    </div><br><br>";
+    </div><span id='breakPost".$postid."'><br><br></span>";
     // the following script that is formed for each post is used for the delete functionality
     // once the delete button is clicked for each post, an ajax post request is made to the [deletePost] method
     // of the controller [User_functions]
     // then the particular post that the user wants deleted fades out
     echo "<script>$(document).ready(function(){
           $('#deletePost".$postid."').click(function(){
+            var r=confirm('Are you sure you want to delete this post?');
+            if(r==true)
+            {
+              $('#notification_side_message').fadeIn();
           $.post('".site_url()."/User_functions/deletePost',{postid:'".$postid."'},function(response,status){
             $('#postContainer".$postid."').fadeOut();
             $('#postContainer".$postid."2').fadeOut();
             $('#postHr".$postid."').fadeOut();
             $('#postContainerMain".$postid."').fadeOut();
+            $('#breakPost".$postid."').fadeOut();
           });
+        }
         });
         });</script>";
 }

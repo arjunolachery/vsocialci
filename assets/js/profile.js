@@ -110,6 +110,13 @@ function searchBarActive(e)
 };
 
 $.fn.openContent=function(a){
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
   switch(a)
   {
     case 1:
@@ -156,6 +163,13 @@ $.fn.openContent=function(a){
     default:
     break;
   }
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
 };
 var welcome_screen_value=$("#welcome_screen_value").val();
 if(welcome_screen_value==1)

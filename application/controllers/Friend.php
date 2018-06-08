@@ -8,6 +8,7 @@ class Friend extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Friend_model');
+        $this->load->model('Home_model');
     }
     public function send_friend_request()
     {
@@ -23,6 +24,7 @@ class Friend extends CI_Controller
     {
         //update status to 1;
         $this->Friend_model->accept_friend_request_model();
+        $this->Friend_model->insert_notifications_model();
     }
     public function get_friendship_status()
     {
@@ -35,5 +37,9 @@ class Friend extends CI_Controller
     public function get_posts()
     {
         $this->Friend_model->get_posts_model();
+    }
+    public function get_amount_friends()
+    {
+      echo $this->Home_model->show_friend_requests_number();
     }
 }

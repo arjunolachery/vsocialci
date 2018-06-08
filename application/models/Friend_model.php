@@ -51,12 +51,65 @@ class Friend_model extends CI_Model
         $friend_id=$_POST['friend_id'];
         $uid=$this->session->userdata('uid');
         $check_exist=$this->Friend_model->check_friend_exist($friend_id);
+        $time_now=time();
         if ($check_exist==1) {
-            $update_query= $this->db->query("UPDATE friends SET status_friend='1' WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
+            $update_query= $this->db->query("UPDATE friends SET status_friend='1',time_friend=$time_now WHERE (u_id='$uid' AND friend_id='$friend_id') OR (friend_id='$uid' AND u_id='$friend_id')");
             return 1;
         } else {
             echo "Friendship doesn't exist";
         }
+    }
+    public function insert_notifications_model()
+    {
+      $friend_id=$_POST['friend_id'];
+      $uid=$this->session->userdata('uid');
+      $check_notification_exist=$this->check_notification_exist($friend_id);
+      //if notification exists, then update else insert
+      $friend_id_m=$friend_id.'m';
+      $uid_m=$uid.'m';
+      if ($check_notification_exist==2) {
+
+        //update
+        $data_checked_on=array(
+          'time_checked_on'=>time(),
+        );
+        $this->db->where('u_id',$uid);
+        $this->db->where('type_checked_on',$friend_id_m);
+        $this->db->update('checked_on', $data_checked_on);
+
+        $data_checked_on=array(
+          'time_checked_on'=>time(),
+        );
+        $this->db->where('u_id',$friend_id);
+        $this->db->where('type_checked_on',$uid_m);
+        $this->db->update('checked_on', $data_checked_on);
+
+
+      }
+      else if($check_notification_exist==0){
+          //insert
+          $data_friends=array(
+            array('u_id' => $uid,
+        'type_checked_on' => $friend_id_m,
+        'time_checked_on' => time(),
+      ),array(
+        'u_id' => $friend_id,
+      'type_checked_on' => $uid_m,
+      'time_checked_on' => time(),
+      )
+    );
+          $this->db->insert_batch('checked_on', $data_friends);
+          return 1;
+      }
+    }
+    public function check_notification_exist($friend_id)
+    {
+      $uid=$this->session->userdata('uid');
+      $uid_m=$uid.'m';
+      $friend_id_m=$friend_id.'m';
+      $select_query=$this->db->query("SELECT * FROM checked_on WHERE ((u_id='$uid' AND type_checked_on='$friend_id_m') OR (u_id='$friend_id' AND type_checked_on='$uid_m'))");
+      $select_query_result=$select_query->result_array();
+      return sizeof($select_query_result);
     }
     public function get_friendship_status_model()
     {

@@ -389,8 +389,8 @@ color:#FFFFFF;
 {
   position:fixed;
   display: none;
-  bottom:0px;
-  right:0px;
+  bottom:1em;
+  right:1em;
   border:thin solid black;
   background-color: green;
   padding:1em;
@@ -498,4 +498,47 @@ color:#FFFFFF;
 {
   font-size: 0.9em;
   color:grey;
+}
+.name_friend_list
+{
+  font-size: 2em;
+}
+.name_friend_list_container
+{
+  border-bottom:thin solid #ccc;
+  background-color: rgb(237, 237, 237);
+  border:thin solid #ccc;
+  padding:1em;
+}
+.name_friend_list_container:hover
+{
+  background-color:#ccc;
+  cursor:pointer;
+}
+.name_friend_list_container_new
+{
+  border-bottom:thin solid #ccc;
+  background-color: rgb(237, 237, 237);
+  border:thin solid #ccc;
+  padding:1em;
+}
+.name_friend_list_container_new:hover
+{
+  background-color:#ccc;
+  cursor:pointer;
+  text-decoration: none;
+}
+a:hover
+{
+  text-decoration: none;
+}
+.friend_new
+{
+  border:thin solid green;
+  background-color:rgb(0, 102, 102);
+  border-radius: 2em;
+  padding:0.5em;
+  font-size: 1.5em;
+  color:white;
+
 }
