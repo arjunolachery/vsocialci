@@ -124,8 +124,8 @@ $.fn.openContent=function(a){
     $("#circleChangeContent").fadeIn();
     break;
     case 4:
-    var email=$("#user_email").html();
-    $.fn.retrieveContent(hostAddress+"/index.php/user/profile_specific",{data:email});
+    var email=$("#user_email").val();
+    $.fn.retrieveContent(hostAddress+"/index.php/user/profile_specific",{'data':email});
     break;
     case 5:
     $.fn.retrieveContent(hostAddress+"/index.php/user/welcome_message",{data:'data'});
