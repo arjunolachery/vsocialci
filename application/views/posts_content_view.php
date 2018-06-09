@@ -150,6 +150,27 @@ foreach ($posts_results as $row) {
         });
       });
 
+      $('#".$postid."downvote_button').click(function(){
+      $.post('".site_url()."/votes/down_vote',{'data':".$postid."},function(response){
+        var filtered_data=response;
+        if(filtered_data>0)
+        {
+          var color='green';
+          filtered_data='+'+filtered_data;
+        }
+        else if(filtered_data<0)
+        {
+          var color='red';
+        }
+        else {
+          var color='black';
+        }
+
+        $('#".$postid."total_votes').html(filtered_data);
+        $('#".$postid."total_votes').css('color',color);
+      });
+    });
+
         });
 
         </script>";

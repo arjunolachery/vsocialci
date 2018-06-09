@@ -13,4 +13,8 @@ class Votes extends CI_Controller
     {
         $this->Votes_model->up_vote_model();
     }
+    public function down_vote()
+    {
+        $this->Votes_model->down_vote_model();
+    }
 }

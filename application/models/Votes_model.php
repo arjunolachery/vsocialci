@@ -14,6 +14,13 @@ class Votes_model extends CI_Model
         //check if the vote exists
         //if it does, update and increase the vote value,
         //else, proceed to insertion
+        if($check_vote_result=='max')
+        {
+          //cannot upvote
+          echo "(Max) +";
+        }
+        else
+        {
         if ($check_vote_result=='none') {
             //insert into db
             //echo "Not found in DB";
@@ -26,6 +33,10 @@ class Votes_model extends CI_Model
             $this->db->insert('votes', $data_insert);
         } else {
             //update
+            if($check_vote_result=='min')
+            {
+              $check_vote_result=-5;
+            }
             $check_vote_result_updated=$check_vote_result+1;
             $data_vote_result=array(
             'val'=>$check_vote_result_updated,
@@ -35,7 +46,55 @@ class Votes_model extends CI_Model
             $this->db->where('post_id', $postid);
             $this->db->update('votes', $data_vote_result);
         }
+      }
         echo $this->get_vote_result();
+    }
+    public function down_vote_model()
+    {
+        $postid=$_POST['data'];
+        $uid=$this->session->userdata('uid');
+
+        $check_vote_result=$this->check_vote();
+
+        if($check_vote_result=='min')
+        {
+          //cannot downvote
+          echo "(Min) ";
+        }
+        else
+        {
+        //echo $uid.$postid;
+        //check if the vote exists
+        //if it does, update and increase the vote value,
+        //else, proceed to insertion
+        if ($check_vote_result=='none') {
+            //insert into db
+            //echo "Not found in DB";
+            $data_insert=array(
+              'u_id'=>$uid,
+              'post_id'=>$postid,
+              'val'=>-1,
+              'time_vote'=>time()
+            );
+            $this->db->insert('votes', $data_insert);
+        } else {
+            //update
+            if($check_vote_result=='max')
+            {
+              $check_vote_result=5;
+            }
+            $check_vote_result_updated=$check_vote_result-1;
+            $data_vote_result=array(
+            'val'=>$check_vote_result_updated,
+            'time_vote'=>time()
+          );
+            $this->db->where('u_id', $uid);
+            $this->db->where('post_id', $postid);
+            $this->db->update('votes', $data_vote_result);
+        }
+        }
+        echo $this->get_vote_result();
+
     }
     /**
      * [check_vote returns a 'none' value if not found or the val is displayed]
@@ -50,7 +109,17 @@ class Votes_model extends CI_Model
         if (empty($select_vote_array)) {
             return 'none';
         } else {
-            return $select_vote_array[0]['val'];
+            if($select_vote_array[0]['val']>4)
+            {
+              return 'max';
+            }
+            else if($select_vote_array[0]['val']<-4)
+            {
+              return 'min';
+            }
+            else {
+              return $select_vote_array[0]['val'];
+            }
         }
     }
     public function get_vote_result()
