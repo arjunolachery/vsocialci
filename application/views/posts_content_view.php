@@ -28,33 +28,27 @@ foreach ($posts_results as $row) {
     $postid=$row['id'];
     $content=$row['content'];
     $picture_id=$row['picture_id'];
-    if($picture_id!=0)
-    {
-      if (strpos($picture_id, 'p') !== false)
-      {
-        //profile pic
-      $picture_id=substr($picture_id, 0, -1);
-      $sql ="SELECT * FROM profile_pic WHERE id='$picture_id'";
-      $query = $this->db->query($sql);
-      $query_array=$query->result_array();
-      $pic_link=base_url()."uploads/".$query_array[0]['profile_pic_file_name'];
-      $content=$query_array[0]['caption']."<br>"."<img src='".$pic_link."' width='100%'>";
-      $convert_timestamp=$convert_timestamp."<br>| Added a new profile picture";
-      }
-      else
-      {
-        //timeline pic
-        $sql ="SELECT * FROM pictures WHERE id='$picture_id'";
-        $query = $this->db->query($sql);
-        $query_array=$query->result_array();
-        $pic_link=base_url()."uploads/".$query_array[0]['pic_file_name'];
-        $content=$query_array[0]['image_caption']."<br>"."<img src='".$pic_link."' width='100%'>";
-        $convert_timestamp=$convert_timestamp."<br>| Added a new picture";
-
-      }
-      //picture exists
+    if ($picture_id!=0) {
+        if (strpos($picture_id, 'p') !== false) {
+            //profile pic
+            $picture_id=substr($picture_id, 0, -1);
+            $sql ="SELECT * FROM profile_pic WHERE id='$picture_id'";
+            $query = $this->db->query($sql);
+            $query_array=$query->result_array();
+            $pic_link=base_url()."uploads/".$query_array[0]['profile_pic_file_name'];
+            $content=$query_array[0]['caption']."<br>"."<img src='".$pic_link."' width='100%'>";
+            $convert_timestamp=$convert_timestamp."<br>| Added a new profile picture";
+        } else {
+            //timeline pic
+            $sql ="SELECT * FROM pictures WHERE id='$picture_id'";
+            $query = $this->db->query($sql);
+            $query_array=$query->result_array();
+            $pic_link=base_url()."uploads/".$query_array[0]['pic_file_name'];
+            $content=$query_array[0]['image_caption']."<br>"."<img src='".$pic_link."' width='100%'>";
+            $convert_timestamp=$convert_timestamp."<br>| Added a new picture";
+        }
+        //picture exists
       //check if picture belongs to profile or timeline by searching for p in pic id
-
     }
     // each post is displayed under 2 main divs
     // with first part [#postContainer{postid}]
@@ -67,9 +61,32 @@ foreach ($posts_results as $row) {
     // as well as upvote and downvote buttons that have not been fully developed
     // TODO: implement upvote, downvote
     // Also each post has a hr [#postHr{postid}] that exist at the end of each post
+    // get profile picture
+    $select_profile_pic=$this->db->query("SELECT * FROM profile_pic WHERE set_profile_pic=1 AND u_id=$postUserId");
+    $select_profile_pic_array=$select_profile_pic->result_array();
+    $profile_pic_link_user=base_url()."uploads/".$select_profile_pic_array[0]['profile_pic_file_name'];
+    //get votes total
+    $select_votes=$this->db->query("SELECT * FROM votes WHERE post_id=$postid");
+    $select_votes_array=$select_votes->result_array();
+    $total_votes=0;
+    if (empty($select_votes_array)) {
+        $total_votes=0;
+    } else {
+        foreach ($select_votes_array as $key) {
+            $total_votes=$total_votes+$key['val'];
+        }
+    }
+    if ($total_votes<0) {
+        $color='red';
+    } elseif ($total_votes>0) {
+        $color='green';
+        $total_votes='+'.$total_votes;
+    } else {
+        $color='black';
+    }
     echo "<div class='postContainerMain' id='postContainerMain".$postid."'><span id='postContainerTopSpan'>
     <div class='row' class='postContainerTop' style='border-bottom-color:#ccc' id='postContainer".$postid."'>
-    <div class='col-lg-5'><table class='post_left_details'><tr><td rowspan='2'><button class='side_button' id='profileButtonOpen'><img src='../../assets/images/user.png'></button></td>
+    <div class='col-lg-5'><table class='post_left_details'><tr><td rowspan='2'><button class='side_button' id='profileButtonOpen'><img src='".$profile_pic_link_user."' width='32px'></button></td>
     <td><span id='namePost".$postid."' class='namePost'>".$name."</span></td></tr><tr><td>
     <span id='namePost".$postid."' class='timePost'> ".$convert_timestamp."</span></td></tr></table>
     </div>
@@ -79,8 +96,7 @@ foreach ($posts_results as $row) {
     if ($this->session->userdata('uid') == $postUserId) {
         echo "<button class='side_button'id='deletePost".$postid."'><img src='".base_url()."assets/images/remove.png'></button>";
     }
-    echo "<button class='side_button'><img src='".base_url()."assets/images/up-arrow.png'></button>
-    <button class='side_button'><img src='".base_url()."assets/images/chevron.png'></button>
+    echo "
     </span>
     </div>
 
@@ -89,7 +105,8 @@ foreach ($posts_results as $row) {
     <div class='col-lg-12 text-left contentPost' style='word-wrap:break-word;'>
     <span id='contentPost".$postid."'>".$content."</span>
     </div>
-
+    <center><button class='side_button' id='".$postid."upvote_button'><img src='".base_url()."assets/images/new_up_arrow.png' width='20px'></button><button class='side_button'><span class='button_points' id='".$postid."total_votes' style='color:".$color."'>".$total_votes."</span></button>
+    <button class='side_button' id='".$postid."downvote_button'><img src='".base_url()."assets/images/new_down_arrow.png' width='20px'></button></center>
     </div>
     </div><span id='breakPost".$postid."'><br><br></span>";
     // the following script that is formed for each post is used for the delete functionality
@@ -111,5 +128,50 @@ foreach ($posts_results as $row) {
           });
         }
         });
-        });</script>";
+
+        $('#".$postid."upvote_button').click(function(){
+        $.post('".site_url()."/votes/up_vote',{'data':".$postid."},function(response){
+          var filtered_data=response;
+          if(filtered_data>0)
+          {
+            var color='green';
+            filtered_data='+'+filtered_data;
+          }
+          else if(filtered_data<0)
+          {
+            var color='red';
+          }
+          else {
+            var color='black';
+          }
+
+          $('#".$postid."total_votes').html(filtered_data);
+          $('#".$postid."total_votes').css('color',color);
+        });
+      });
+
+      $('#".$postid."downvote_button').click(function(){
+      $.post('".site_url()."/votes/down_vote',{'data':".$postid."},function(response){
+        var filtered_data=response;
+        if(filtered_data>0)
+        {
+          var color='green';
+          filtered_data='+'+filtered_data;
+        }
+        else if(filtered_data<0)
+        {
+          var color='red';
+        }
+        else {
+          var color='black';
+        }
+
+        $('#".$postid."total_votes').html(filtered_data);
+        $('#".$postid."total_votes').css('color',color);
+      });
+    });
+
+        });
+
+        </script>";
 }

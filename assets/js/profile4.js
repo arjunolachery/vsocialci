@@ -110,6 +110,7 @@ function searchBarActive(e)
 };
 
 $.fn.openContent=function(a){
+  update_amount_friends();
   switch(a)
   {
     case 1:
@@ -191,7 +192,15 @@ $(window).bind('popstate', function(){
   });
   */
 
-
+  function update_amount_friends(){
+    $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+    $("#friendRequestsAmount").html(response);
+    if(response==0)
+    {
+      $(".friend_requests_amount_sup").hide();
+    }
+  });
+  }
 
 
 /*

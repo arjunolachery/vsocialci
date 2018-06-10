@@ -40,6 +40,14 @@ class Friend extends CI_Controller
     }
     public function get_amount_friends()
     {
-      echo $this->Home_model->show_friend_requests_number();
+        echo $this->Home_model->show_friend_requests_number();
+    }
+    public function get_amount_messages()
+    {
+        echo $this->Home_model->show_messages_number();
+    }
+    public function notification_message_time_update()
+    {
+        echo $this->Home_model->notification_message_time_update_model();
     }
 }

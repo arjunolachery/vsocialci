@@ -61,34 +61,31 @@ class Friend_model extends CI_Model
     }
     public function insert_notifications_model()
     {
-      $friend_id=$_POST['friend_id'];
-      $uid=$this->session->userdata('uid');
-      $check_notification_exist=$this->check_notification_exist($friend_id);
-      //if notification exists, then update else insert
-      $friend_id_m=$friend_id.'m';
-      $uid_m=$uid.'m';
-      if ($check_notification_exist==2) {
+        $friend_id=$_POST['friend_id'];
+        $uid=$this->session->userdata('uid');
+        $check_notification_exist=$this->check_notification_exist($friend_id);
+        //if notification exists, then update else insert
+        $friend_id_m=$friend_id.'m';
+        $uid_m=$uid.'m';
+        if ($check_notification_exist==2) {
 
         //update
-        $data_checked_on=array(
+            $data_checked_on=array(
           'time_checked_on'=>time(),
         );
-        $this->db->where('u_id',$uid);
-        $this->db->where('type_checked_on',$friend_id_m);
-        $this->db->update('checked_on', $data_checked_on);
+            $this->db->where('u_id', $uid);
+            $this->db->where('type_checked_on', $friend_id_m);
+            $this->db->update('checked_on', $data_checked_on);
 
-        $data_checked_on=array(
+            $data_checked_on=array(
           'time_checked_on'=>time(),
         );
-        $this->db->where('u_id',$friend_id);
-        $this->db->where('type_checked_on',$uid_m);
-        $this->db->update('checked_on', $data_checked_on);
-
-
-      }
-      else if($check_notification_exist==0){
-          //insert
-          $data_friends=array(
+            $this->db->where('u_id', $friend_id);
+            $this->db->where('type_checked_on', $uid_m);
+            $this->db->update('checked_on', $data_checked_on);
+        } elseif ($check_notification_exist==0) {
+            //insert
+            $data_friends=array(
             array('u_id' => $uid,
         'type_checked_on' => $friend_id_m,
         'time_checked_on' => time(),
@@ -98,49 +95,49 @@ class Friend_model extends CI_Model
       'time_checked_on' => time(),
       )
     );
-          $this->db->insert_batch('checked_on', $data_friends);
-          return 1;
-      }
+            $this->db->insert_batch('checked_on', $data_friends);
+            return 1;
+        }
     }
     public function check_notification_exist($friend_id)
     {
-      $uid=$this->session->userdata('uid');
-      $uid_m=$uid.'m';
-      $friend_id_m=$friend_id.'m';
-      $select_query=$this->db->query("SELECT * FROM checked_on WHERE ((u_id='$uid' AND type_checked_on='$friend_id_m') OR (u_id='$friend_id' AND type_checked_on='$uid_m'))");
-      $select_query_result=$select_query->result_array();
-      return sizeof($select_query_result);
+        $uid=$this->session->userdata('uid');
+        $uid_m=$uid.'m';
+        $friend_id_m=$friend_id.'m';
+        $select_query=$this->db->query("SELECT * FROM checked_on WHERE ((u_id='$uid' AND type_checked_on='$friend_id_m') OR (u_id='$friend_id' AND type_checked_on='$uid_m'))");
+        $select_query_result=$select_query->result_array();
+        return sizeof($select_query_result);
     }
     public function get_friendship_status_model()
     {
-      $data['uid']=$this->session->userdata('uid');
-      $data['email']=$_POST['email'];
-      $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-      $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
-      $data['friend_status']=$this->friend_status_check($data['friend']);
-      if ($data['friend_status']['friend_val']!=3) {
-          echo $data['friend_status']['message']."<br>".$data['friend_status']['button'];
-      } else {
-          echo $data['friend_status']['button'];
-      }
+        $data['uid']=$this->session->userdata('uid');
+        $data['email']=$_POST['email'];
+        $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+        $data['friend_status']=$this->friend_status_check($data['friend']);
+        if ($data['friend_status']['friend_val']!=3) {
+            echo $data['friend_status']['message']."<br>".$data['friend_status']['button'];
+        } else {
+            echo $data['friend_status']['button'];
+        }
     }
     public function get_friendship_status_2_model()
     {
-    $data['uid']=$this->session->userdata('uid');
-    $data['email']=$_POST['email'];
-    $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-    $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
-    $data['friend_status']=$this->friend_status_check($data['friend']);
-    echo $data['friend_status']['friend_val'];
+        $data['uid']=$this->session->userdata('uid');
+        $data['email']=$_POST['email'];
+        $data['friend_uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        $data['friend']=$this->User_functions_model->friends_data($data['uid'], $data['friend_uid']);
+        $data['friend_status']=$this->friend_status_check($data['friend']);
+        echo $data['friend_status']['friend_val'];
     }
     public function get_posts_model()
     {
-      $data['email']=$_POST['email'];
-      $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
-      // retrieval of posts is done from User_functions_model->retrieve_posts
-      $data['posts_results']=$this->User_functions_model->retrieve_posts_2($data['uid']);
-      // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
-      $this->load->view('posts_content_view', $data);
+        $data['email']=$_POST['email'];
+        $data['uid']=$this->User_functions_model->get_uid_from_email($data['email']);
+        // retrieval of posts is done from User_functions_model->retrieve_posts
+        $data['posts_results']=$this->User_functions_model->retrieve_posts_2($data['uid']);
+        // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
+        $this->load->view('posts_content_view', $data);
     }
     public function check_friend_exist($friend_id)
     {
@@ -217,6 +214,18 @@ class Friend_model extends CI_Model
         # code...
         $uid=$this->session->userdata('uid');
         $result_check_friend= $this->db->query("SELECT * FROM friends,users,profile_pic WHERE set_profile_pic=1 AND friends.status_friend=1 AND ((friends.u_id='$uid'  AND users.user_id=friends.friend_id AND users.user_id=profile_pic.u_id) OR  (friends.friend_id='$uid'  AND users.user_id=friends.u_id AND users.user_id=profile_pic.u_id)) ORDER BY users.name");
+        $result_check_friend_val = $result_check_friend->result_array();
+        if (empty($result_check_friend_val)) {
+            return 0;
+        } else {
+            return $result_check_friend_val;
+        }
+    }
+    public function retrieve_friends_messages_list()
+    {
+        # code...
+        $uid=$this->session->userdata('uid');
+        $result_check_friend= $this->db->query("SELECT * FROM friends,users,profile_pic,checked_on WHERE set_profile_pic=1 AND checked_on.u_id=$uid AND friends.status_friend=1 AND ((friends.u_id='$uid'  AND users.user_id=friends.friend_id AND checked_on.type_checked_on=friends.friend_id+'m' AND users.user_id=profile_pic.u_id) OR  (friends.friend_id='$uid'  AND users.user_id=friends.u_id AND users.user_id=profile_pic.u_id AND checked_on.type_checked_on=friends.u_id+'m')) ORDER BY users.name");
         $result_check_friend_val = $result_check_friend->result_array();
         if (empty($result_check_friend_val)) {
             return 0;

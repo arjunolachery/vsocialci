@@ -72,7 +72,10 @@ function submit_timeline_pic() {
   //alert(current_data[0]+current_data[1]);
 }
 
-
+function go_to_bottom_message()
+{
+  $('#messages_show').animate({ scrollTop: '300000' }, 500);
+}
 
 var height_notification_pop_up = $(window).height();
 $("#notification_pop_up").css("height", height_notification_pop_up - 200);
