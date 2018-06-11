@@ -1,4 +1,7 @@
 <?php
+/**
+ * [Friend_model associated with the Friend controller]
+ */
 class Friend_model extends CI_Model
 {
     public function __construct()
@@ -8,9 +11,8 @@ class Friend_model extends CI_Model
         $this->load->model('User_functions_model');
     }
     /**
-     * [deleteUserPost is executed whenever the user pressed the delete button]
-     * @param  [int] $postid [the unique id of post]
-     * @return [void]
+     * [send_friend_request_model description]
+     * @return [type] [description]
      */
     public function send_friend_request_model()
     {
