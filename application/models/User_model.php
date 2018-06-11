@@ -85,55 +85,22 @@ class User_model extends CI_Model
     }
     /**
      * [retrieve_settings the settings data that is to be retrieved to the home_view]
-     * @return [type] [description]
+     * @return [array]      [all the details of the user]
      */
     public function retrieve_settings()
     {
-        /*
-          $this->db->select('*');
-          $this->db->from('users');
-          $this->db->where(array('user_id'=>$uid));
-          $query=$this->db->get();
-          $user=$query->row();
-          return $user->activation;
-          */
         $uid=$this->session->userdata('uid');
         $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
         return $user->result_array();
-        //return $uid;
-        /*
-        $uid=$this->session->userdata('uid');
-        $this->db->select('*');
-        $this->db->from('users');
-        $this->db->where(array('user_id'=>$uid));
-        $query=$this->db->get();
-        $user=$query->row();
-        */
-        //return $user;
-        //return $this->session->userdata('uid');
     }
+    /**
+     * [retrieve_settings_friend the data of the friend that is to be retrieved]
+     * @param  [int] $uid [the id of the user]
+     * @return [array]      [all the details of the user]
+     */
     public function retrieve_settings_friend($uid)
     {
-        /*
-          $this->db->select('*');
-          $this->db->from('users');
-          $this->db->where(array('user_id'=>$uid));
-          $query=$this->db->get();
-          $user=$query->row();
-          return $user->activation;
-          */
         $user = $this->db->query("SELECT * FROM users,preferences,primary_information WHERE users.user_id='$uid' AND users.user_id = primary_information.u_id AND users.user_id = preferences.u_id");
         return $user->result_array();
-        //return $uid;
-        /*
-        $uid=$this->session->userdata('uid');
-        $this->db->select('*');
-        $this->db->from('users');
-        $this->db->where(array('user_id'=>$uid));
-        $query=$this->db->get();
-        $user=$query->row();
-        */
-        //return $user;
-        //return $this->session->userdata('uid');
     }
 }

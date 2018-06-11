@@ -153,6 +153,10 @@ class User extends CI_Controller
     {
         $this->Auth_model->activate_user_model();
     }
+    /**
+     * [logout the method for logging out the user by unsetting the session variables]
+     * @return [none]
+     */
     public function logout()
     {
         $this->Auth_model->logout_model();

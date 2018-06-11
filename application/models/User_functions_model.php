@@ -285,6 +285,8 @@ class User_functions_model extends CI_Model
             echo 'Current Password is Incorrect';
         }
     }
+    // TODO: remove the following comment if the upload still works correctly
+    /*
     public function upload_photo_model()
     {
         $config['upload_path'] = base_url().'assets/user_images';
@@ -307,16 +309,23 @@ class User_functions_model extends CI_Model
             //$this->load->view('upload_success', $data);
         }
     }
+    */
+   /**
+    * [caption_profile_update_model the model used for updating the caption on the profile picture]
+    * @return void
+    */
     public function caption_profile_update_model()
     {
         $img_caption = $this->input->post('data_caption');
-        //print_r($img);
         $update_captions_result=$this->update_caption('profile', $img_caption);
     }
+    /**
+     * [caption_profile_update_model the model used for updating the caption on the timeline picture]
+     * @return void
+     */
     public function caption_image_update_model()
     {
         $img_caption = $this->input->post('data_caption');
-        //print_r($img);
         $update_captions_result=$this->update_caption_2('profile', $img_caption);
     }
 }
