@@ -115,7 +115,6 @@ class User extends CI_Controller
     {
         // user's post data is sent to the function [user_post_data] from the model [User_model]
         $this->User_model->user_post_data($_SESSION['uid'], $_POST['message']);
-        //echo 1;
     }
     /**
      * posts_input_content_view method calls the posts that are to be visible to the user's profile]

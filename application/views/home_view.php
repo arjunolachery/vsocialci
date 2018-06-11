@@ -42,21 +42,21 @@ $num_files=0;
 <!-- the head div that is always at the top-->
     <div class="container-fluid" id="height_header_main">
       <div class="row main">
-        <div class="col-lg-1"><img src="../../assets/images/backward-arrow.png" id="back_arrow_image"></div>
-        <div class="col-lg-3" style="padding:0.17em 0em 0em 0.4em"><span><img src="../../assets/images/logo.png">&nbsp;<img src="<?php echo $profile_pic_file_name?>" width="32px" height="32px" id="top_profile_pic"></span></div>
-        <div class="col-lg-4" style="padding:0px">
+        <div class="col-lg-1 col-xs-0"></div>
+        <div class="col-lg-3 col-xs-4" style="padding:0.17em 0em 0em 0.4em"><img src="../../assets/images/backward-arrow.png" id="back_arrow_image"><span><img src="../../assets/images/logo.png">&nbsp;<img src="<?php echo $profile_pic_file_name?>" width="32px" height="32px" id="top_profile_pic"></span></div>
+        <div class="col-lg-4 col-xs-3" style="padding:0px">
 
           <div id="searchBar" class="text-center" style="text-align:center;width:100%"><input type="text" placeholder="Search" name="search" id="search_bar_input" autocomplete="off"></div><span id="search_content_show" style="width:33%">
         </span>
         </div>
 
-        <div class="col-lg-3 text-right">
-          &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon messages_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
-          <button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/group-button.png"><sup class="amountOnIcon friend_requests_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
-          <button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
+        <div class="col-lg-3 col-xs-5 text-right">
+          &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon messages_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">0</span>&nbsp;</span></sup></span></button>
+          <button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/group-button.png"><sup class="amountOnIcon friend_requests_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">0</span>&nbsp;</span></sup></span></button>
+          <button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon notifications_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">0</span>&nbsp;</span></sup></span></button>
           <span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show"></span></span>
         </div>
-        <div class="col-lg-1"></div>
+        <div class="col-lg-1 col-xs-0"></div>
       </div>
     </div>
 

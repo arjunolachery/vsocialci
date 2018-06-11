@@ -40,7 +40,7 @@ class User_functions_model extends CI_Model
     public function retrieve_search_results($search_data)
     {
         //return $this->session->userdata('uid').$search_data;
-        $query_string="SELECT * FROM users WHERE name LIKE '".$search_data."%' LIMIT 25";
+        $query_string="SELECT * FROM users WHERE name LIKE '".$search_data."%' LIMIT 5";
         $query = $this->db->query($query_string);
         return $query->result_array();
     }
@@ -175,7 +175,6 @@ class User_functions_model extends CI_Model
         );
             $this->db->insert('posts', $data_2);
             return 1;
-
         }
         echo $num_images;
     }
@@ -207,7 +206,6 @@ class User_functions_model extends CI_Model
         );
             $this->db->insert('posts', $data_2);
             return 1;
-
         }
         echo $num_images;
     }
@@ -310,10 +308,10 @@ class User_functions_model extends CI_Model
         }
     }
     */
-   /**
-    * [caption_profile_update_model the model used for updating the caption on the profile picture]
-    * @return void
-    */
+    /**
+     * [caption_profile_update_model the model used for updating the caption on the profile picture]
+     * @return void
+     */
     public function caption_profile_update_model()
     {
         $img_caption = $this->input->post('data_caption');

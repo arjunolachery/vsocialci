@@ -11,13 +11,12 @@ class Friend_model extends CI_Model
         $this->load->model('User_functions_model');
     }
     /**
-     * [send_friend_request_model description]
-     * @return [type] [description]
+     * [send_friend_request_model this function is executed whenever the user clicks on the send friend request button as called by the send_friend_request method in the Friend Controller]
+     * @return [int]  [a 1 is returned if the request has been sent]
      */
     public function send_friend_request_model()
     {
         //insert into db;
-        //
         $friend_id=$_POST['friend_id'];
         $check_exist=$this->check_friend_exist($friend_id);
 
@@ -34,6 +33,10 @@ class Friend_model extends CI_Model
             echo "Already sent";
         }
     }
+    /**
+     * [remove_friend_model this function is executed whenever the user clicks on the remove friend button as called by the remove_friend method in the Friend Controller]
+     * @return void
+     */
     public function remove_friend_model()
     {
         //delete from db;
@@ -47,6 +50,10 @@ class Friend_model extends CI_Model
             echo "Doesn't exist";
         }
     }
+    /**
+     * [accept_friend_request_model this function is executed whenever the user clicks on the accept friend request button as called by the accept_friend_request method in the Friend Controller]
+     * @return void
+     */
     public function accept_friend_request_model()
     {
         //update status to 1;
@@ -61,6 +68,10 @@ class Friend_model extends CI_Model
             echo "Friendship doesn't exist";
         }
     }
+    /**
+     * [insert_notifications_model is a function that inserts or updates a single data row having $friend_id.'m' whenever the user selects the friend to message with. The timestamp gets updated or inserted]
+     * @return [type] [description]
+     */
     public function insert_notifications_model()
     {
         $friend_id=$_POST['friend_id'];
@@ -101,6 +112,11 @@ class Friend_model extends CI_Model
             return 1;
         }
     }
+    /**
+     * [check_notification_exist used in insert_notifications_model (right above at the time of typing), to find out whether the messaging notifications are present for both users ]
+     * @param  [type] $friend_id [the user id of the friend]
+     * @return [int]            [the number of rows having the notifications for both users -> could be 0,1, or 2]
+     */
     public function check_notification_exist($friend_id)
     {
         $uid=$this->session->userdata('uid');
@@ -110,6 +126,10 @@ class Friend_model extends CI_Model
         $select_query_result=$select_query->result_array();
         return sizeof($select_query_result);
     }
+    /**
+     * [get_friendship_status_model this function is used to set the variables ('friend_val','message','button') so that it is shown whenever the user views a profile]
+     * @return [str] [prints out/echoes the message and the button whether it is 'Add a Friend', 'Remove Friend' or 'Accept Friend']
+     */
     public function get_friendship_status_model()
     {
         $data['uid']=$this->session->userdata('uid');
@@ -123,6 +143,11 @@ class Friend_model extends CI_Model
             echo $data['friend_status']['button'];
         }
     }
+    /**
+     * [get_friendship_status_2_model a simplified version of the function get_friendship_status_model (right above at the time of typing) that prints out the friend status value ('friend_val')]
+     * used in the display of the profile view
+     * @return [int] [prints out/echoes any of 0,1,or 2 which correspond to 'Add a Friend', 'Remove Friend' or 'Accept Friend' respectively]
+     */
     public function get_friendship_status_2_model()
     {
         $data['uid']=$this->session->userdata('uid');
@@ -132,6 +157,10 @@ class Friend_model extends CI_Model
         $data['friend_status']=$this->friend_status_check($data['friend']);
         echo $data['friend_status']['friend_val'];
     }
+    /**
+     * [get_posts_model the function that retrieves all the posts made by the user which is displayed when the user's profile is viewed]
+     * @return [obj] [view model]
+     */
     public function get_posts_model()
     {
         $data['email']=$_POST['email'];
@@ -141,6 +170,12 @@ class Friend_model extends CI_Model
         // load view [posts_content_view] to the method [posts_content] with $data [$uid,$posts_results]
         $this->load->view('posts_content_view', $data);
     }
+    // TODO: Still need to check if this can be avoided or optimized as it returns 1 in the beginning itself making it useless.
+    /**
+     * [check_friend_exist used in functions such as send_friend_request_model, remove_friend_model, accept_friend_request_model]
+     * @param  [type] $friend_id [the user id of the friend]
+     * @return [int]            [1 if the friend exists or 0 if not]
+     */
     public function check_friend_exist($friend_id)
     {
         //$uid=$this->session->userdata('uid');
@@ -154,6 +189,11 @@ class Friend_model extends CI_Model
             return 1;
         }
     }
+    /**
+     * [friend_status_check used in the previous function get_friendship_status_model to figure out the message and button variables ]
+     * @param  [type] $friend [description]
+     * @return [type]         [description]
+     */
     public function friend_status_check($friend)
     {
         $uid=$this->session->userdata('uid');
@@ -210,7 +250,10 @@ class Friend_model extends CI_Model
         }
         return $result_array;
     }
-    //returns a complete array of friends table only with rows having user id as either the friend field or the uid field.
+    /**
+     * [retrieve_friends_list returns a complete array of friends table only with rows having user id as either the friend field or the uid field with friend_status as 1.]
+     * @return [type] [description]
+     */
     public function retrieve_friends_list()
     {
         # code...
@@ -223,6 +266,10 @@ class Friend_model extends CI_Model
             return $result_check_friend_val;
         }
     }
+    /**
+     * [retrieve_friends_messages_list A more expanded version of the above function (at the time of typing) which also prints out the checked time of the messages]
+     * @return [type] [description]
+     */
     public function retrieve_friends_messages_list()
     {
         # code...

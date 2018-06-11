@@ -45,7 +45,7 @@ class User_model extends CI_Model
             //proceed to the following 'if branch' if the user's email account has not been verified
             if ($activation_status==0) {
                 // set session variable verify_email_message to let the user know to verify the email again.
-                $this->session->set_flashdata(
+                $this->session->set_userdata(
                 "verify_email_message",
             "<div class='alert alert-danger alert-dismissible fade in'>
             <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>

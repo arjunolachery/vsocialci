@@ -7,7 +7,6 @@ class Votes_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-
     }
     /**
      * [up_vote_model contains the database operations that are essential for a successful upvote]
@@ -15,45 +14,41 @@ class Votes_model extends CI_Model
      */
     public function up_vote_model()
     {
-      //inputs for the method to work
-      $postid=$_POST['data'];
-      $uid=$this->session->userdata('uid');
-      //check_vote returns a 'none' value if not found or the val of the vote is displayed or 'max', 'min'
+        //inputs for the method to work
+        $postid=$_POST['data'];
+        $uid=$this->session->userdata('uid');
+        //check_vote returns a 'none' value if not found or the val of the vote is displayed or 'max', 'min'
         $check_vote_result=$this->check_vote();
-        if($check_vote_result=='max')
-        {
-          //cannot upvote
-          echo "(Max) +";
-        }
-        else
-        {
-          //can upvote as it's not max (5)
-        if ($check_vote_result=='none') {
-            //insert into db if the user hasn't given a vote on the post before
-            $data_insert=array(
+        if ($check_vote_result=='max') {
+            //cannot upvote
+            echo "(Max) +";
+        } else {
+            //can upvote as it's not max (5)
+            if ($check_vote_result=='none') {
+                //insert into db if the user hasn't given a vote on the post before
+                $data_insert=array(
               'u_id'=>$uid,
               'post_id'=>$postid,
               'val'=>1,
               'time_vote'=>time()
             );
-            $this->db->insert('votes', $data_insert);
-        } else {
-            //update val if the record exists
-            if($check_vote_result=='min')
-            {
-              $check_vote_result=-5;
-            }
-            $check_vote_result_updated=$check_vote_result+1;
-            $data_vote_result=array(
+                $this->db->insert('votes', $data_insert);
+            } else {
+                //update val if the record exists
+                if ($check_vote_result=='min') {
+                    $check_vote_result=-5;
+                }
+                $check_vote_result_updated=$check_vote_result+1;
+                $data_vote_result=array(
             'val'=>$check_vote_result_updated,
             'time_vote'=>time()
           );
-            $this->db->where('u_id', $uid);
-            $this->db->where('post_id', $postid);
-            $this->db->update('votes', $data_vote_result);
+                $this->db->where('u_id', $uid);
+                $this->db->where('post_id', $postid);
+                $this->db->update('votes', $data_vote_result);
+            }
         }
-      }
-      //echo total votes result
+        //echo total votes result
         echo $this->get_vote_result();
     }
     /**
@@ -68,42 +63,37 @@ class Votes_model extends CI_Model
         //check_vote returns a 'none' value if not found or the val of the vote is displayed or 'max', 'min'
         $check_vote_result=$this->check_vote();
 
-        if($check_vote_result=='min')
-        {
-          //cannot downvote
-          echo "(Min) ";
-        }
-        else
-        {
-        //able to downvote
-        if ($check_vote_result=='none') {
-            //insert into db if record doesn't exist
-            $data_insert=array(
+        if ($check_vote_result=='min') {
+            //cannot downvote
+            echo "(Min) ";
+        } else {
+            //able to downvote
+            if ($check_vote_result=='none') {
+                //insert into db if record doesn't exist
+                $data_insert=array(
               'u_id'=>$uid,
               'post_id'=>$postid,
               'val'=>-1,
               'time_vote'=>time()
             );
-            $this->db->insert('votes', $data_insert);
-        } else {
-            //update val if record exists
-            if($check_vote_result=='max')
-            {
-              $check_vote_result=5;
-            }
-            $check_vote_result_updated=$check_vote_result-1;
-            $data_vote_result=array(
+                $this->db->insert('votes', $data_insert);
+            } else {
+                //update val if record exists
+                if ($check_vote_result=='max') {
+                    $check_vote_result=5;
+                }
+                $check_vote_result_updated=$check_vote_result-1;
+                $data_vote_result=array(
             'val'=>$check_vote_result_updated,
             'time_vote'=>time()
           );
-            $this->db->where('u_id', $uid);
-            $this->db->where('post_id', $postid);
-            $this->db->update('votes', $data_vote_result);
-        }
+                $this->db->where('u_id', $uid);
+                $this->db->where('post_id', $postid);
+                $this->db->update('votes', $data_vote_result);
+            }
         }
         //echo total votes result
         echo $this->get_vote_result();
-
     }
     /**
      * [check_vote returns a 'none' value or the val is displayed if the vote done by the user for a specific post is found]
@@ -122,16 +112,12 @@ class Votes_model extends CI_Model
         if (empty($select_vote_array)) {
             return 'none';
         } else {
-            if($select_vote_array[0]['val']>4)
-            {
-              return 'max';
-            }
-            else if($select_vote_array[0]['val']<-4)
-            {
-              return 'min';
-            }
-            else {
-              return $select_vote_array[0]['val'];
+            if ($select_vote_array[0]['val']>4) {
+                return 'max';
+            } elseif ($select_vote_array[0]['val']<-4) {
+                return 'min';
+            } else {
+                return $select_vote_array[0]['val'];
             }
         }
     }

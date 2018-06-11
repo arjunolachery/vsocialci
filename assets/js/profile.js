@@ -18,6 +18,10 @@ $("#settingsButtonOpen").click(function(){
   $.fn.openContent(2);
 });
 
+$("#top_profile_pic").click(function(){
+  $.fn.openContent(9);
+});
+
 $("#messagesButtonOpen").click(function(){
   $.fn.openContent(6);
 });
@@ -173,6 +177,7 @@ $.fn.openContent=function(a){
   }
 });
 };
+$(".notifications_amount_sup").hide();
 var welcome_screen_value=$("#welcome_screen_value").val();
 if(welcome_screen_value==1)
 {
@@ -244,18 +249,9 @@ function update_amount_messages(){
 //outside the main function
 
 var choose=0;
-function foo() {
-
-/*
-  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
-  $("#friendRequestsAmount").html(response);
-  });
-$.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
-$("#messagesAmount").html(response);
-});
-*/
-}
-setTimeout(foo, 500);
+var response1=0;
+var response2=0;
+var response3=0;
 
 setInterval(function() {
             // code to be repeated
@@ -268,6 +264,12 @@ setInterval(function() {
               $(".friend_requests_amount_sup").show();
               }
             $("#friendRequestsAmount").html(response);
+            if(response!=response1)
+            {
+              $("#notification_side_message").html('You got a new friend request');
+              show_notification_side();
+              response1=response;
+            }
             });
           $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
             if(response==0)
@@ -278,7 +280,38 @@ setInterval(function() {
             $(".messages_amount_sup").show();
             }
           $("#messagesAmount").html(response);
+          if(response!=response2)
+          {
+            if(response!=0)
+            {
+            $("#notification_side_message").html('You got new messages');
+            show_notification_side();
+          }
+            response2=response;
+          }
           });
+          $.post(hostAddress+"/index.php/user_functions/get_amount_notifications",function(response){
+            if(response==0)
+            {
+              $(".notifications_amount_sup").hide();
+            }
+            else {
+            $(".notifications_amount_sup").show();
+            }
+          $("#notificationsAmount").html(response);
+          if(response!=response3)
+          {
+            if(response!=0)
+            {
+            $("#notification_side_message").html('You got new notifications');
+            show_notification_side();
+          }
+            response3=response;
+          }
+          });
+
+          //add notifications here
+
       }, 1000); // every 1000 ms
 
 function update_amount_friends(){
@@ -299,4 +332,8 @@ function update_amount_messages(){
     $(".messages_amount_sup").hide();
   }
 });
+}
+
+function show_notification_side(){
+  $("#notification_side_message").fadeIn('slow').delay(2000).fadeOut('slow');
 }

@@ -187,6 +187,12 @@ class Auth_model extends CI_Model
         $user=$query->row();
         return $user;
     }
+    /**
+     * [retrieve_user_email retrieves data row from user table with email of the user passed]
+     * can be used in many places
+     * @param  [int] $uid [user id]
+     * @return [void]
+     */
     public function retrieve_user_email($email)
     {
         $this->db->select('*');
@@ -196,7 +202,6 @@ class Auth_model extends CI_Model
         $user=$query->row();
         return $user;
     }
-
     /**
      * [checkUserExist used to check if the email exists mainly during the sign up operation]
      * if it exists then the user cannot be able to sign up
@@ -216,6 +221,10 @@ class Auth_model extends CI_Model
             return 0;
         }
     }
+    /**
+     * [send_link_model description]
+     * @return [type] [description]
+     */
     public function send_link_model()
     {
         // TODO: get user's email
@@ -245,6 +254,8 @@ class Auth_model extends CI_Model
         $this->email->message($message);
         $this->email->send();
         redirect(site_url()."/user/home", "refresh");
+        echo "<script>$('#notification_side_message').html('You changed your profile picture');
+        show_notification_side();</script>";
     }
     /**
      * activate_user is the method to activate the user's email, works by changing the activate value to 1
@@ -253,12 +264,15 @@ class Auth_model extends CI_Model
     public function activate_user_model()
     {
         $data=array(
-          'activation'=>1,
-          'activation_time'=>time(),
-        );
-        $this->db->where('activation_key', $_REQUEST['key']);
+            'activation'=>1,
+            'activationTime'=>time(),
+          );
+        $this->db->where('activationKey', $_REQUEST['key']);
         $this->db->update('users', $data);
-        echo "<script>alert('".$_REQUEST['key']."')</script>";
+        $this->session->set_userdata('verify_email_message', "<div class='alert alert-success alert-dismissible fade in'>
+        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+        Your email has been verified.</div>");
+        redirect(base_url(), "refresh");
     }
     /**
      * [logout_model the logout model associated with the logout method in the Auth controller]
@@ -272,6 +286,5 @@ class Auth_model extends CI_Model
         $this->session->unset_userdata('success');
         $this->session->unset_userdata('error');
         header('location:'.base_url());
-        //redirect(site_url(), "refresh");
     }
 }

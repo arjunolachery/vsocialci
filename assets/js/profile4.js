@@ -157,7 +157,22 @@ $.fn.openContent=function(a){
     default:
     break;
   }
+  $.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
+  $("#messagesAmount").html(response);
+  if(response==0)
+  {
+    $(".messages_amount_sup").hide();
+  }
+  });
+  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
+  $("#friendRequestsAmount").html(response);
+  if(response==0)
+  {
+    $(".friend_requests_amount_sup").hide();
+  }
+});
 };
+$(".notifications_amount_sup").hide();
 var welcome_screen_value=$("#welcome_screen_value").val();
 if(welcome_screen_value==1)
 {
