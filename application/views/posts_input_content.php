@@ -76,7 +76,7 @@ $num_files_2=0;
       </div>
 
     </div>
-    <div class="col-lg-3 text-center" id="posts_content_right"><br><h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4></div>
+    <div class="col-lg-3 text-center" id="posts_content_right"><br><!--<h4 style="display:inline">Online<button class="side_button"><img src="../../assets/images/levels.png"></button></h4>--></div>
 </div>
 
 
