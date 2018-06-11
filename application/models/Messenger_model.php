@@ -1,4 +1,7 @@
 <?php
+/**
+ * [Messenger_model associated with the Messenger controller for everything messaging]
+ */
 class Messenger_model extends CI_Model
 {
     public function __construct()
@@ -23,6 +26,11 @@ class Messenger_model extends CI_Model
         //get messages from model
         $this->load->view('messages_box_content', $data);
     }
+    /**
+     * [messages_time_checked function that gets the last checked time of the friend's messages by the logged in user]
+     * @param  [int] $friend_id [the friend's user id]
+     * @return [int]            [the timestamp of the last checked time of the friend's messages]
+     */
     public function messages_time_checked($friend_id)
     {
         $data['uid']=$this->session->userdata('uid');
@@ -32,6 +40,10 @@ class Messenger_model extends CI_Model
         $select_query_array=$select_query->result_array();
         return $select_query_array[0]['time_checked_on'];
     }
+    /**
+     * [send_message_model is the model for the messages being sent to the friend by the logged in user]
+     * @return void
+     */
     public function send_message_model()
     {
         $uid=$this->session->userdata('uid');

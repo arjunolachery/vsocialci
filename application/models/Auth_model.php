@@ -260,6 +260,10 @@ class Auth_model extends CI_Model
         $this->db->update('users', $data);
         echo "<script>alert('".$_REQUEST['key']."')</script>";
     }
+    /**
+     * [logout_model the logout model associated with the logout method in the Auth controller]
+     * @return void
+     */
     public function logout_model()
     {
         $this->session->unset_userdata('uid');

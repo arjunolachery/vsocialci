@@ -1,4 +1,7 @@
 <?php
+/**
+ * [Messenger the controller associated with the Messenger module of the system]
+ */
 class Messenger extends CI_Controller
 {
     /**
@@ -7,16 +10,20 @@ class Messenger extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('Auth_model') contains database operations related to Auth controller]
-        // $this->load->model('User_model') contains database operations related to User controller]
-        //$this->load->model('Friend_model');
-        //$this->load->model('User_functions_model');
         $this->load->model('Messenger_model');
     }
+    /**
+     * [retrieve_messages the controller method associated with retrieving the messages between the user and the friend]
+     * @return void
+     */
     public function retrieve_messages()
     {
         $this->Messenger_model->retrieve_messages_model();
     }
+    /**
+     * [send_message the controller method for sending messages to the friend from the user]
+     * @return void
+     */
     public function send_message()
     {
         $this->Messenger_model->send_message_model();
