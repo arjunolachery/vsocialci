@@ -253,12 +253,15 @@ class Auth_model extends CI_Model
     public function activate_user_model()
     {
         $data=array(
-          'activation'=>1,
-          'activation_time'=>time(),
-        );
-        $this->db->where('activation_key', $_REQUEST['key']);
+            'activation'=>1,
+            'activationTime'=>time(),
+          );
+        $this->db->where('activationKey', $_REQUEST['key']);
         $this->db->update('users', $data);
-        echo "<script>alert('".$_REQUEST['key']."')</script>";
+        $this->session->set_userdata('verify_email_message', "<div class='alert alert-success alert-dismissible fade in'>
+        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+        Your email has been verified.</div>");
+        redirect(base_url(), "refresh");
     }
     /**
      * [logout_model the logout model associated with the logout method in the Auth controller]

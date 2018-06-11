@@ -49,13 +49,6 @@ class User_functions extends CI_Controller
     {
         $this->User_functions_model->change_password_model();
     }
-    // TODO: remove the following comment if upload still works
-    /*
-    public function upload_photo()
-    {
-        $this->User_functions_model->upload_photo_model();
-    }
-    */
     /**
      * [caption_profile_update method for updating the caption of the profile picture after uploading it]
      * @return void
@@ -72,10 +65,18 @@ class User_functions extends CI_Controller
     {
         $this->User_functions_model->caption_image_update_model();
     }
+    /**
+     * [notifications_update updates the time the notifications were checked by the user]
+     * @return void
+     */
     public function notifications_update()
     {
         echo $this->Home_model->notifications_update_model();
     }
+    /**
+     * [get_amount_notifications gets the amount of new notifications that the user has]
+     * @return [int] [number of new notifications for the user]
+     */
     public function get_amount_notifications()
     {
         echo $this->Home_model->show_notifications_number();
