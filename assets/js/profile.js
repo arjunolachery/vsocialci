@@ -173,6 +173,7 @@ $.fn.openContent=function(a){
   }
 });
 };
+$(".notifications_amount_sup").hide();
 var welcome_screen_value=$("#welcome_screen_value").val();
 if(welcome_screen_value==1)
 {
@@ -244,18 +245,6 @@ function update_amount_messages(){
 //outside the main function
 
 var choose=0;
-function foo() {
-
-/*
-  $.post(hostAddress+"/index.php/friend/get_amount_friends",function(response){
-  $("#friendRequestsAmount").html(response);
-  });
-$.post(hostAddress+"/index.php/friend/get_amount_messages",function(response){
-$("#messagesAmount").html(response);
-});
-*/
-}
-setTimeout(foo, 500);
 
 setInterval(function() {
             // code to be repeated
@@ -279,6 +268,19 @@ setInterval(function() {
             }
           $("#messagesAmount").html(response);
           });
+          $.post(hostAddress+"/index.php/user_functions/get_amount_notifications",function(response){
+            if(response==0)
+            {
+              $(".notifications_amount_sup").hide();
+            }
+            else {
+            $(".notifications_amount_sup").show();
+            }
+          $("#notificationsAmount").html(response);
+          });
+
+          //add notifications here
+
       }, 1000); // every 1000 ms
 
 function update_amount_friends(){

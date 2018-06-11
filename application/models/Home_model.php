@@ -47,6 +47,7 @@ class Home_model extends CI_Model
     {
         // load view [notifications_content] to the method [notifications]
         $this->load->view('notifications_content');
+        $this->update_checked_on_notifications();
     }
     public function show_friend_requests()
     {
@@ -123,32 +124,30 @@ class Home_model extends CI_Model
             }
         }
         return $count;
-        //get friends first
-        //then with the friends id, get messages with the time more than the checked_time
-        /*
-        $select_friend_requests=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.friend_id=$uid AND profile_pic.u_id=friends.u_id AND users.user_id=friends.u_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=0) ORDER BY friends.time_friend DESC");
-        $data['friend_requests']=$select_friend_requests->result_array();
-        $select_friend_acceptances=$this->db->query("SELECT * FROM friends,users,profile_pic WHERE (friends.u_id=$uid AND profile_pic.u_id=friends.friend_id AND users.user_id=friends.friend_id AND profile_pic.set_profile_pic=1 AND friends.status_friend=1) ORDER BY friends.time_friend DESC");
-        $data['friend_acceptances']=$select_friend_acceptances->result_array();
-
-        $select_checked_on_time=$this->db->query("SELECT * FROM checked_on WHERE u_id=$uid AND type_checked_on='f'");
-        $data['checked_on']=$select_checked_on_time->result_array();
-        $add='';
-        $count=0;
-
-        foreach ($data['friend_requests'] as $key) {
-            $add=$add.$key['time_friend'];
-            if ($data['checked_on'][0]['time_checked_on']<$key['time_friend']) {
-                $count++;
-            }
+    }
+    public function show_notifications_number()
+    {
+        $uid=$this->session->userdata("uid");
+        $select_posts=$this->db->query("SELECT * FROM posts WHERE u_id=$uid");
+        $select_posts_id=$select_posts->result_array();
+        $post_ids='';
+        foreach ($select_posts_id as $key) {
+            $post_ids=$post_ids.",".$key['id'];
         }
-        foreach ($data['friend_acceptances'] as $key) {
-            $add=$add.$key['time_friend'];
-            if ($data['checked_on'][0]['time_checked_on']<$key['time_friend']) {
-                $count++;
-            }
-        }*/
-        //return $data['checked_on'][0]['time_checked_on'].$add;
+        $post_ids = ltrim($post_ids, ',');
+        //echo $post_ids;
+        //print_r($select_posts_id);
+        //$matches = implode(',', $select_posts_id[0]);
+        //echo $matches;
+        $select_checked_on_time_notifications=$this->db->query("SELECT * FROM checked_on WHERE type_checked_on='n' AND u_id=$uid");
+        $select_checked_on_time_notifications_array=$select_checked_on_time_notifications->result_array();
+        $time_checked_notifications=$select_checked_on_time_notifications_array[0]['time_checked_on'];
+        //return $time_checked_notifications;
+
+        $select_posts_votes=$this->db->query("SELECT * FROM votes WHERE post_id IN ($post_ids) AND time_vote>$time_checked_notifications ORDER BY time_vote DESC");
+        $select_posts_votes_result=$select_posts_votes->result_array();
+
+        return sizeof($select_posts_votes_result);
     }
     public function update_checked_on_friends()
     {
@@ -158,6 +157,16 @@ class Home_model extends CI_Model
       );
         $this->db->where('u_id', $uid);
         $this->db->where('type_checked_on', 'f');
+        $this->db->update('checked_on', $data_checked_on);
+    }
+    public function update_checked_on_notifications()
+    {
+        $uid=$this->session->userdata('uid');
+        $data_checked_on=array(
+'time_checked_on'=>time(),
+);
+        $this->db->where('u_id', $uid);
+        $this->db->where('type_checked_on', 'n');
         $this->db->update('checked_on', $data_checked_on);
     }
     public function show_messages()
@@ -240,5 +249,19 @@ class Home_model extends CI_Model
         $this->db->where('u_id', $uid);
         $this->db->where('type_checked_on', $friend_id_m);
         $this->db->update('checked_on', $data_checked_on);
+    }
+    public function notifications_update_model()
+    {
+        $uid=$this->session->userdata('uid');
+        $data_checked_on=array(
+  'time_checked_on'=>time(),
+);
+        $this->db->where('u_id', $uid);
+        $this->db->where('type_checked_on', 'n');
+        $this->db->update('checked_on', $data_checked_on);
+    }
+    public function get_amount_notifications_model()
+    {
+        // code...
     }
 }

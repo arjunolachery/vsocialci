@@ -48,8 +48,9 @@ function submit_profile_pic() {
   $.post("http://localhost/vsocialci/index.php/user_functions/caption_profile_update", {
     'data_caption': current_data
   }, function(response) {
-    alert(value_submit);
+    //alert(value_submit);
     alert("Uploaded");
+    openContent(2);
   });
   //alert(current_data[0]+current_data[1]);
 }
@@ -66,8 +67,9 @@ function submit_timeline_pic() {
   $.post("http://localhost/vsocialci/index.php/user_functions/caption_image_update", {
     'data_caption': current_data
   }, function(response) {
-    alert(value_submit);
+    //alert(value_submit);
     alert("Uploaded");
+    openContent(4);
   });
   //alert(current_data[0]+current_data[1]);
 }

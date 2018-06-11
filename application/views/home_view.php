@@ -53,7 +53,7 @@ $num_files=0;
         <div class="col-lg-3 text-right">
           &nbsp;<button class="side_button" id="messagesButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/speech-bubble2.png"><sup class="amountOnIcon messages_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="messagesAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
           <button class="side_button" id="friendRequestsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/group-button.png"><sup class="amountOnIcon friend_requests_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="friendRequestsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
-          <button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
+          <button class="side_button" id="notificationsButtonOpen"><span class="notifictionsAmountContainer"><img src="../../assets/images/notification.png"><sup class="amountOnIcon notifications_amount_sup"><span class="amountOnIconCss">&nbsp;<span id="notificationsAmount">0</span>&nbsp;</span></sup></span></button>          &nbsp;
           <span id="settings_container"><button class="side_button" id="settingsButtonOpen"><img src="../../assets/images/interface4.png"></button><span id="settings_content_show"></span></span>
         </div>
         <div class="col-lg-1"></div>

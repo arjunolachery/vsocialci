@@ -13,6 +13,7 @@ class User_functions extends CI_Controller
         $this->load->helper('form');
         $this->load->helper(array('form', 'url'));
         $this->load->model('User_functions_model');
+        $this->load->model('Home_model');
         $this->load->library('upload');
     }
     /**
@@ -55,10 +56,10 @@ class User_functions extends CI_Controller
         $this->User_functions_model->upload_photo_model();
     }
     */
-   /**
-    * [caption_profile_update method for updating the caption of the profile picture after uploading it]
-    * @return void
-    */
+    /**
+     * [caption_profile_update method for updating the caption of the profile picture after uploading it]
+     * @return void
+     */
     public function caption_profile_update()
     {
         $this->User_functions_model->caption_profile_update_model();
@@ -70,5 +71,13 @@ class User_functions extends CI_Controller
     public function caption_image_update()
     {
         $this->User_functions_model->caption_image_update_model();
+    }
+    public function notifications_update()
+    {
+        echo $this->Home_model->notifications_update_model();
+    }
+    public function get_amount_notifications()
+    {
+        echo $this->Home_model->show_notifications_number();
     }
 }
