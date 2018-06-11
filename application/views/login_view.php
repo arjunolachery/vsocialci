@@ -30,12 +30,12 @@
       if (isset($_SESSION['error'])) {
           ?>
       <div class="alert alert-danger">
-      <?php echo $_SESSION['error']; ?>
+        <?php echo $_SESSION['error']; ?>
       </div>
       <?php
       }
       echo validation_errors("<div class='alert alert-danger'>", "</div>");?>
-<!-- the main form and login content -->
+        <!-- the main form and login content -->
         <form action="" method="post">
           <div class="form-group">
             <label for="email">Email:</label>

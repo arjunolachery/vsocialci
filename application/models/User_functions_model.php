@@ -30,13 +30,21 @@ class User_functions_model extends CI_Model
         $query = $this->db->query('SELECT * FROM users INNER JOIN posts on users.user_id = posts.u_id ORDER BY id DESC');
         return $query->result_array();
     }
-
+    /**
+     * [retrieve_posts_2 ]
+     * @param  [type] $uid [description]
+     * @return [type]      [description]
+     */
     public function retrieve_posts_2($uid)
     {
         $query = $this->db->query("SELECT * FROM users,posts WHERE users.user_id=$uid AND posts.u_id=$uid ORDER BY posts.id DESC");
         return $query->result_array();
     }
-
+    /**
+     * [retrieve_search_results this function gets the array of the search data results]
+     * @param  [type] $search_data [the characters entered in the search bar]
+     * @return [arr]              [the users having a name similar to the search input is displayed]
+     */
     public function retrieve_search_results($search_data)
     {
         //return $this->session->userdata('uid').$search_data;
@@ -44,6 +52,13 @@ class User_functions_model extends CI_Model
         $query = $this->db->query($query_string);
         return $query->result_array();
     }
+    // TODO: new password is not needed below
+    /**
+     * [check_password_exists a function that checks for whether the current password entered exists]
+     * @param  [type] $current_password [the entered current password]
+     * @param  [type] $new_password     [the entered new password]
+     * @return [int]                   [number of rows of the entered password and user id in session]
+     */
     public function check_password_exists($current_password, $new_password)
     {
         $uid=$this->session->userdata('uid');
@@ -52,6 +67,11 @@ class User_functions_model extends CI_Model
         $query_num_rows=$query_execute->num_rows();
         return $query_num_rows;
     }
+    /**
+     * [update_password the function that updates the current password to the new password]
+     * @param  [type] $new_password [entered new password]
+     * @return [type]               [descriptio]
+     */
     public function update_password($new_password)
     {
         $uid=$this->session->userdata('uid');
@@ -63,6 +83,10 @@ class User_functions_model extends CI_Model
         $update_check=$this->db->affected_rows();
         return $update_check;
     }
+    /**
+     * [check_welcome_screen function that checks for whether the welcome screen is enabled or not]
+     * @return [type] [description]
+     */
     public function check_welcome_screen()
     {
         $uid=$this->session->userdata('uid');
@@ -75,12 +99,21 @@ class User_functions_model extends CI_Model
             return $user->welcome_screen;
         }
     }
+    /**
+     * [get_uid_from_email the uid of a user having the email is returned]
+     * @param  [type] $email [the email id of the user]
+     * @return [type]        [uid of a user with the provided email id is returned]
+     */
     public function get_uid_from_email($email)
     {
         $user = $this->db->query("SELECT * FROM users WHERE email='$email'");
         $user_result = $user->result_array();
         return $user_result[0]['user_id'];
     }
+    /**
+     * [get_profile_pic used in other models to display the link to the profile picture]
+     * @return [str] [link to profile picture]
+     */
     public function get_profile_pic()
     {
         $uid=$this->session->userdata('uid');
@@ -97,9 +130,13 @@ class User_functions_model extends CI_Model
             return $profile_pic_val;
         }
     }
+    /**
+     * [get_profile_pic_friend the profile picture link of the friend is retrieved]
+     * @param  [type] $uid [user id of friend]
+     * @return [str]      [profile pic link of the friend]
+     */
     public function get_profile_pic_friend($uid)
     {
-        //$this->
         //get uid of $email
         $user = $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid'");
         $profile_pic_file_name = $user->result_array();
@@ -112,6 +149,10 @@ class User_functions_model extends CI_Model
             }
         }
     }
+    /**
+     * [remove_set_profile used by the profile pic uploader to set all the other profile pictures that were uploaded and set it as not profile pictures]
+     * @return [int] $update_check [the successful completion of the update denoted by a 1 is returned]
+     */
     public function remove_set_profile()
     {
         $uid=$this->session->userdata('uid');
@@ -123,6 +164,11 @@ class User_functions_model extends CI_Model
         $update_check=$this->db->affected_rows();
         return $update_check;
     }
+    /**
+     * [insert_profile_pic_db a profile picture's data is inserted into the table profile_pic and set_profile_pic is set to 1]
+     * @param  [type] $file_name [the name of the file after appending unique numbers]
+     * @return [type]            [description]
+     */
     public function insert_profile_pic_db($file_name)
     {
         $uid=$this->session->userdata('uid');
@@ -135,6 +181,11 @@ class User_functions_model extends CI_Model
         $this->db->insert('profile_pic', $data);
         return 1;
     }
+    /**
+     * [insert_timeline_pic_db a pic uploaded to the timeline is inserted into pictures table with its metadata in it]
+     * @param  [type] $file_name [the name of the file after appending unique numbers]
+     * @return [type]            [description]
+     */
     public function insert_timeline_pic_db($file_name)
     {
         $uid=$this->session->userdata('uid');
@@ -147,6 +198,13 @@ class User_functions_model extends CI_Model
         $this->db->insert('pictures', $data);
         return 1;
     }
+    /**
+     * [update_caption once the picture is uploaded to the file server and its corresponding data is inserted into the pictures/profile_pic table, the caption is then loaded. Once caption is submitted it will update the corresponding data row]
+     * this is specific to profile_pic only
+     * @param  [type] $album        [description]
+     * @param  [type] $img_captions [description]
+     * @return [type]               [description]
+     */
     public function update_caption($album, $img_captions)
     {
         $uid=$this->session->userdata('uid');
@@ -154,13 +212,6 @@ class User_functions_model extends CI_Model
         //select $num_images last uploaded
         $result_images= $this->db->query("SELECT * FROM profile_pic WHERE u_id='$uid' ORDER BY id DESC LIMIT $num_images");
         $profile_pic_file_name = $result_images->result_array();
-        //print_r($profile_pic_file_name);
-        /*
-          for($i=0;$i<$num_images;$i++)
-          {
-            echo $profile_pic_file_name[$i]['id']."<br>";
-          }
-          */
         for ($i=0;$i<$num_images;$i++) {
             $data=array(
             'caption' => $img_captions[$num_images-$i-1],
@@ -178,6 +229,13 @@ class User_functions_model extends CI_Model
         }
         echo $num_images;
     }
+    /**
+     * [update_caption_2 once the picture is uploaded to the file server and its corresponding data is inserted into the pictures/profile_pic table, the caption is then loaded. Once caption is submitted it will update the corresponding data row]
+     * this is specific to timeline pictures only
+     * @param  [type] $album        [description]
+     * @param  [type] $img_captions [description]
+     * @return [type]               [description]
+     */
     public function update_caption_2($album, $img_captions)
     {
         $uid=$this->session->userdata('uid');
@@ -185,13 +243,6 @@ class User_functions_model extends CI_Model
         //select $num_images last uploaded
         $result_images= $this->db->query("SELECT * FROM pictures WHERE u_id='$uid' ORDER BY id DESC LIMIT $num_images");
         $profile_pic_file_name = $result_images->result_array();
-        //print_r($profile_pic_file_name);
-        /*
-          for($i=0;$i<$num_images;$i++)
-          {
-            echo $profile_pic_file_name[$i]['id']."<br>";
-          }
-          */
         for ($i=0;$i<$num_images;$i++) {
             $data=array(
             'image_caption' => $img_captions[$num_images-$i-1],
@@ -211,20 +262,24 @@ class User_functions_model extends CI_Model
     }
     public function friends_data($uid, $friend_uid)
     {
-        //return $uid.$friend_uid;
         $result_images= $this->db->query("SELECT * FROM friends WHERE (u_id='$uid' AND friend_id='$friend_uid') OR (friend_id='$uid' AND u_id='$friend_uid')");
         $friends_table = $result_images->result_array();
         return $friends_table;
     }
-
-
-
+    /**
+     * [deletePost_model this function is used for deleting a user's post whenever the delete button is clicked]
+     * @return void
+     */
     public function deletePost_model()
     {
         $uid=$this->session->userdata('uid');
         $postid=$this->input->post('postid');
         $this->deleteUserPost($postid);
     }
+    /**
+     * [update_personal_information_model the function where the primary_information table data row is updated whenever the user clicks on 'Save Changes']
+     * @return [type] [description]
+     */
     public function update_personal_information_model()
     {
         $gender_value=$this->input->post('gender');
@@ -234,6 +289,10 @@ class User_functions_model extends CI_Model
         $this->db->update('primary_information', array('gender' => $gender_value,'date_birth' =>$date_birth));
         echo 1;
     }
+    /**
+     * [update_preferences_model to update the preferences as toggled by the user under the settings tab -> could be either auto-login,welcome_screen etc.]
+     * @return [type] [description]
+     */
     public function update_preferences_model()
     {
         $uid=$this->session->userdata('uid');
@@ -244,6 +303,10 @@ class User_functions_model extends CI_Model
         $this->db->update('preferences', array('auto_login' => $auto_login_value,'welcome_screen' =>$welcome_screen_val));
         echo $auto_login_value.$welcome_screen_val.$select_value;
     }
+    /**
+     * [change_password_model used to update the new password as set by the user under settings]
+     * @return [type] [description]
+     */
     public function change_password_model()
     {
         $current_password=$this->input->post('current_password');
@@ -269,7 +332,6 @@ class User_functions_model extends CI_Model
         }
         $current_password=md5($current_password);
         $new_password=md5($new_password);
-
         $num_rows=$this->check_password_exists($current_password, $new_password);
         if ($num_rows==1) {
             //runs the update password model method and when it's 1, its successful
@@ -283,31 +345,6 @@ class User_functions_model extends CI_Model
             echo 'Current Password is Incorrect';
         }
     }
-    // TODO: remove the following comment if the upload still works correctly
-    /*
-    public function upload_photo_model()
-    {
-        $config['upload_path'] = base_url().'assets/user_images';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']	= '100';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
-        $config['overwrite'] = 'TRUE';
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-        $img = $this->input->post('userfile');
-        if (! $this->user_functions->upload_photo($img)) {
-            $error = array('error' => $this->upload->display_errors());
-            echo "Failed!!";
-            print_r($error);
-        //$this->load->view('upload_form', $error);
-        } else {
-            $data = array('upload_data' => $this->upload->data());
-            echo "File uploaded successfully!!";
-            //$this->load->view('upload_success', $data);
-        }
-    }
-    */
     /**
      * [caption_profile_update_model the model used for updating the caption on the profile picture]
      * @return void
@@ -318,7 +355,7 @@ class User_functions_model extends CI_Model
         $update_captions_result=$this->update_caption('profile', $img_caption);
     }
     /**
-     * [caption_profile_update_model the model used for updating the caption on the timeline picture]
+     * [caption_image_update_model the model used for updating the caption on the timeline picture]
      * @return void
      */
     public function caption_image_update_model()

@@ -1,12 +1,12 @@
 <?php
 // the content for private messages
 ?>
-<div class="row" id="settings_content">
-  <div class="col-lg-3" id="messages_left_side">
-    <div class="row">
-<div class="col-lg-3"></div>
-<div class="col-lg-6">
-    <?php
+  <div class="row" id="settings_content">
+    <div class="col-lg-3" id="messages_left_side">
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+          <?php
   echo "<h3>Your Friends</h3>";
   if ($friends_list==0) {
       echo "Add friends to get started.";
@@ -69,56 +69,61 @@
       </script>";
   }
   ?></div>
-<div class="col-lg-3"></div>
-</div>
-</div>
+        <div class="col-lg-3"></div>
+      </div>
+    </div>
     <div class="col-lg-6" id="messages_middle_side">
       <h3>Messages</h3>
-      <div id="messages_show"><div id="message_result">Select a friend to start chatting</div></div>
+      <div id="messages_show">
+        <div id="message_result">Select a friend to start chatting</div>
+      </div>
       <div id="submit_message_container"><input type="text" id="submit_message_input" disabled><button id="send_message_input" disabled>Send</button>
-      <br><input type="hidden" id="friend_id_field" value=""></div>
-      <center><!--<button class="side_button" id="button_close"><img src="<?php echo base_url()?>assets/images/error.png"></button>--></center>
+        <br><input type="hidden" id="friend_id_field" value=""></div>
+      <center>
+        <!--<button class="side_button" id="button_close"><img src="<?php echo base_url()?>assets/images/error.png"></button>--></center>
     </div>
     <div class="col-lg-3" id="messages_right_side"></div>
-</div>
+  </div>
 
-<!-- closes the messages content and opens up posts content as defined in scripts.js -->
-<script>
-$("#button_close").click(function(){
-$.fn.openContent(4);
-});
-$("#submit_message_input").keydown(function(e){
-  if(e.keyCode==13){
-    //entered
-    submit_message();
-    go_to_bottom_message();
-  }
-});
-$("#send_message_input").click(function(){
-  submit_message();
-  go_to_bottom_message();
-});
-function submit_message()
-{
-  var message=$("#submit_message_input").val();
-  if(message !="")
-  {
-    $.post("<?php echo site_url().'/messenger/send_message'?>",{'friend_id':$("#friend_id_field").val(),'message_content':$("#submit_message_input").val()},function(data){
-    $("#submit_message_input").val('');
-    retrieve_messages_private();
-  });
-  }
-  else {
-    alert("Message is empty!");
-  }
+  <!-- closes the messages content and opens up posts content as defined in scripts.js -->
+  <script>
+    $("#button_close").click(function() {
+      $.fn.openContent(4);
+    });
+    $("#submit_message_input").keydown(function(e) {
+      if (e.keyCode == 13) {
+        //entered
+        submit_message();
+        go_to_bottom_message();
+      }
+    });
+    $("#send_message_input").click(function() {
+      submit_message();
+      go_to_bottom_message();
+    });
 
-  }
-  //$('#messages_show').animate({ scrollTop: $(document).height() }, 1200);
+    function submit_message() {
+      var message = $("#submit_message_input").val();
+      if (message != "") {
+        $.post("<?php echo site_url().'/messenger/send_message'?>", {
+          'friend_id': $("#friend_id_field").val(),
+          'message_content': $("#submit_message_input").val()
+        }, function(data) {
+          $("#submit_message_input").val('');
+          retrieve_messages_private();
+        });
+      } else {
+        alert("Message is empty!");
+      }
 
-function retrieve_messages_private(){
-$.post("<?php echo site_url().'/messenger/retrieve_messages'?>",{'friend_id':$("#friend_id_field").val()},function(data){
-  $('#messages_show').html(data);
-});
-}
+    }
+    //$('#messages_show').animate({ scrollTop: $(document).height() }, 1200);
 
-</script>
+    function retrieve_messages_private() {
+      $.post("<?php echo site_url().'/messenger/retrieve_messages'?>", {
+        'friend_id': $("#friend_id_field").val()
+      }, function(data) {
+        $('#messages_show').html(data);
+      });
+    }
+  </script>

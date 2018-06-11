@@ -5,25 +5,18 @@ $uid=$this->session->userdata("uid");
 $select_posts=$this->db->query("SELECT * FROM posts WHERE u_id=$uid");
 $select_posts_id=$select_posts->result_array();
 $post_ids='';
-
 $select_checked_on_time_notifications=$this->db->query("SELECT * FROM checked_on WHERE type_checked_on='n' AND u_id=$uid");
 $select_checked_on_time_notifications_array=$select_checked_on_time_notifications->result_array();
 $time_checked_notifications=$select_checked_on_time_notifications_array[0]['time_checked_on'];
-
 foreach ($select_posts_id as $key) {
     $post_ids=$post_ids.",".$key['id'];
 }
 $post_ids = ltrim($post_ids, ',');
-//echo $post_ids;
-//print_r($select_posts_id);
-//$matches = implode(',', $select_posts_id[0]);
-//echo $matches;
 $select_posts_votes=$this->db->query("SELECT * FROM votes WHERE post_id IN ($post_ids) ORDER BY time_vote DESC");
 $select_posts_votes_result=$select_posts_votes->result_array();
-
 ?>
-<div class="row" id="settings_content">
-  <div class="col-lg-3"></div>
+  <div class="row" id="settings_content">
+    <div class="col-lg-3"></div>
     <div class="col-lg-6">
       <h3>Notifications</h3>
       <?php
@@ -35,11 +28,8 @@ $select_posts_votes_result=$select_posts_votes->result_array();
           $user_name=$select_profile_pic_array[0]['name'];
           $email=$select_profile_pic_array[0]['email'];
           $postid=$key['post_id'];
-
           $select_post=$this->db->query("SELECT * FROM posts WHERE id=$postid");
           $select_post_query=$select_post->result_array();
-          //echo "<br><hr><br>";
-
           $picture_id=$select_post_query[0]['picture_id'];
           if ($picture_id!=0) {
               if (strpos($picture_id, 'p') !== false) {
@@ -68,7 +58,6 @@ $select_posts_votes_result=$select_posts_votes->result_array();
               //normal post
               $message_type="recent post";
           }
-
           $vote_status="upvoted";
           if ($key['val']>0) {
               $vote_status="upvoted";
@@ -77,8 +66,6 @@ $select_posts_votes_result=$select_posts_votes->result_array();
           } else {
               $vote_status="upvoted";
           }
-
-
           if ($key['val']>=0) {
               $key['val']="+".$key['val'];
           }
@@ -87,23 +74,16 @@ $select_posts_votes_result=$select_posts_votes->result_array();
           } else {
               $new="";
           }
-          //print_r($select_post_query);
-
-          //$posts_query=$this->db->query("SELECT * FROM posts WHERE ")
-
-          //echo "You got votes for post: ".$key['post_id']." from: ".$user_name." with a vote count of: ".$key['val']."<br>";
           echo "<a href='".site_url()."/user/profile?email=".$email."'><div class='flex_container name_friend_list_container'><img src='".$profile_pic_link_user."' width='64px'><div>&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='name_friend_list'>".$user_name." ".$vote_status." your ".$message_type." by ".$key['val'].$new."</div></div></a>";
       }
       ?>
-
-      <center><!--<button class="side_button" id="button_close"><img src="<?php echo base_url()?>assets/images/error.png"></button>--></center>
-    </div>
-  <div class="col-lg-3"></div>
-</div>
-
-<!-- closes the notifications content and opens up posts content as defined in scripts.js -->
-<script>
-$("#button_close").click(function(){
-$.fn.openContent(4);
-});
-</script>
+        <center>
+          </div>
+    <div class="col-lg-3"></div>
+  </div>
+  <!-- closes the notifications content and opens up posts content as defined in scripts.js -->
+  <script>
+    $("#button_close").click(function() {
+      $.fn.openContent(4);
+    });
+  </script>

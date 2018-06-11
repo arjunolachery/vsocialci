@@ -39,7 +39,7 @@ $num_files=0;
   </head>
 
   <body>
-<!-- the head div that is always at the top-->
+    <!-- the head div that is always at the top-->
     <div class="container-fluid" id="height_header_main">
       <div class="row main">
         <div class="col-lg-1 col-xs-0"></div>
@@ -60,14 +60,14 @@ $num_files=0;
       </div>
     </div>
 
-<!--for jquery purpose-->
-      <input type="hidden" value="<?php echo $email;?>" id="user_email">
-<!--to keep spacing between the fixed header and the other content at the top-->
+    <!--for jquery purpose-->
+    <input type="hidden" value="<?php echo $email;?>" id="user_email">
+    <!--to keep spacing between the fixed header and the other content at the top-->
     <div id="top_header_spacing"></div>
-<!-- the main area where all the content loads into such as messages, settings etc.-->
+    <!-- the main area where all the content loads into such as messages, settings etc.-->
     <div id="mainContent">
     </div>
-<!--the image upload pop up-->
+    <!--the image upload pop up-->
     <div id="notification_pop_up">
       <span class="settings_title_theme">Upload an Image
 </span><br>
@@ -92,80 +92,79 @@ $num_files=0;
       </form>
     </div>
 
-<!-- this is for future development, it is now hidden-->
-<?php // TODO: notifications to be developed?>
+    <!-- this is for future development, it is now hidden-->
+    <?php // TODO: notifications to be developed?>
     <div id="notification_side_message">
       You deleted a post.<br>
     </div>
-<!-- for jquery purpose-->
+    <!-- for jquery purpose-->
     <input type="hidden" hidden id="welcome_screen_value" value="<?php echo $welcome_screen_enabled;?>">
     <script>
-    // TODO: Try to change this script below to home_view.js, change the php into js format.
-    var errors2 = false;
-    var num_files = 0;
-    var num_files_done = 0;
-    var set_profile_pic = 0;
-    var myDropzone = new Dropzone("#my-dropzone", {
-      maxFiles: 1,
-      init: function() {
-        this.on("maxfilesexceeded", function(file) {
-          this.removeFile(file);
-          alert('max reached');
-        });
-        this.on("success", function(file, responseText) {
-          num_files_done++;
-          //alert(responseText);
-          this.removeAllFiles();
-          var profile_pic_name = responseText;
-          $("#top_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>" + profile_pic_name);
-          $("#setting_side_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>" + profile_pic_name);
-          <?php
+      // TODO: Try to change this script below to home_view.js, change the php into js format.
+      var errors2 = false;
+      var num_files = 0;
+      var num_files_done = 0;
+      var set_profile_pic = 0;
+      var myDropzone = new Dropzone("#my-dropzone", {
+        maxFiles: 1,
+        init: function() {
+          this.on("maxfilesexceeded", function(file) {
+            this.removeFile(file);
+            alert('max reached');
+          });
+          this.on("success", function(file, responseText) {
+            num_files_done++;
+            //alert(responseText);
+            this.removeAllFiles();
+            var profile_pic_name = responseText;
+            $("#top_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>" + profile_pic_name);
+            $("#setting_side_profile_pic").attr("src", "<?php echo base_url().'uploads/'?>" + profile_pic_name);
+            <?php
             $num_files_done=$num_files_done+1;
             ?>
-          $("#caption_submit_result").append(<?php echo $num_files_done?>);
-          $("#preview" + num_files_done).attr('src', "<?php echo base_url().'uploads/'?>" + responseText);
-          $("#preview" + num_files_done).attr('width', "128px");
-          // $("#options"+num_files_done).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
-          if (num_files == num_files_done) {
-            $("#submit_button_profile").removeAttr("disabled");
-            $("#submit_button_profile").attr("enabled");
-          }
-        });
-        this.on("addedfile", function(file) {
-          num_files++;
-
-          //<div id="clickable_settings" class="flex_container clickable_settings">&nbsp;
-          //<img src="../../assets/images/settings.png" style="vertical-align:middle">&nbsp;<span>Settings&nbsp;</span></div>
-
-          $("#caption_submit_input").append("<br><br><div class='flex_container' id='pic_show'" + num_files + "><img src='../../assets/images/loading.gif' width='32px' id='preview" + num_files +
-            "'>&nbsp;<textarea class='image_caption_input' placeholder='Add a caption' id='pic" + num_files + "'></textarea><span id='options" + num_files + "'></span></div>");
-          $('pic' + num_files).keypress(function(event) {
-            if (event.keyCode == 13) {
-              event.preventDefault();
-              alert('hi');
+            $("#caption_submit_result").append(<?php echo $num_files_done?>);
+            $("#preview" + num_files_done).attr('src', "<?php echo base_url().'uploads/'?>" + responseText);
+            $("#preview" + num_files_done).attr('width', "128px");
+            // $("#options"+num_files_done).append("<img src=<?php echo base_url().'assets/images/error.png'?>");
+            if (num_files == num_files_done) {
+              $("#submit_button_profile").removeAttr("disabled");
+              $("#submit_button_profile").attr("enabled");
             }
           });
-          if (num_files == 1) {
-            $("#caption_submit_button").append("<br><input type='button' disabled id='submit_button_profile' onclick='submit_profile_pic()' value='Submit'>");
-          }
-          if (num_files != num_files_done) {
-            $("#submit_button_profile").removeAttr("enabled");
-            $("#submit_button_profile").attr("disabled");
-          }
-        });
-      },
-      error: function(file, errorMessage) {
-        errors2 = true;
-      },
-      queuecomplete: function() {
-        if (errors2) {
-          alert("There were errors!");
-          errors2 = false;
-        } else {
-          //alert("Done Uploading!");
+          this.on("addedfile", function(file) {
+            num_files++;
 
+            //<div id="clickable_settings" class="flex_container clickable_settings">&nbsp;
+            //<img src="../../assets/images/settings.png" style="vertical-align:middle">&nbsp;<span>Settings&nbsp;</span></div>
+
+            $("#caption_submit_input").append("<br><br><div class='flex_container' id='pic_show'" + num_files + "><img src='../../assets/images/loading.gif' width='32px' id='preview" + num_files +
+              "'>&nbsp;<textarea class='image_caption_input' placeholder='Add a caption' id='pic" + num_files + "'></textarea><span id='options" + num_files + "'></span></div>");
+            $('pic' + num_files).keypress(function(event) {
+              if (event.keyCode == 13) {
+                event.preventDefault();
+                alert('hi');
+              }
+            });
+            if (num_files == 1) {
+              $("#caption_submit_button").append("<br><input type='button' disabled id='submit_button_profile' onclick='submit_profile_pic()' value='Submit'>");
+            }
+            if (num_files != num_files_done) {
+              $("#submit_button_profile").removeAttr("enabled");
+              $("#submit_button_profile").attr("disabled");
+            }
+          });
+        },
+        error: function(file, errorMessage) {
+          errors2 = true;
+        },
+        queuecomplete: function() {
+          if (errors2) {
+            alert("There were errors!");
+            errors2 = false;
+          } else {
+            //alert("Done Uploading!");
+
+          }
         }
-      }
-    });
-
+      });
     </script>
